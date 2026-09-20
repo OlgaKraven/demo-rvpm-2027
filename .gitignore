@@ -1,0 +1,10 @@
+site/
+node_modules/
+.venv/
+instance/
+__pycache__/
+.pytest_cache/
+.playwright-cli/
+output/
+*.pyc
+.env

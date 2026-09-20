@@ -1,0 +1,15 @@
+import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';import {stages,tasks,criteria,entities} from '../content/course.mjs';import '../src/core.js';import {phpStages,origins} from '../content/php.mjs';
+const out='site';fs.mkdirSync(out,{recursive:true});
+for(const f of fs.readdirSync('src'))fs.copyFileSync('src/'+f,out+'/'+f);
+fs.cpSync('materials',out+'/materials',{recursive:true});
+const base='examples/conference-portal-flask';let files={};
+function walk(dir,rel=''){for(const f of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','.venv','instance','__pycache__','.pytest_cache','.env'].includes(f.name))continue;const key=rel+f.name;if(f.isDirectory())walk(path.join(dir,f.name),key+'/');else if(!f.name.endsWith('.pyc'))files[key]=fs.readFileSync(path.join(dir,f.name));}}
+walk(base);fs.mkdirSync(out+'/downloads',{recursive:true});fs.writeFileSync(out+'/downloads/conference-portal-flask.zip',ExamCore.zip(files));
+const code={};for(const [name,bytes] of Object.entries(files))if(name==='.gitignore'||/\.(py|sql|html|css|js|md|txt)$/.test(name))code[name]=bytes.toString('utf8');
+files={};walk('examples/conference-portal-php');fs.writeFileSync(out+'/downloads/conference-portal-php.zip',ExamCore.zip(files));const phpCode={};for(const [name,bytes] of Object.entries(files))if(/\.(php|py|sql|css|js|md|json)$/.test(name))phpCode[name]=bytes.toString('utf8');
+const official=JSON.parse(fs.readFileSync('content/official.json'));
+const sources=fs.readdirSync('materials').filter(f=>/\.pdf$|\.zip$/.test(f)).map(f=>({file:f,sha256:createHash('sha256').update(fs.readFileSync('materials/'+f)).digest('hex')}));
+const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};fs.writeFileSync(out+'/content.js','globalThis.COURSE='+JSON.stringify(data)+';');
+fs.writeFileSync(out+'/downloads/source-manifest.json',JSON.stringify(sources,null,2));
+let index=fs.readFileSync(out+'/index.html','utf8');for(const f of fs.readdirSync(out).filter(f=>/\.(css|js)$/.test(f))){const hash=createHash('sha256').update(fs.readFileSync(out+'/'+f)).digest('hex').slice(0,10);index=index.replaceAll('"'+f+'"','"'+f+'?v='+hash+'"');}fs.writeFileSync(out+'/index.html',index);fs.writeFileSync(out+'/.nojekyll','');
+console.log(`Built basic 2027 course: ${tasks.length} official tasks, ${stages.length} learning stages, ${Object.keys(files).length} example files.`);

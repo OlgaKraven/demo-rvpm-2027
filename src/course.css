@@ -33,3 +33,12 @@
 .er-inline .entity-story{margin-top:0;min-width:0}
 .er-inline .schema-table{min-width:0}
 @media(max-width:900px){.er-inline .schema-grid{grid-template-columns:minmax(0,1fr)}}
+/* Полный образец — документ на ширину тренировки, без оформления кода. */
+.training-full-sample{width:100%;margin:24px 0;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);overflow:hidden}
+.training-full-sample>summary{padding:20px 24px;font-size:20px;font-weight:700}
+.sample-reading{width:100%;padding:4px 28px 28px;font:18px/1.85 Arial,sans-serif;background:#fff;color:#202733;overflow-wrap:anywhere}
+.sample-reading p{margin:0 0 18px;max-width:none;white-space:normal}
+.sample-reading h3{font-size:23px;line-height:1.4;margin:28px 0 18px;color:inherit}
+.dark .sample-reading{background:#202630;color:#f3f4f6}
+.training-menu-title{font-size:18px;line-height:1.4;margin:4px 10px 18px;color:var(--ink)}
+@media(max-width:600px){.sample-reading{padding:4px 18px 20px;font-size:17px}.training-full-sample>summary{padding:18px;font-size:18px}}

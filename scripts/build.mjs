@@ -3,6 +3,7 @@ import fs from 'node:fs';import {databaseIllustrations} from '../content/databas
 const out='site';fs.mkdirSync(out,{recursive:true});
 for(const f of fs.readdirSync('src'))fs.copyFileSync('src/'+f,out+'/'+f);
 fs.cpSync('materials',out+'/materials',{recursive:true});
+fs.cpSync('examples/conference-portal-flask/static/fonts',out+'/fonts',{recursive:true});
 const base='examples/conference-portal-flask';let files={};
 function walk(dir,rel=''){for(const f of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','.venv','instance','__pycache__','.pytest_cache','.env'].includes(f.name))continue;const key=rel+f.name;if(f.isDirectory())walk(path.join(dir,f.name),key+'/');else if(!f.name.endsWith('.pyc'))files[key]=fs.readFileSync(path.join(dir,f.name));}}
 walk(base);fs.mkdirSync(out+'/downloads',{recursive:true});fs.writeFileSync(out+'/downloads/conference-portal-flask.zip',ExamCore.zip(files));

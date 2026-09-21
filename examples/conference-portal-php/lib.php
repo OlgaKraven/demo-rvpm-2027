@@ -6,7 +6,6 @@ final class Database {
         $this->pdo = new PDO('mysql:host='.(getenv('MYSQL_HOST') ?: '127.0.0.1').';port='.(getenv('MYSQL_PORT') ?: '3306').';dbname='.(getenv('MYSQL_DATABASE') ?: 'conference_php_2027').';charset=utf8mb4', getenv('MYSQL_USER') ?: 'root', getenv('MYSQL_PASSWORD') ?: '', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,PDO::ATTR_EMULATE_PREPARES=>false]);
     }
     public function query(string $sql,array $args=[]): PDOStatement {$s=$this->pdo->prepare($sql);$s->execute($args);return $s;}
-    public function transaction(callable $fn): mixed {$this->pdo->beginTransaction();try{$v=$fn($this);$this->pdo->commit();return $v;}catch(Throwable $e){$this->pdo->rollBack();throw $e;}}
 }
 function e(mixed $v):string{return htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');}
 function url(string $route='home'):string{return 'index.php?r='.rawurlencode($route);}

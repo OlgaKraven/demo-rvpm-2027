@@ -29,6 +29,7 @@ jobs:
         working-directory: examples/conference-portal-flask
       - run: php -l examples/conference-portal-php/index.php && php -l examples/conference-portal-php/lib.php && php -l examples/conference-portal-php/setup.php
       - run: npm run build && npm test
+      - run: python tests/check-assembly.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -59,3 +59,11 @@ export const entities=[
  {name:'reviews',source:'КИМ, стр. 36: отзыв после завершения мероприятия. Оценка 1–5 и один отзыв — решения учебного примера.',fields:['id · PK','application_id · UNIQUE FK → applications.id','user_id · FK → users.id','rating','comment','created_at']},
  {name:'rate_limits',source:'Техническая защита от частых попыток входа и регистрации. Добавлена в примере, отдельного требования КИМ нет.',fields:['key · PK','window_start','hits']}
 ];
+
+import {flaskLessons} from './assembly.mjs';
+stages.find(s=>s.id==='backend').steps=flaskLessons.map(x=>[x.title,x.why,x.source]);
+
+import {databaseStage} from './database.mjs';
+stages[0].steps[4]=['Проверьте окружение','Проверьте наличие VS Code, Git, Python для Flask или XAMPP для PHP. Пока не запускайте создание таблиц: сначала разберите сущности в ER-разделе, затем выполните отдельный этап «Создание БД и выгрузка». Команды запуска готового примера находятся в разделе «Примеры».','Порядок работы: требования → ER → БД → формы'];
+stages[1].title='Проектирование ER';stages[1].steps=stages[1].steps.slice(0,4);stages[1].steps.push(['Проверьте модель перед созданием базы','У каждой таблицы определён PK, а каждая связь имеет понятную причину из условия. Английские имена и служебные поля — решения разработчика. Пройдите интерактивный разбор: текст требования → сущность → поле → источник данных. Далее создайте эту модель в СУБД на следующем этапе.','КИМ, стр. 33–36; интерактивная ER-схема']);
+stages.splice(2,0,databaseStage);

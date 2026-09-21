@@ -15,10 +15,10 @@ py -m venv .venv
 
 ```powershell
 $env:DB_BACKEND='sqlite'
-.\.venv\Scripts\python.exe app.py
+.\.venv\Scripts\python.exe -m flask --app app run --port 5017
 ```
 
-Откройте http://127.0.0.1:5000. Таблицы и каталог создаются автоматически в `instance/conference.sqlite3`. XAMPP для этого режима не нужен.
+Откройте http://127.0.0.1:5017. Таблицы и каталог создаются автоматически в `instance/conference.sqlite3`. XAMPP для этого режима не нужен.
 
 ## MySQL / MariaDB из XAMPP
 
@@ -33,7 +33,7 @@ $env:MYSQL_PORT='3306'
 $env:MYSQL_DATABASE='conference_rvpm_2027'
 $env:MYSQL_USER='root'
 $env:MYSQL_PASSWORD=''
-.\.venv\Scripts\python.exe app.py
+.\.venv\Scripts\python.exe -m flask --app app run --port 5017
 ```
 
 Пример root без пароля предназначен только для стандартного локального XAMPP. Если ваша учётная запись другая, подставьте её параметры. Приложение не создаёт саму базу. В пустой базе оно создаёт пять таблиц из `schema-mysql.sql`, шесть помещений и учебного администратора.

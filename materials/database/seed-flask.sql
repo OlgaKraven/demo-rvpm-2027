@@ -1,0 +1,11 @@
+-- Only for the empty tables of your own training database.
+SET NAMES utf8mb4;
+START TRANSACTION;
+INSERT INTO users(username,password_hash,full_name,phone,email,is_admin) VALUES('Conf2027','pbkdf2:sha256:600000$tRUjbpAqysV48w6R$08f6b1b5d7265ac8d1542b620c21635af22b4409693f75f45d11d47c811f1651','Администратор Портала','8(800)000-00-00','admin@conference.test',1);
+INSERT INTO rooms(name,category,city,address,capacity,hourly_rate,image,description,equipment) VALUES('Лофт «Балтика»','auditorium','Санкт-Петербург','Кожевенная линия, 30',120,9500,'img/auditorium-loft.jpg','Исторический лофт с двумя экранами и профессиональным звуком.','2 экрана, проектор, звук, Wi‑Fi');
+INSERT INTO rooms(name,category,city,address,capacity,hourly_rate,image,description,equipment) VALUES('Аудитория «Нева»','auditorium','Москва','Ленинградский проспект, 39',48,5200,'img/auditorium-neva.webp','Светлый зал для стратегических сессий, лекций и обсуждений.','Проектор, флипчарт, климат-контроль');
+INSERT INTO rooms(name,category,city,address,capacity,hourly_rate,image,description,equipment) VALUES('Коворкинг «Спектр»','coworking','Казань','ул. Петербургская, 52',70,6100,'img/coworking-spectrum.jpg','Гибкое пространство с рабочими зонами и местом для нетворкинга.','Wi‑Fi, кухня, проектор, мобильная мебель');
+INSERT INTO rooms(name,category,city,address,capacity,hourly_rate,image,description,equipment) VALUES('Коворкинг «Фабрика»','coworking','Екатеринбург','ул. Бориса Ельцина, 3',36,4300,'img/coworking-foundry.webp','Камерное пространство для деловых клубов и рабочих групп.','Экран 4K, видеосвязь, Wi‑Fi, кофе-пойнт');
+INSERT INTO rooms(name,category,city,address,capacity,hourly_rate,image,description,equipment) VALUES('Кинозал «Вектор»','cinema','Нижний Новгород','ул. Рождественская, 18',42,5700,'img/cinema-vector.jpg','Тихий зал с амфитеатром для видеопоказов и презентаций.','Экран, Full HD проектор, 5.1 звук, Wi‑Fi');
+INSERT INTO rooms(name,category,city,address,capacity,hourly_rate,image,description,equipment) VALUES('Кинозал «Панорама»','cinema','Новосибирск','Красный проспект, 17',85,7800,'img/cinema-panorama.jpg','Просторный зал для отраслевых форумов и гибридных трансляций.','2 экрана, 4K проектор, микрофоны, трансляция');
+COMMIT;

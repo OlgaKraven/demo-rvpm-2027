@@ -26,3 +26,10 @@
 @media(max-width:900px){.er-inline{grid-template-columns:1fr}.er-pinned{position:relative;top:0}.hero.study-intro{flex-wrap:wrap}.banner-actions{margin:0;padding:12px 20px}.presentation{padding:12px 36px 20px}.presentation-body.has-visual{grid-template-columns:1fr}.presentation-visual{min-height:220px}.presentation-copy{font-size:18px}.presentation-head{gap:8px}.presentation-head>span:first-child{display:none}.origin-table{font-size:14px}.presentation-title{margin:14px 0}}
 .er-inline .schema-table{max-height:68vh;overflow:auto;scrollbar-gutter:stable}.origin-table th:first-child{width:30%}.slide-fields{font-family:monospace;font-size:18px;line-height:1.7}.banner-actions .btn.primary{background:#ed1737!important;border-color:#ed1737!important;color:white!important}.presentation button:focus-visible{outline:3px solid #176ac4;outline-offset:2px}
 .er-pinned{min-width:0;max-width:100%;overflow:auto;box-sizing:border-box}.er-inline{min-width:0}.er-pinned .er-overview{min-width:0}.er-pinned svg{min-width:0;width:100%;height:auto}.er-sequence label{min-width:0}.er-sequence select{max-width:100%}.schema-table h3{padding:0 10px}
+/* ER: схема на всю ширину, ниже поля и происхождение таблицы рядом. */
+.er-inline{grid-template-columns:minmax(0,1fr)}
+.er-inline .er-pinned{position:relative;top:auto;width:100%}
+.er-inline .schema-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.er-inline .entity-story{margin-top:0;min-width:0}
+.er-inline .schema-table{min-width:0}
+@media(max-width:900px){.er-inline .schema-grid{grid-template-columns:minmax(0,1fr)}}

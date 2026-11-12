@@ -23,8 +23,7 @@
     by('theme').textContent=dark?'Включить светлую тему':'Включить тёмную тему';
   }
   function drawLinks(slide,interactive){
-    const base=interactive||audience?new URL('./',location.href):deck.site;
-    return slide.links?.length?'<div class="slide-links">'+slide.links.map(([name,href])=>'<a href="'+esc(new URL(href,base).href)+'" target="_blank" rel="noopener">'+esc(name)+'</a>').join('')+'</div>':'';
+    return slide.links?.length?'<div class="slide-links">'+slide.links.map(([name,href])=>'<a href="'+esc(new URL(href,href.startsWith('materials/')||(!interactive&&!audience)?deck.site:new URL('./',location.href)).href)+'" target="_blank" rel="noopener">'+esc(name)+'</a>').join('')+'</div>':'';
   }
   function check(slide){
     return slide.check?'<div class="callout"><strong>Что проверить</strong>'+esc(slide.check)+'</div>':'';
@@ -65,7 +64,7 @@
       const name=destination===undefined||audience?text:'<a href="#slide-'+(destination+1)+'" data-contents-slide="'+destination+'">'+text+'</a>';
       return '<tr><th scope="row">'+name+'</th><td>'+esc(value)+'</td></tr>';
     }).join('')+'</tbody></table>'+prose;
-    if(slide.code)body=subtitle+(interactive?'<button class="copy-code" type="button">' + (slide.snippet===undefined?'Копировать код':'Копировать весь фрагмент') + '</button>':'')+'<pre><code>'+esc(slide.code)+'</code></pre>';
+    if(slide.code)body=subtitle+(interactive?'<button class="copy-code" type="button">' + (slide.snippet===undefined?'Копировать код':'Копировать весь фрагмент') + '</button>':'')+'<pre><code>'+esc(slide.code)+'</code></pre>'+drawLinks(slide,interactive);
     return '<article class="slide slide-'+slide.kind+'">'+head+(slide.kind==='section'?'<i class="chevron" aria-hidden="true"></i>':'')+'<div class="slide-content">'+title+body+'</div>'+foot+'</article>';
   }
   function printPages(){
@@ -84,7 +83,8 @@
       const clipped=[body,prose].some(el=>el && (el.scrollHeight>el.clientHeight+2||el.scrollWidth>el.clientWidth+2));
       return clipped?[{page:i+1,title:deck.slides[i].title,vertical:body.scrollHeight-body.clientHeight}]:[];
     });
-    return {pages:frames.length,overflow,broken};
+    const wrongLinks=[...print.querySelectorAll('.slide-links a')].map(link=>link.href).filter(href=>!href.startsWith(deck.site));
+    return {pages:frames.length,overflow,broken,wrongLinks};
   }
   function sendState(){channel?.postMessage({kind:'state',index,dark,profile,position});}
   function draw(focus){

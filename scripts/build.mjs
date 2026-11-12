@@ -1,3 +1,4 @@
+import {stageChecks,stepChecks,lessonFiles} from '../content/lesson-checks.mjs';
 import {beginnerGuidance} from '../content/beginner.mjs';
 import {teacherDeck} from '../content/teacher-deck.mjs';
 import {guidance} from '../content/guidance.mjs';
@@ -20,7 +21,7 @@ fs.writeFileSync(out+'/downloads/conference-portal-php-starter.zip',ExamCore.zip
 const allVariants={};for(const v of mockVariants){const vf={'Задание.md':variantMarkdown(v),'rooms.csv':variantCSV(v)};fs.writeFileSync(out+'/downloads/exam-'+v.id+'.zip',ExamCore.zip(vf));for(const [name,value]of Object.entries(vf))allVariants[v.id+'/'+name]=value;}fs.writeFileSync(out+'/downloads/exam-30-variants.zip',ExamCore.zip(allVariants));
 const official=JSON.parse(fs.readFileSync('content/official.json'));
 const sources=fs.readdirSync('materials').filter(f=>/\.pdf$|\.zip$/.test(f)).map(f=>({file:f,sha256:createHash('sha256').update(fs.readFileSync('materials/'+f)).digest('hex')}));
-const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
+const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,stageChecks,stepChecks,lessonFiles,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
 fs.writeFileSync(out+'/downloads/source-manifest.json',JSON.stringify(sources,null,2));
 const decks=Object.fromEntries(['php','mysql'].map(stack=>[stack,teacherDeck(data,stack)]));
 const deckData='globalThis.TEACHER_DECKS='+JSON.stringify(decks)+';';

@@ -1,6 +1,6 @@
 import {stages} from './course.mjs';
 export const phpStages=structuredClone(stages);
-phpStages[0].steps[3]=['Создайте рабочую структуру','В VS Code откройте папку C:\\xampp\\htdocs\\conference-rvpm-2027. PHP-пример состоит из index.php, lib.php, schema.sql, setup.php и static. Для своей работы создайте отдельную папку и Git-репозиторий, зафиксируйте начало задания.','КИМ: страницы 33, 36, 37; PHP README'];
+phpStages[0].steps[3]=['Создайте рабочую структуру','В VS Code откройте папку C:\\xampp\\htdocs\\conference-rvpm-2027. Создайте README.md, .gitignore и папки docs и static. Сделайте начальный коммит. Каркас с index.php и lib.php понадобится на этапе «Формы и PHP».','КИМ: страницы 33, 36, 37; PHP README'];
 phpStages[0].steps[4]=['Проверьте XAMPP','Проверьте XAMPP, PHP и VS Code. Сначала выполните проектирование ER, затем отдельный этап создания БД. Команды запуска готового примера есть в разделе «Примеры»; пока не выполняйте setup.php, чтобы не пропустить проектирование.','PHP README; setup.php'];
 phpStages[1].steps[1][2]='КИМ: страница 34; PHP index.php → register';
 phpStages[1].steps[3][2]='КИМ: страница 36; PHP index.php → review';

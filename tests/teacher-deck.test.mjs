@@ -14,6 +14,8 @@ test('both presentations cover each lesson step and link to their own sections',
       const chapter=deck.chapters.find(item=>item.id===stage.id);
       assert.equal(deck.slides[chapter.index].kind,'section');
       assert.equal(deck.slides[chapter.index].title,stage.title);
+      assert.equal(data.stageChecks[stage.id].length,2);
+      if(data.stepChecks[stage.id])assert.equal(data.stepChecks[stage.id].length,stage.steps.length);
       for(const section of chapter.sections)assert.equal(deck.slides[section.index].chapter,stage.id);
       for(let i=0;i<stage.steps.length;i++){
         const step=deck.slides.find(slide=>slide.stepKey===stage.id+':'+(i+1));
@@ -26,6 +28,26 @@ test('both presentations cover each lesson step and link to their own sections',
       assert.equal(Number(page),destination+1);
       assert.equal(deck.chapters.find(chapter=>chapter.index===destination)?.label,title);
     }
-    for(const slide of deck.slides.filter(slide=>slide.image))assert(fs.existsSync(site+slide.image.file),slide.image.file);
+    for(const slide of deck.slides){
+      if(slide.image)assert(fs.existsSync(site+slide.image.file),slide.image.file);
+      for(const [,href] of slide.links??[]){
+        const url=new URL(href,deck.site);
+        assert(url.href.startsWith(deck.site),href);
+        const asset=url.pathname.slice(new URL(deck.site).pathname.length);
+        assert(asset ? fs.existsSync(site+asset) : url.searchParams.has('mode'),href);
+        if(asset.match(/(?:^|\/)kim-\d+\.pdf$/))assert.equal(asset,'materials/kim-'+data.official.year+'.pdf');
+        if(url.searchParams.get('mode')==='learn'){
+          const stage=stages.find(stage=>stage.id===url.searchParams.get('stage'));
+          const number=Number(url.searchParams.get('step'));
+          assert.equal(url.searchParams.get('stack'),stack,href);
+          assert(stage && number>=1 && number<=stage.steps.length,href);
+        }
+      }
+    }
+    const resourceLinks=(step,asset)=>deck.slides.some(slide=>slide.stepKey===step&&slide.links?.some(([,href])=>href===asset));
+    assert(resourceLinks('database:4','materials/database/remaining-tables.sql'));
+    assert(resourceLinks('database:6','materials/database/seed-'+(stack==='php'?'php':'flask')+'.sql'));
+    assert(resourceLinks('database:8','materials/database/er-example.pdf'));
+    assert(resourceLinks('database:9','materials/database/schema-export.sql'));
   }
 });

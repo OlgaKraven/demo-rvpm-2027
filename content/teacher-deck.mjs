@@ -1,9 +1,10 @@
 import {beginnerStep} from './beginner.mjs';
+import {filesFor} from './lesson-checks.mjs';
 
 const site = 'https://olgakraven.github.io/demo-rvpm-2027/';
 const material = 'materials/';
 const taskFor = {er:0,database:0,backend:0,design:1,interaction:2};
-const sectionSteps = {er:[1,2,3,4],database:[2,3,4,5,7,8],backend:[1,2,3,4,5,6,7,8]};
+const sectionSteps = {er:[1,2,3,4,5],database:[2,3,4,5,7,8],backend:[1,2,3,4,5,6,7,8]};
 const databaseNotes=[
   'Покажите зелёный индикатор MySQL и верхнюю строку phpMyAdmin. Спросите, какую роль здесь играет Apache.',
   'Введите имя учебной базы. Затем попросите назвать её: такое же значение должно попасть в MYSQL_DATABASE.',
@@ -109,8 +110,9 @@ export function teacherDeck(data, stack) {
   for(const stage of stages) {
     start(stage.id,stage.title);
     const taskIndex=taskFor[stage.id], task=data.tasks[taskIndex];
+    const [input,verify]=data.stageChecks[stage.id];
     add('section',stage.title,{
-      eyebrow:stage.module,body:labels[stage.id],check:stage.output,
+      eyebrow:stage.module,body:labels[stage.id],source:'Перед началом: '+input,
       note:'Откройте соответствующий этап обучения. Сначала покажите результат предыдущего этапа и объясните, как он используется здесь.',
       links:[['Открыть учебный этап',lessonUrl(stack,stage.id,1)]]
     });
@@ -131,7 +133,13 @@ export function teacherDeck(data, stack) {
       const stepKey=stage.id+':'+(i+1), eyebrow='Шаг '+(i+1)+' из '+stage.steps.length;
       const props={stepKey,eyebrow};
       const g=guide(stage,i);
-      add('text',title,{...props,body,source,links:[['Открыть карточку',lessonUrl(stack,stage.id,i+1)]],note:stage.id==='database'?databaseNotes[i]:g?.why});
+      const card=lessonUrl(stack,stage.id,i+1);
+      const resources=filesFor(data.lessonFiles,stage.id,i,stack).map(([label,path])=>[label,path]);
+      const lesson=stage.id==='backend'?(php?data.phpAssembly:data.assembly)[i]:null;
+      if(lesson&&i===0)resources.push(['Скачать учебный каркас',starterArchive(stack)]);
+      add('text',title,{...props,body,source,links:[['Открыть карточку',card],...resources],note:stage.id==='database'?databaseNotes[i]:g?.why});
+      const expected=data.stepChecks[stage.id]?.[i];
+      if(expected&&stage.id==='er')add('step',title,{...props,check:expected});
       if(g) {
         textPages(g.actions,410).forEach((actions,index,pages)=>add('step',title,{
           ...props,eyebrow:eyebrow+(pages.length>1?' · '+(index+1)+'/'+pages.length:''),
@@ -171,9 +179,9 @@ export function teacherDeck(data, stack) {
         for(const [shot,description] of [[file,caption],...(extras[i]||[]).map(name=>[name,'Проверьте поля, ключи и список таблиц в phpMyAdmin.'])]) {
           add('step',title,{...props,image:image('database',shot,description)});
         }
+        add('step',title,{...props,check:expected,links:resources});
       }
-      if(stage.id==='backend') {
-        const lesson=(php?data.phpAssembly:data.assembly)[i];
+      if(lesson) {
         if(lesson.map)add('text',title,{...props,heading:'От условия к данным',body:lesson.map,check:lesson.check});
         for(const block of lesson.blocks) {
           const marker=block.first?.match(/BEGIN ([\w-]+)/)?.[1];
@@ -183,7 +191,7 @@ export function teacherDeck(data, stack) {
           const snippet=pages.length>1?snippets.push(block.text)-1:undefined;
           pages.forEach((code,j)=>add('code',title,{
             ...props,eyebrow:'Шаг '+(i+1)+' · '+block.file+(marker?' · '+marker:'')+(pages.length>1?' · '+(j+1)+'/'+pages.length:''),
-            code,snippet
+            code,snippet,links:snippet!==undefined?[['Полный фрагмент в карточке',card]]:undefined
           }));
         }
         const shot=(php?['catalog','registration-mobile','login','application',null,null]:['catalog',null,'registration','login',null,'application','admin-mobile',null,null])[i];
@@ -202,7 +210,7 @@ export function teacherDeck(data, stack) {
     }
     if(sectionContents!==null)slides[sectionContents].rows=contentsRows(chapter.sections);
     add('text','Что должно остаться после этапа',{
-      eyebrow:'Результат этапа',check:stage.output,note:'Попросите открыть сохранённый результат и показать, как проверить его по карточке.'
+      eyebrow:'Результат этапа',heading:'Что сохранить',body:stage.output,check:verify,note:'Попросите открыть сохранённый результат и показать, как проверить его по карточке.'
     });
   }
   start('example','Готовый пример');
@@ -212,7 +220,7 @@ export function teacherDeck(data, stack) {
   });
   for(const [title, actions, check, shot] of [
     ['Регистрация и вход',['Создайте student27 и войдите.','Повторите регистрацию с тем же логином.'], 'Пользователь видит пустой кабинет; повторный логин вызывает ошибку.', php?'registration-mobile':'registration'],
-    ['Заявка на помещение',['Выберите зал, завтрашнюю дату, 10:00 и оплату по СБП.','Откройте кабинет и сверяйте данные с applications.'], 'Одна карточка со статусом «Новая».', 'application'],
+    ['Заявка на помещение',['Введите «Учебная конференция», выберите первый зал, завтрашнюю дату, 10:00, 1 участника и оплату по СБП.','Откройте кабинет и сверяйте данные с applications.'], 'Одна карточка со статусом «Новая».', 'application'],
     ['Действия администратора',['Войдите как Conf2027 с учебным паролем Demo77.','Найдите заявку. Назначьте, затем завершите мероприятие.'], 'У пользователя виден статус «Завершено».', php?null:'admin-mobile'],
     ['Отзыв и результат',['Под student27 оставьте отзыв о завершённом мероприятии.','Обновите кабинет и сверьте таблицу reviews.'], 'В карточке показан отзыв. Для заявки есть одна запись в reviews.', null]
   ]) {

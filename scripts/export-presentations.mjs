@@ -25,7 +25,7 @@ try {
       if(!response.ok())throw new Error('Could not open '+stack+' presentation');
       await page.waitForFunction(()=>globalThis.RvpmPdf!==undefined);
       const layout = await page.evaluate(()=>globalThis.RvpmPdf);
-      if(!layout.pages||layout.overflow.length||layout.broken.length)throw new Error(stack+': '+JSON.stringify(layout));
+      if(!layout.pages||layout.overflow.length||layout.broken.length||layout.wrongLinks.length)throw new Error(stack+': '+JSON.stringify(layout));
       const pdf = await page.pdf({preferCSSPageSize:true,printBackground:true,tagged:true});
       outputs.push({name,pdf});
       console.log(name+': '+layout.pages+' pages');

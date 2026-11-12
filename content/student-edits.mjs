@@ -31,13 +31,14 @@ h3 { font-size: 18px; }
 }
 button, .button, .btn, .nav-primary {
   background: var(--primary);
-  color: #fff;
+  color: #061729;
   border: 1px solid transparent;
   border-radius: .4rem;
   padding: .55rem .8rem;
 }
 button:hover, .button:hover, .btn:hover, .nav-primary:hover {
   background: var(--heading);
+  color: #fff;
 }`;
 
 const font = prefix => `@font-face {
@@ -131,6 +132,15 @@ const imageStyle = `.card img, .room-card img, .room-detail img {
   display: block;
 }`;
 
+const choiceStyle = `#room_id, #payment_method, form[method="get"] select {
+  color: var(--heading);
+  background: var(--surface);
+  border: 1px solid var(--muted);
+  border-radius: .4rem;
+  min-height: 44px;
+}
+#room_id, #payment_method { margin-block-end: .75rem; }`;
+
 export function studentEdits(stack) {
   const php = stack === 'php';
   const css = php ? 'static/style.css' : 'static/css/style.css';
@@ -141,10 +151,105 @@ export function studentEdits(stack) {
       1: [{file:css, code:font(php?'':'../')}],
       2: [{file:css, code:imageStyle}],
       3: [{file:css, code:adaptive}],
+      4: [{file:css, code:choiceStyle}],
       5: [{file:css, code:focus}]
     },
     interaction: {
       1: [{file:css, code:feedbackCss}, {file:js, code:php?feedbackJs:feedbackJs+'\n\n'+flaskRoomHint}]
+    }
+  };
+}
+
+const applicationCheck = `SELECT r.name AS room, a.payment_method, a.status
+FROM applications AS a
+JOIN rooms AS r ON r.id = a.room_id
+WHERE a.conference_name = 'Проверка списка'
+ORDER BY a.id DESC LIMIT 1;`;
+
+const countApplications = `SELECT COUNT(*) AS applications_found
+FROM applications
+WHERE conference_name = 'Проверка перенаправления';`;
+
+const countReviews = `SELECT a.id, a.status, COUNT(r.id) AS reviews_found
+FROM applications AS a
+LEFT JOIN reviews AS r ON r.application_id = a.id
+WHERE a.conference_name = 'Проверка отзыва'
+GROUP BY a.id, a.status
+ORDER BY a.id DESC LIMIT 1;`;
+
+const inspectIndexes = `SELECT id, username FROM users WHERE username = 'student27';
+
+EXPLAIN SELECT * FROM applications
+WHERE user_id = (SELECT id FROM users WHERE username = 'student27');
+
+SHOW INDEX FROM applications
+WHERE Column_name IN ('user_id', 'status', 'event_date', 'room_id');`;
+
+const inspectResources = `const external = performance.getEntriesByType("resource")
+  .map(entry => new URL(entry.name))
+  .filter(url => ["http:", "https:"].includes(url.protocol) && url.origin !== location.origin)
+  .map(url => url.href);
+console.log(external);`;
+
+const qaNotes = `# Проверка задания 3
+
+| Действие | Ожидаемый результат | Фактический результат |
+| --- | --- | --- |
+| Отправить заявку и дважды обновить кабинет | Добавилась одна запись | Заполнить после проверки |
+| Проверить отзыв до и после завершения | До завершения формы нет, после сохраняется один отзыв | Заполнить после проверки |
+| Обновить каталог без интернета | Загружаются локальные стили, шрифт и фото | Заполнить после проверки |`;
+
+const sql = (instruction,code)=>({target:'phpMyAdmin → SQL',instruction,code});
+const terminal = (instruction,code)=>({target:'PowerShell в папке проекта',instruction,code});
+
+export function studentChecks(stack) {
+  const php=stack==='php';
+  return {
+    design:{
+      4:[sql('Выберите свою учебную базу и выполните запрос после отправки заявки «Проверка списка».',applicationCheck)],
+      5:[terminal('Сохраните снимки в docs. После git diff проверьте список подготовленных файлов, затем выполните последнюю команду.',`git status
+git add static docs
+git diff --cached --stat
+git commit -m "Задание 2: стиль и адаптация проверены"`)]
+    },
+    interaction:{
+      0:[
+        {
+          target:php?'index.php · ветка new':'app.py · функция new_application',
+          instruction:'Найдите переход сразу после успешного сохранения заявки. Сверьте эту строку с фрагментом. Если её нет, восстановите обработчик по карточке форм.',
+          code:php?"go('dashboard');":'return redirect(url_for("portal.dashboard"))',
+          backendStep:php?4:6
+        },
+        sql('Выполните запрос до отправки заявки «Проверка перенаправления» и ещё раз после двух обновлений кабинета. Запишите оба числа.',countApplications)
+      ],
+      2:[
+        {
+          target:php?'index.php · ветка review':'app.py · функция add_review',
+          instruction:'Найдите выборку по id заявки и id владельца, затем проверку статуса completed перед INSERT INTO reviews. Сверьте строку ниже. Если обработчик отсутствует, восстановите его по карточке форм.',
+          code:php
+            ?"if($a['status']!=='completed')fail(403,'Отзыв доступен после завершения мероприятия.');"
+            :'    if application["status"] != "completed":\n        flash("Отзыв можно оставить только после завершения мероприятия.", "error")',
+          backendStep:php?5:8
+        },
+        sql('Выполните запрос для заявки «Проверка отзыва» до публикации и после неё. Сверьте значение reviews_found.',countReviews)
+      ],
+      3:[sql('Выполните три запроса в рабочей базе. Если первая выборка пуста, зарегистрируйте student27 по карточке форм и повторите проверку.',inspectIndexes)],
+      4:[{
+        target:'F12 → Console в открытом портале',
+        instruction:'После обновления каталога дождитесь загрузки фото. Выполните код в консоли этой страницы и проверьте список внешних HTTP-запросов.',
+        code:inspectResources
+      }],
+      5:[
+        {
+          target:'docs/QA.md · создайте файл',
+          instruction:'Вставьте шаблон в пустой файл. Заполните третий столбец своими результатами и сохраните.',
+          code:qaNotes
+        },
+        terminal('Выполните команды после проверки. Просмотрите список подготовленных файлов перед коммитом.',`git status
+git add .
+git diff --cached --stat
+git commit -m "Задание 3: интерактивность и целостность проверены"`)
+      ]
     }
   };
 }

@@ -147,6 +147,16 @@ export function teacherDeck(data, stack) {
         }));
         if(g.code)add('code',title,{...props,code:g.code,heading:'Команды и код для проверки'});
       }
+      for(const {file,code} of data.studentEdits[stack][stage.id]?.[i]??[]){
+        for(const part of codePages(code))add('code',title,{
+          ...props,heading:'В конец файла '+file,code:part,links:[['Фрагмент целиком в карточке',card]]
+        });
+      }
+      for(const {target,instruction,code} of data.studentChecks[stack][stage.id]?.[i]??[]){
+        for(const part of codePages(code))add('code',title,{
+          ...props,heading:target,code:part,note:instruction,links:[['Порядок проверки в карточке',card]]
+        });
+      }
       const worked=beginnerStep(data.beginner,stage.id,i,stack);
       if(worked) {
         const actions=worked.rows.map(([label,value])=>label+'. '+value);

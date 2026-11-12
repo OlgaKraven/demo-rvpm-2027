@@ -43,7 +43,8 @@ export const lessonFiles = {
     8: [['Пример SQL-выгрузки','materials/database/schema-export.sql']]
   },
   design: {
-    0: [['Руководство по стилю · PDF','materials/style-guide.pdf']]
+    0: [['Руководство по стилю · PDF','materials/style-guide.pdf']],
+    2: [['Приложения БУ · ZIP','materials/basic-inputs.zip']]
   }
 };
 

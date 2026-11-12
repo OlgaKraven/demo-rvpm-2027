@@ -249,6 +249,16 @@ function studentEdits(id,index) {
     <pre class="lesson-code" tabindex="0" aria-label="Код для ${E(file)}"><code>${E(code)}</code></pre>
   </section>`).join('');
 }
+function studentChecks(id,index) {
+  const checks=D.studentChecks[db][id]?.[index]??[];
+  return checks.map(({target,instruction,code,backendStep})=>`<section class="build-block" data-check-code>
+    <h4>${E(target)}</h4><p>${E(instruction)}</p>
+    ${backendStep
+      ? `<p><a href="?mode=learn&amp;stage=backend&amp;stack=${db}&amp;step=${backendStep}">Открыть карточку форм · шаг ${backendStep}</a></p>`
+      : btn('Копировать фрагмент','data-copy-block')}
+    <pre class="lesson-code" tabindex="0" aria-label="Фрагмент для ${E(target)}"><code>${E(code)}</code></pre>
+  </section>`).join('');
+}
 function seedData() {
   const rooms=JSON.parse(codes()['rooms.json']);
   const first=rooms[0];
@@ -801,7 +811,7 @@ function bind(){
   document.querySelectorAll('[data-reference]').forEach(b=>b.onclick=()=>{const [target,index]=b.dataset.reference.split(':');stage=target;set(lessonProgressKey('step',stage),Number(index));mode='learn';render({pushHistory:true});document.querySelector('.study-step').scrollIntoView({block:'start'});});
   on('mock-variant',e=>{mockBrief=false;mockId=e.target.value;set('mock-id',mockId);render();document.getElementById('mock-variant')?.focus();},'onchange');
   root.querySelectorAll('[data-copy-block]').forEach(button=>button.onclick=async()=>{
-    const code=button.closest('[data-edit-file]').querySelector('pre').textContent;
+    const code=button.closest('[data-edit-file], [data-check-code]').querySelector('pre').textContent;
     try {
       await navigator.clipboard.writeText(code);
       button.textContent='Скопировано';
@@ -1068,7 +1078,17 @@ function lessonGuidance(id,i,stack=db){return D.guidance[id==='backend'&&stack==
 function lessonActions(actions) {
   return `<ol class="lesson-actions" role="list">${actions.map((action,index)=>`<li><span class="lesson-action-number" aria-hidden="true">${index+1}</span><span>${E(action)}</span></li>`).join('')}</ol>`;
 }
-function guidanceHTML(id,i){const g=lessonGuidance(id,i);if(!g)return '';return `<section class="lesson-explanation"><h3>Как это понять</h3><p>${E(g.why)}</p><h3>Что сделать самостоятельно</h3>${lessonActions(g.actions)}${g.code?`<pre class="lesson-code" tabindex="0">${E(g.code)}</pre>`:''}${studentEdits(id,i)}<div class="build-check"><strong>Проверьте себя</strong><p>${E(g.check)}</p></div></section>`;}
+function guidanceHTML(id,index) {
+  const guide=lessonGuidance(id,index);
+  if(!guide)return '';
+  return `<section class="lesson-explanation">
+    <h3>Как это понять</h3><p>${E(guide.why)}</p>
+    <h3>Что сделать самостоятельно</h3>${lessonActions(guide.actions)}
+    ${guide.code?`<pre class="lesson-code" tabindex="0">${E(guide.code)}</pre>`:''}
+    ${studentEdits(id,index)}${studentChecks(id,index)}
+    <div class="build-check"><strong>Проверьте себя</strong><p>${E(guide.check)}</p></div>
+  </section>`;
+}
 function beginnerHTML(id,index) {
   const key=id==='backend'&&db==='php'?'phpBackend':id;
   const example=D.beginner[key]?.[index];

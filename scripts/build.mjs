@@ -2,6 +2,7 @@ import {rvpmErGuide} from '../content/er-guide.mjs';
 import {buildErLayouts} from './er-layout.mjs';
 import {stageChecks,stepChecks,lessonFiles} from '../content/lesson-checks.mjs';
 import {lessonReference} from '../content/lesson-reference.mjs';
+import {projectFlow} from '../content/project-flow.mjs';
 import {beginnerGuidance} from '../content/beginner.mjs';
 import {teacherDeck} from '../content/teacher-deck.mjs';
 import {guidance} from '../content/guidance.mjs';
@@ -15,18 +16,19 @@ const base='examples/conference-portal-flask';let files={};
 function walk(dir,rel=''){for(const f of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','.venv','instance','__pycache__','.pytest_cache','.env'].includes(f.name))continue;const key=rel+f.name;if(f.isDirectory())walk(path.join(dir,f.name),key+'/');else if(!f.name.endsWith('.pyc'))files[key]=fs.readFileSync(path.join(dir,f.name));}}
 walk(base);fs.mkdirSync(out+'/downloads',{recursive:true});fs.writeFileSync(out+'/downloads/conference-portal-flask.zip',ExamCore.zip(files));
 const code={};for(const [name,bytes] of Object.entries(files))if(name==='.gitignore'||/\.(py|sql|html|css|js|json|md|txt)$/.test(name))code[name]=bytes.toString('utf8');
-const construction=assembly(code);const starterFiles={...files,'app.py':construction.starter,'START-HERE.md':'# Учебный каркас Flask\n\nОткройте раздел «Формы и Flask» учебного курса https://olgakraven.github.io/demo-rvpm-2027/?mode=learn&stage=backend&stack=mysql&step=1 и выполняйте шаги по порядку.\n\nСначала запустите каркас по docs/WINDOWS.md. Маршруты пока возвращают текстовые заглушки. На каждом шаге создавайте указанные HTML-файлы и заменяйте блок app.py между BEGIN/END. Полный код, отступы и проверки есть в уроках. Тесты рассчитаны на завершённую сборку.\n'};for(const f of Object.keys(starterFiles))if(f.startsWith('templates/')&&!['templates/base.html','templates/error.html'].includes(f))delete starterFiles[f];fs.writeFileSync(out+'/downloads/conference-portal-flask-starter.zip',ExamCore.zip(starterFiles));
+const construction=assembly(code);const starterFiles={...files,'app.py':construction.starter,'START-HERE.md':'# Учебный каркас Flask\n\nОткройте раздел «Формы и Flask» учебного курса https://olgakraven.github.io/demo-rvpm-2027/?mode=learn&stage=backend&stack=mysql&step=1 и выполняйте шаги по порядку.\n\nРаспакуйте архив во временную папку. Перенесите файлы в проект, который начали в разделе подготовки. Сохраните свой README.md, .gitignore, папку docs и историю Git.\n\nЗапустите каркас по docs/WINDOWS.md с DB_BACKEND=mysql. В MYSQL_DATABASE укажите имя базы из предыдущего этапа с пятью таблицами и каталогом. Маршруты пока возвращают текстовые заглушки. На каждом шаге создавайте указанные HTML-файлы и заменяйте блок app.py между BEGIN/END. Полный код, отступы и проверки есть в уроках. Тесты рассчитаны на завершённую сборку.\n'};for(const f of Object.keys(starterFiles))if(f.startsWith('templates/')&&!['templates/base.html','templates/error.html'].includes(f))delete starterFiles[f];fs.writeFileSync(out+'/downloads/conference-portal-flask-starter.zip',ExamCore.zip(starterFiles));
 files={};walk('examples/conference-portal-php');fs.writeFileSync(out+'/downloads/conference-portal-php.zip',ExamCore.zip(files));const phpCode={};for(const [name,bytes] of Object.entries(files))if(/\.(php|py|sql|css|js|md|json)$/.test(name))phpCode[name]=bytes.toString('utf8');
 const phpConstruction = phpAssembly(phpCode);
 const usersSql=phpCode['schema.sql'].match(/^CREATE TABLE users\s*\([\s\S]*?;/m)[0];
 fs.writeFileSync(out+'/materials/database/users.sql',usersSql+'\n');
+const roomInsertExample=fs.readFileSync('materials/database/seed-php.sql','utf8').match(/^INSERT INTO rooms\([^\r\n]+/m)[0];
 fs.writeFileSync(out+'/downloads/conference-portal-php-starter.zip',ExamCore.zip({
   ...files,'index.php':phpConstruction.starter,'START-HERE.md':phpStarterReadme
 }));
 const allVariants={};for(const v of mockVariants){const vf={'Задание.md':variantMarkdown(v),'rooms.csv':variantCSV(v)};fs.writeFileSync(out+'/downloads/exam-'+v.id+'.zip',ExamCore.zip(vf));for(const [name,value]of Object.entries(vf))allVariants[v.id+'/'+name]=value;}fs.writeFileSync(out+'/downloads/exam-30-variants.zip',ExamCore.zip(allVariants));
 const official=JSON.parse(fs.readFileSync('content/official.json'));
 const sources=fs.readdirSync('materials').filter(f=>/\.pdf$|\.zip$/.test(f)).map(f=>({file:f,sha256:createHash('sha256').update(fs.readFileSync('materials/'+f)).digest('hex')}));
-const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,stageChecks,stepChecks,lessonFiles,lessonReference,usersSql,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
+const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,stageChecks,stepChecks,lessonFiles,lessonReference,projectFlow,usersSql,roomInsertExample,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
 fs.writeFileSync(out+'/downloads/source-manifest.json',JSON.stringify(sources,null,2));
 const er=rvpmErGuide(data);
 er.layouts=await buildErLayouts(er);

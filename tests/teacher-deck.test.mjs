@@ -47,6 +47,10 @@ test('both presentations cover each lesson step and link to their own sections',
     const resourceLinks=(step,asset)=>deck.slides.some(slide=>slide.stepKey===step&&slide.links?.some(([,href])=>href===asset));
     assert(resourceLinks('database:4','materials/database/remaining-tables.sql'));
     assert(resourceLinks('database:6','materials/database/seed-'+(stack==='php'?'php':'flask')+'.sql'));
+    const catalogue=deck.slides.find(slide=>slide.title==='Из каталога в таблицу rooms');
+    assert.equal(catalogue.rows.length,6);
+    assert(catalogue.rows.every(row=>row.length===2));
+    assert.match(catalogue.rows[0][1],/auditorium.*120 мест/);
     assert(resourceLinks('database:8','materials/database/er-example.pdf'));
     assert(resourceLinks('database:9','materials/database/schema-export.sql'));
   }

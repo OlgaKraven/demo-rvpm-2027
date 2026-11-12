@@ -11,7 +11,7 @@ const databaseNotes=[
   'Создайте id, нажмите A_I и сохраните. Покажите, где в «Структуре» виден значок первичного ключа.',
   'Перед выбором SQL покажите имя базы в верхней строке. После импорта откройте «Структура» и пересчитайте таблицы.',
   'В «Связях» выберите applications.user_id и покажите, куда ведёт эта стрелка на ER. Повторите для room_id.',
-  'Откройте rooms → «Обзор». Должно быть шесть строк. Покажите запись Conf2027 в users, без вывода хеша.',
+  'Покажите источник помещений и почему каталог нужен до регистрации. Сопоставьте первую запись JSON со строкой rooms, затем покажите роль администратора.',
   'Откройте Designer и разнесите таблицы. Попросите проследить путь от reviews к rooms через applications.',
   'Откройте экспортированный PDF. Увеличьте масштаб и убедитесь, что видны все поля и четыре связи.',
   'Покажите разницу между экспортом базы и экспортом одной таблицы. Откройте SQL и найдите CREATE TABLE users.'
@@ -174,6 +174,15 @@ export function teacherDeck(data, stack) {
         }
       }
       if(stage.id==='database') {
+        if(i===5) {
+          const rooms=JSON.parse((php?data.phpCode:data.code)['rooms.json']);
+          add('table','Из каталога в таблицу rooms',{
+            ...props,columns:['Помещение','Код типа, город и вместимость'],wrapTable:true,
+            rows:rooms.map(room=>[room.name,`${room.category} · ${room.city} · ${room.capacity} мест`]),
+            note:'КИМ задаёт типы помещений. Значения в таблице учебные. В следующем этапе сервер возьмёт capacity по выбранному room_id.',
+            links:[['Карточка с записью JSON и SQL',card]]
+          });
+        }
         const [file,caption]=data.databaseIllustrations[i];
         const extras={2:['03-fields.png','04-users-structure.png'],3:['06-all-tables.png']};
         for(const [shot,description] of [[file,caption],...(extras[i]||[]).map(name=>[name,'Проверьте поля, ключи и список таблиц в phpMyAdmin.'])]) {

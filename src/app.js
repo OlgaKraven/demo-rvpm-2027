@@ -183,10 +183,24 @@ function practiceNavigation(tasks) {
 function header(title,description) {
   return `<header class="workspace-intro"><div><h1>${E(title)}</h1>${description?`<p>${E(description)}</p>`:''}</div></header>`;
 }
+function starterIntro() {
+  const php=db==='php', stack=php?'PHP':'Flask';
+  const file='downloads/conference-portal-'+stack.toLowerCase()+'-starter.zip';
+  const command=php?`$env:MYSQL_DATABASE='conference_php_2027'
+& C:\\xampp\\php\\php.exe -S 127.0.0.1:8087`:`py -m venv .venv
+.\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt
+$env:DB_BACKEND='mysql'
+$env:MYSQL_DATABASE='conference_rvpm_2027'
+.\\.venv\\Scripts\\python.exe -m flask --app app run --port 5017`;
+  return `<p>Распакуйте учебный каркас во временную папку. Перенесите его файлы в проект, начатый на этапе подготовки. Сохраните свой README.md, .gitignore, папку docs и историю Git.</p>
+    <a class="btn primary" href="${file}" download>Скачать учебный каркас ${stack}</a>
+    <p>Оставьте MySQL включённым в XAMPP. В PowerShell из папки проекта выполните команды ниже. В <code>MYSQL_DATABASE</code> укажите ту же базу, где создали таблицы и загрузили каталог.</p>
+    <pre class="lesson-code" tabindex="0" aria-label="Команды запуска каркаса"><code>${E(command)}</code></pre>
+    <p>Откройте <code>http://127.0.0.1:${php?8087:5017}/</code>. Главная пока показывает сообщение каркаса. На следующих шагах заменяйте заглушки по одной.</p>`;
+}
 function phpBuildLesson(i) {
   const lesson = D.phpAssembly[i];
-  const setup = i===0 ? `<a class="btn primary" href="downloads/conference-portal-php-starter.zip" download>Скачать учебный каркас PHP</a>
-    <p>Распакуйте архив в отдельную папку и откройте START-HERE.md. Подключите базу с предыдущего этапа, если в ней уже есть пять таблиц и данные из seed-php.sql. При запуске с нуля создайте отдельную пустую базу и выполните setup.php по инструкции.</p>` : '';
+  const setup = i===0 ? starterIntro() : '';
   return `<section class="build-lesson"><h3>Соберите этот шаг в каркасе</h3>${setup}
     ${lesson.blocks.map((block,j)=>`<section class="php-lesson-block">
       <h4>${E(block.file)} · ${E(block.first.match(/BEGIN ([\w-]+)/)[1])}</h4>
@@ -197,7 +211,7 @@ function phpBuildLesson(i) {
     <div class="build-check"><strong>Проверка после шага</strong><p>${E(lesson.check)}</p></div>
   </section>`;
 }
-function buildLesson(i){if(db==='php')return phpBuildLesson(i);const x=D.assembly[i];if(!x)return '';return `<section class="build-lesson"><h3>Что сделать в проекте</h3>${i===0?'<p>Распакуйте каркас в отдельную папку. Подключение базы, сессия и CSRF уже подготовлены; маршруты пока возвращают текстовые заглушки. Если база уже создана на предыдущем этапе, запускайте каркас с DB_BACKEND=mysql и MYSQL_DATABASE, указывающей на эту базу. На следующих шагах вы замените заглушки рабочим кодом.</p><a class="btn primary" href="downloads/conference-portal-flask-starter.zip" download>Скачать учебный каркас Flask</a>':''}${x.map?`<p class="data-flow"><strong>От условия к данным:</strong> ${E(x.map)}</p>`:''}${x.blocks.map((b,j)=>`<details class="build-block" ${j===0?'open':''}><summary>${j+1}. ${E(b.file)} · ${b.file==='app.py'?'обработчик на сервере':'содержимое файла'}</summary><p>${E(b.where)}</p><p class="small">Строки ${b.start}–${b.start+b.text.split('\n').length-1} в готовом примере. В вашем каркасе ориентируйтесь на имена файлов и маркеры.</p><button class="btn" data-copy-block="${i}:${j}">Копировать фрагмент</button><pre class="lesson-code" tabindex="0" aria-label="Код ${E(b.file)}">${E(b.text)}</pre></details>`).join('')}<div class="build-check"><strong>Проверка после шага</strong><p>${E(x.check)}</p></div></section>`;}
+function buildLesson(i){if(db==='php')return phpBuildLesson(i);const x=D.assembly[i];if(!x)return '';return `<section class="build-lesson"><h3>Что сделать в проекте</h3>${i===0?starterIntro():''}${x.map?`<p class="data-flow"><strong>От условия к данным:</strong> ${E(x.map)}</p>`:''}${x.blocks.map((b,j)=>`<details class="build-block" ${j===0?'open':''}><summary>${j+1}. ${E(b.file)} · ${b.file==='app.py'?'обработчик на сервере':'содержимое файла'}</summary><p>${E(b.where)}</p><p class="small">Строки ${b.start}–${b.start+b.text.split('\n').length-1} в готовом примере. В вашем каркасе ориентируйтесь на имена файлов и маркеры.</p><button class="btn" data-copy-block="${i}:${j}">Копировать фрагмент</button><pre class="lesson-code" tabindex="0" aria-label="Код ${E(b.file)}">${E(b.text)}</pre></details>`).join('')}<div class="build-check"><strong>Проверка после шага</strong><p>${E(x.check)}</p></div></section>`;}
 function lessonLinks(id,index) {
   const files=(D.lessonFiles[id]?.[index]??[]).filter(([, , stack])=>!stack||stack===db);
   if(!files.length)return '';
@@ -205,17 +219,48 @@ function lessonLinks(id,index) {
     /\.(zip|sql)$/.test(url)?`<a class="btn" href="${E(url)}" download>${E(name)}</a>`:link(E(name),E(url))
   ).join('')}</div>`;
 }
+function seedData() {
+  const rooms=JSON.parse(codes()['rooms.json']);
+  const first=rooms[0];
+  const categories={auditorium:'Аудитория',coworking:'Коворкинг',cinema:'Кинозал'};
+  const hash=db==='php'?'PHP проверяет хеш через password_verify.':'Flask проверяет хеш через check_password_hash.';
+  return `<section class="seed-data">
+    <h3>Каталог помещений</h3>
+    <div class="material-table"><table>
+      <thead><tr><th scope="col">Помещение</th><th scope="col">Тип<span class="seed-city-inline"> и город</span></th><th class="seed-city-column" scope="col">Город</th><th scope="col">Мест</th></tr></thead>
+      <tbody>${rooms.map(room=>`<tr><th scope="row">${E(room.name)}</th><td>${E(categories[room.category])}<span class="seed-city-inline">${E(room.city)}</span></td><td class="seed-city-column">${E(room.city)}</td><td>${E(room.capacity)}</td></tr>`).join('')}</tbody>
+    </table></div>
+    <p>Например, у помещения ${E(first.name)} <code>category = ${E(first.category)}</code> определяет фильтр, а <code>capacity = ${E(first.capacity)}</code> ограничивает число участников. Идентификатор строки назначает MySQL. Возьмите его из результата запроса, когда будете проверять заявку.</p>
+    <details class="build-block"><summary>Сравнить запись в rooms.json и команду INSERT</summary>
+      <h4>Одна запись каталога</h4>
+      <pre class="lesson-code" tabindex="0"><code>${E(JSON.stringify(first,null,2))}</code></pre>
+      <h4>Как запись попадает в rooms</h4>
+      <pre class="lesson-code" tabindex="0"><code>${E(D.roomInsertExample.replace(' VALUES(','\nVALUES ('))}</code></pre>
+      <p>INSERT перечисляет столбцы и их значения в одном порядке. Столбца <code>id</code> в списке нет: его заполняет MySQL через AUTO_INCREMENT.</p>
+      <p>Город помогает искать помещение. Адрес, фото, описание и оборудование нужны для карточки. Цена в час показывает стоимость в учебном каталоге. Способ оплаты выбирают позже в форме заявки.</p>
+    </details>
+    <h3>Учётная запись администратора</h3>
+    <p>Логин <code>Conf2027</code> и пароль <code>Demo77</code> указаны в КИМ. SQL сохраняет хеш пароля и <code>is_admin = 1</code>. ${hash} Скачайте файл своего стека, чтобы вход работал. У пользователя из формы регистрации будет <code>is_admin = 0</code>.</p>
+    <p>Каталог и администратор нужны до запуска форм. Строки в <code>applications</code> и <code>reviews</code> появятся после отправки заявки и отзыва в портале.</p>
+  </section>`;
+}
 function databaseLesson(i) {
   const [file,caption]=D.databaseIllustrations[i];
+  const guide=D.guidance.database[i];
   const extras={2:[['03-fields.png','Поля, типы и ограничения'],['04-users-structure.png','Структура таблицы users']],3:[['06-all-tables.png','Пять таблиц после импорта']]};
   const sql=i===2?D.usersSql:i===5?`SELECT id, name, capacity FROM rooms ORDER BY id;
+SELECT category, COUNT(*) AS room_count FROM rooms GROUP BY category;
 SELECT username, is_admin FROM users;
 SELECT COUNT(*) AS application_count FROM applications;
 SELECT COUNT(*) AS review_count FROM reviews;`:'';
-  return `<section class="database-lesson">
+  return `<section class="lesson-explanation database-lesson">
+    <h3>${i===5?'Откуда берутся данные':'Почему этот шаг нужен'}</h3><p>${E(guide.why)}</p>
+    ${i===5?seedData():''}
+    <h3>Что сделать</h3>${lessonActions(guide.actions)}
+    ${lessonLinks('database',i)}
     ${sql?`<h3>${i===2?'Запрос создания таблицы':'Проверка начальных записей'}</h3>
       <pre class="lesson-code" tabindex="0" aria-label="Запрос SQL"><code>${E(sql)}</code></pre>
-      ${i===5?'<p>Ожидаемый результат: шесть помещений, одна учётная запись Conf2027 с ролью 1 и по 0 строк в applications и reviews.</p>':''}`:''}
+      ${i===5?'<p>Сверьте результаты: шесть строк в каталоге, по два помещения каждого типа, одна учётная запись Conf2027 с ролью 1 и по 0 строк в applications и reviews. Если строк больше, проверьте имя базы и историю импортов до работы с формами.</p>':''}`:''}
     ${[[file,caption],...(extras[i]??[])].map(([f,title])=>
     `<figure><a href="materials/database/${E(f)}" target="_blank" rel="noopener"><img src="materials/database/${E(f)}" alt="${E(title)}" loading="lazy"></a><figcaption>${E(title)} · нажмите для увеличения</figcaption></figure>`
   ).join('')}</section>`;
@@ -243,6 +288,10 @@ function lessonArtifacts(id) {
     : files;
   return `<ul class="result-files">${items.map(([name,description])=>
     `<li><code>${E(name)}</code> <span>· ${E(description)}</span></li>`).join('')}</ul>`;
+}
+
+function projectProgress(id) {
+  return `<p class="project-progress"><strong>Как меняется проект</strong><span>${E(D.projectFlow[id])}</span></p>`;
 }
 
 function lessonTabsHTML(items,active,group,panel) {
@@ -292,6 +341,7 @@ function learningMap() {
         <div>
           <p class="section-code">${E(lesson.module)}</p>
           <h2 id="map-stage-title">${E(lesson.title)}</h2><p>${E(D.lessonReference[lesson.id].intro[1])}</p>
+          ${projectProgress(lesson.id)}
           <strong>Что сохранить</strong>${lessonArtifacts(lesson.id)}
           ${btn(action,`data-lesson-view="${resume||done(lesson.id)?'steps':'brief'}"`,true)}
         </div>
@@ -309,6 +359,7 @@ function lessonBrief(lesson) {
     <p>${E(lesson.goal)}</p>
     ${assignment?`<h3>Условие задания</h3><p>${E(assignment.text)}</p>`:''}
     <h3>Что понадобится</h3><p>${E(D.stageChecks[lesson.id][0])}</p>
+    ${projectProgress(lesson.id)}
     ${files.length?`<section class="task-files"><h3>Файлы этапа</h3><ul>${files.map(([name,url])=>`<li><a href="${E(url)}" ${url.endsWith('.zip')?'download':'target="_blank" rel="noopener"'}>${E(name)}</a></li>`).join('')}</ul></section>`:''}
     <div class="lesson-brief-actions">${btn(savedStep(lesson)!==null?'Продолжить с шага '+savedStep(lesson)+' →':'Перейти к шагам →','data-lesson-view="steps"',true)}</div>
   </section>`;
@@ -347,9 +398,9 @@ function learn() {
           </div>
           ${result?`<div class="lesson-result">${lessonArtifacts(lesson.id)}${stepResultCheck(lesson.id)}</div>`:`
             <p>${E(step[1])}</p><p class="source-note">Источник · ${E(step[2])}</p>
-            ${guidanceHTML(stage,index)}${lessonLinks(stage,index)}${beginnerHTML(stage,index)}
-            ${stage==='database'?databaseLesson(index):stage==='backend'?buildLesson(index):''}
-            ${stepCheck(stage,index)}
+            ${stage==='database'?databaseLesson(index):guidanceHTML(stage,index)+lessonLinks(stage,index)}
+            ${beginnerHTML(stage,index)}${stage==='backend'?buildLesson(index):''}
+            ${stage==='er'?'':stepCheck(stage,index)}
             ${er?'<section class="er-workspace" id="er-workspace" aria-labelledby="er-title"></section>':''}
             ${stage==='design'&&index<2?styleSamples(null):''}
             ${stage==='design'&&index===2?btn('Изображения из приложений','id="lesson-images" aria-haspopup="dialog"'):''}
@@ -974,7 +1025,10 @@ function materialsModal(initial='condition'){const v=mode==='mock'?examVariant()
 function fileModal(file){if(!(file in codes()))file=db==='php'?'index.php':'app.py';const d=modal('Исходники примера');const body=d.querySelector('.modal-body');body.innerHTML=`<label class="file-picker">Файл<select id="code-file">${Object.keys(codes()).map(f=>`<option ${f===file?'selected':''}>${E(f)}</option>`).join('')}</select></label><div class="button-row">${btn('Копировать код','id="copy-code"')}</div><p class="small">Полный исходный файл. Перенос длинных строк включён; копирование сохраняет исходное форматирование.</p><pre class="code-preview" tabindex="0" aria-label="Исходный код"></pre>`;const show=()=>body.querySelector('pre').textContent=codes()[body.querySelector('select').value]||'Файл недоступен';show();body.querySelector('select').onchange=show;body.querySelector('#copy-code').onclick=async e=>{try{await navigator.clipboard.writeText(body.querySelector('pre').textContent);e.target.textContent='Скопировано';}catch{e.target.textContent='Выделите код и нажмите Ctrl+C';}};}
 function filePurpose(f){if(/schema/.test(f))return 'Описывает таблицы, типы полей, ограничения и связи базы данных.';if(f==='rooms.json')return 'Демонстрационный каталог помещений: начальные записи rooms, а не данные пользователей.';if(f==='app.py'||f==='index.php')return 'Принимает запросы браузера, проверяет данные и права, выполняет запросы к БД и возвращает страницу.';if(f==='lib.php'||f==='mysql_backend.py')return 'Общие функции и подключение к MySQL: запросы, соединение и вспомогательные операции.';if(f==='setup.php')return 'Однократная подготовка пустой учебной базы: таблицы, администратор и каталог.';if(f.endsWith('.html'))return 'HTML-шаблон страницы: подписи, поля формы и вывод данных, переданных сервером.';if(f.endsWith('.css'))return 'Оформление интерфейса: палитра, шрифты, сетки, состояния элементов и мобильная адаптация.';if(f.endsWith('.js'))return 'Поведение в браузере: обработка событий и обратная связь. Не заменяет проверки на сервере.';if(f.includes('test'))return 'Автоматическая проверка сценариев и ограничений приложения на тестовых данных.';if(f.endsWith('.md'))return 'Инструкция, описание источников или отчёт о проверке проекта.';if(f==='requirements.txt')return 'Список Python-зависимостей для установки в виртуальное окружение.';if(f==='.gitignore')return 'Исключает окружение, кэш и локальные секреты из новых добавлений в Git.';return 'Вспомогательный ресурс проекта. Смотрите путь файла и его содержимое перед изменением.';}
 function lessonGuidance(id,i,stack=db){return D.guidance[id==='backend'&&stack==='php'?'phpBackend':id]?.[i];}
-function guidanceHTML(id,i){const g=lessonGuidance(id,i);if(!g)return '';return `<section class="lesson-explanation"><h3>Как это понять</h3><p>${E(g.why)}</p><h3>Что сделать самостоятельно</h3><ol class="lesson-actions" role="list">${g.actions.map((x,index)=>`<li><span class="lesson-action-number" aria-hidden="true">${index+1}</span><span>${E(x)}</span></li>`).join('')}</ol>${g.code?`<pre class="lesson-code" tabindex="0">${E(g.code)}</pre>`:''}<div class="build-check"><strong>Проверьте себя</strong><p>${E(g.check)}</p></div></section>`;}
+function lessonActions(actions) {
+  return `<ol class="lesson-actions" role="list">${actions.map((action,index)=>`<li><span class="lesson-action-number" aria-hidden="true">${index+1}</span><span>${E(action)}</span></li>`).join('')}</ol>`;
+}
+function guidanceHTML(id,i){const g=lessonGuidance(id,i);if(!g)return '';return `<section class="lesson-explanation"><h3>Как это понять</h3><p>${E(g.why)}</p><h3>Что сделать самостоятельно</h3>${lessonActions(g.actions)}${g.code?`<pre class="lesson-code" tabindex="0">${E(g.code)}</pre>`:''}<div class="build-check"><strong>Проверьте себя</strong><p>${E(g.check)}</p></div></section>`;}
 function beginnerHTML(id,index) {
   const key=id==='backend'&&db==='php'?'phpBackend':id;
   const example=D.beginner[key]?.[index];

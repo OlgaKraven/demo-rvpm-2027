@@ -67,6 +67,24 @@
 .map-detail .result-files { margin: 14px 0 18px; padding-inline-start: 20px; }
 .map-detail .result-files li { margin-block: 6px; }
 .result-files code { overflow-wrap: anywhere; }
+.project-progress strong { display: block; margin-bottom: 4px; }
+.seed-data .material-table { margin-block: 12px; }
+.seed-data .material-table table { margin: 0; table-layout: auto; }
+.seed-data .material-table :is(th, td) { font-size: .875rem; overflow-wrap: normal; word-break: normal; }
+.seed-data .material-table tbody th {
+  text-align: start;
+  background: var(--paper);
+  color: var(--ink);
+  letter-spacing: normal;
+}
+.seed-data .lesson-code { white-space: pre-wrap; overflow-wrap: anywhere; }
+.seed-city-inline { display: none; }
+@media (max-width: 560px) {
+  .seed-data .material-table :is(th, td) { padding: 8px 5px; }
+  .seed-data .seed-city-column { display: none; }
+  .seed-data thead .seed-city-inline { display: inline; }
+  .seed-data tbody .seed-city-inline { display: block; color: var(--muted); }
+}
 
 .lesson-back-link {
   display: inline-flex;

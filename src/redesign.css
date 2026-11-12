@@ -85,32 +85,33 @@ body { font: 1rem/1.6 var(--font-ui); }
   color: var(--red);
   border-color: var(--red);
 }
-.stack-choice {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding: 0;
-  min-inline-size: 0;
-  border: 0;
-  margin: 0;
+.map-intro { margin-bottom: 22px; }
+.map-intro p { color: var(--muted); margin: 0; }
+.map-stack {
+  display: grid;
+  gap: 8px;
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-block: 1px solid var(--line);
 }
-.stack-choice legend { padding: 0; color: var(--muted); font-size: .8125rem; }
-.stack-choice label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 6px 9px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--paper);
-  color: var(--ink);
-  font-size: .875rem;
-  line-height: 1.3;
-  cursor: pointer;
+.map-stack label { font-weight: 650; }
+.map-stack select { width: 100%; min-width: 0; min-height: 44px; }
+@supports (appearance: base-select) {
+  .map-stack select, .map-stack select::picker(select) { appearance: base-select; }
+  .map-stack select { white-space: normal; }
+  .map-stack select::picker(select) {
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .map-stack :is(option, selectedcontent) { display: block; overflow-wrap: anywhere; }
+  .map-stack option { padding: 10px 14px; }
+  .map-stack option:hover, .map-stack option:checked { background: var(--route-active); }
+  .map-stack .stack-tools { display: block; color: var(--muted); font-size: .875em; }
+  .map-stack .stack-separator { display: none; }
 }
-.stack-choice input { margin: 0; accent-color: var(--red); }
-.stack-choice label:has(input:checked) { border-color: var(--red); background: var(--stage-active); }
+
 
 .hero.study-intro {
   display: grid;

@@ -409,13 +409,14 @@
 }
 
 .mock-variant-bar {
+  grid-area: variant;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px 20px;
   align-items: end;
 }
-.mock-variant-bar .training-source { min-width: 0; max-width: none; margin: 0; }
-.mock-variant-bar select { width: 100%; min-width: 0; }
+.mock-variant-picker { display: grid; gap: 8px; min-width: 0; }
+.mock-variant-picker select { width: 100%; min-width: 0; }
 .mock-variant-actions, .mock-brief-heading {
   display: flex;
   flex-wrap: wrap;
@@ -428,7 +429,10 @@
   color: var(--red);
   border-color: var(--red);
 }
-.mock-exam .attempt-layout { margin-top: 18px; }
+.mock-exam .attempt-layout {
+  grid-template-areas: "variant variant" "content timer";
+  margin-top: 18px;
+}
 .mock-exam .timer-hint { grid-column: 1 / -1; padding: 2px 14px 14px; }
 @media (min-width: 701px) and (max-width: 1040px) {
   .mock-exam .attempt-layout .training-timer-controls { padding-inline: 14px; }
@@ -468,6 +472,7 @@
 .lesson-step-number { margin-inline-end:.55rem; }
 @media (max-width:1040px) {
   .training-compact .attempt-layout { grid-template: "timer" "content" / minmax(0,1fr); }
+  .mock-exam .attempt-layout { grid-template-areas: "variant" "timer" "content"; }
   .training-compact .attempt-layout .timer-card { position:static; max-width:none; }
 }
 @media (max-width:760px) {

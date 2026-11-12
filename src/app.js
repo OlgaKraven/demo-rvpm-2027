@@ -543,15 +543,19 @@ function practice() {
        <div class="training-intro-actions">${btn('Условие КИМ и приложения','id="training-sample" aria-haspopup="dialog"')}</div>`;
   return `<section class="training-page practice-page training-compact${variant?' mock-exam':''}">
     <header class="workspace-intro">${heading}</header>
-    <div class="attempt-layout">${timerBox(state)}<div class="attempt-content">
+    <div class="attempt-layout">
       ${variant?`<div class="mock-variant-bar">
-        <div class="training-source"><label for="mock-variant">Вариант<select id="mock-variant" ${status==='running'?'disabled':''}>${D.mockVariants.map(item=>
-          `<option value="${item.id}" ${item.id===variant.id?'selected':''}>${item.number}. ${E(item.brand)} · ${E(item.city)}</option>`).join('')}</select></label></div>
+        <div class="mock-variant-picker">
+          <label for="mock-variant">Вариант</label>
+          <select id="mock-variant" ${status==='running'?'disabled':''}>${D.mockVariants.map(item=>
+            `<option value="${item.id}" ${item.id===variant.id?'selected':''}>${item.number}. ${E(item.brand)} · ${E(item.city)}</option>`).join('')}</select>
+        </div>
         <div class="mock-variant-actions">${btn('Условие варианта',`id="mock-brief" aria-pressed="${mockBrief}"`)}
           <a class="btn" id="mock-download" href="downloads/exam-${variant.id}.zip" download>Файлы ${variant.id} · ZIP</a></div>
       </div>`:''}
-      ${attemptNotice(state)}${workspace}
-    </div></div>
+      ${timerBox(state)}
+      <div class="attempt-content">${attemptNotice(state)}${workspace}</div>
+    </div>
   </section>`;
 }
 

@@ -28,9 +28,9 @@ jobs:
       - run: python -m pytest -q
         working-directory: examples/conference-portal-flask
       - run: php -l examples/conference-portal-php/index.php && php -l examples/conference-portal-php/lib.php && php -l examples/conference-portal-php/setup.php
+      - run: npm ci
       - run: npm run build && npm test
       - run: python tests/check-assembly.py
-      - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run export:pdf
       - uses: actions/configure-pages@v5

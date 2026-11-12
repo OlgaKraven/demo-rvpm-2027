@@ -4,7 +4,8 @@ const params = new URLSearchParams(location.search);
 let memory={},storageOK=true;const prefix='rvpm-2027-basic-v1:';
 function get(k,f=null){try{return JSON.parse(localStorage.getItem(prefix+k))??f;}catch{storageOK=false;return memory[k]??f;}}
 function set(k,v){memory[k]=v;try{localStorage.setItem(prefix+k,JSON.stringify(v));}catch{storageOK=false;}}
-let mode=get('mode','overview'),stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false;
+let mode=get('mode','overview'),stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false,learningView='map',mockBrief=false;
+let tourActive=false, tourErStep=false, tourCleanup=null, destroyER=null;
 const modes=[['overview','Обзор'],['learn','Обучение'],['training','Тренировка'],['mock','Пробный экзамен'],['examples','Примеры'],['teacher','Преподавателю']];
 db=db==='php'?'php':'mysql';
 function lessonProgressKey(kind, id) {
@@ -33,6 +34,8 @@ function readRoute(query) {
   stage = query.get('stage') || stage;
   if(!S().some(lesson=>lesson.id===stage))stage='documents';
   const step = query.get('step');
+  const view=query.get('view');
+  if(mode==='learn')learningView=['map','brief','result'].includes(view)?view:(step||query.has('stage'))?'steps':'map';
   if(mode!=='learn' || !step || !/^\d+$/.test(step))return;
   const index = Number(step)-1;
   const lesson = S().find(item=>item.id===stage);
@@ -42,7 +45,10 @@ function readRoute(query) {
 function pagePath() {
   const query = new URLSearchParams({mode,stage});
   if(['learn','examples'].includes(mode))query.set('stack',db);
-  if(mode==='learn')query.set('step',currentStepIndex(S().find(item=>item.id===stage))+1);
+  if(mode==='learn'){
+    if(learningView==='steps')query.set('step',currentStepIndex(S().find(item=>item.id===stage))+1);
+    else query.set('view',learningView);
+  }
   const criteriaAnchor = mode==='overview' && (location.hash==='#criteria' || new URLSearchParams(location.search).get('mode')==='criteria');
   return '?'+query+(criteriaAnchor?'#criteria':'');
 }
@@ -50,15 +56,8 @@ function pagePath() {
 readRoute(params);
 
 function S(stack=db){return stack==='php'?D.phpStages:D.stages;}function codes(){return db==='php'?D.phpCode:D.code;}
-let coach=null,marked=null,restoreFocus=null;const btn=(text,attrs='',primary=false)=>`<button class="btn${primary?' primary':''}" ${attrs}>${text}</button>`;
+const btn=(text,attrs='',primary=false)=>`<button class="btn${primary?' primary':''}" ${attrs}>${text}</button>`;
 const link=(text,path)=>`<a class="btn" href="${path}" target="_blank" rel="noopener">${text}</a>`;
-const sources=()=>'';
-function closeTour(){coach?.remove();marked?.classList.remove('tour-mark');coach=null;marked=null;restoreFocus?.isConnected&&restoreFocus.focus();}
-function tour(kind='site'){
- closeTour();restoreFocus=document.activeElement;const routes={site:[['.site-nav','Выберите режим','Обучение объясняет шаги, тренировка позволяет остановить время, пробный экзамен идёт 3 часа 30 минут без паузы.'],['#stack','Выберите стек','В «Обучении» выберите PHP + MySQL для Apache/XAMPP либо Flask с MySQL. В «Примерах» тот же список меняет архив и инструкцию.'],['.route-sidebar','Двигайтесь по маршруту','Учебные этапы помогают выполнить три официальных задания. Это не дополнительные задания экзамена.'],['.variant-panel, #training-sample','Ваше условие','В тренировке — образец КИМ. В пробном экзамене выберите один из 30 учебных вариантов.'],['.timer-card','Время','Гид не запускает таймер. Начинайте работу своей кнопкой.'],['#materials-open','Материалы внутри сайта','Читайте условие, смотрите изображения и руководство по стилю без скачивания. Архивы доступны отдельно.']],lesson:[['.route-heading','Цель этапа','Прочитайте цель и ожидаемый результат.'],['.study-step','Одно действие за раз','Выполняйте шаг в своём редакторе и СУБД. Источник указан под объяснением.'],['.study-controls','Следующее действие','Листайте шаги или выберите нужный по номеру. Положение сохраняется.'],['.route-check','Самопроверка','Отмечайте результат после проверки своей работы.']],training:[['.variant-panel, #training-sample','Условие задания','Тренировка содержит образец КИМ; пробный экзамен — 30 учебных вариантов.'],['.timer-card','Таймер','В тренировке есть отдельная «Пауза», в экзамене паузы нет.'],['.training-stage-list','Три задания','Переключайте задание, сохраняя общий отсчёт и свои отметки.'],['.training-task','Условие и самопроверка','Читайте полный КИМ; краткое описание на экране помогает ориентироваться.']],er:[['.er-sequence','Построение по этапам','Добавляйте таблицы, затем проверяйте их связи.'],['.schema-grid','Поля и происхождение','У каждого поля сразу указаны источник и причина выбора: условие, форма, сессия, каталог или служебная логика.'],['.er-pinned','Связи','Связь FK → PK не заменяет проверку прав владельца на сервере.']],files:[['.file-picker','Выберите файл','Это исходники именно скачиваемого примера.'],['.code-preview','Читайте полный код','Найдите указанные в уроке функцию, маршрут или шаблон. Код можно скопировать.']],deck:[['#teacher-db','Выберите стек','Карточки, демонстрации и PDF соответствуют выбранному стеку.'],['#deck-open','Откройте презентацию','В оглавлении можно перейти к этапу. Режим показа открывает окно аудитории и сценарий преподавателя.']]};
- const items=(routes[kind]||routes.site).filter(([q])=>document.querySelector(q)?.getClientRects().length);if(!items.length)return;let n=0;coach=document.createElement('section');coach.className='tour-coach';coach.setAttribute('role','region');coach.setAttribute('aria-label','Гид');(document.activeElement?.closest('dialog')||document.body).append(coach);
- function draw(){marked?.classList.remove('tour-mark');const [q,t,b]=items[n];marked=document.querySelector(q);marked.classList.add('tour-mark');marked.scrollIntoView({block:'center'});coach.innerHTML=`<small>ГИД · ${n+1} / ${items.length}</small><h3>${t}</h3><p>${b}</p><div class="button-row">${btn('Назад','data-back '+(!n?'disabled':''))}${btn(n===items.length-1?'Завершить':'Далее','data-next',true)}${btn('Закрыть гид','data-close')}</div>`;coach.querySelector('[data-back]').onclick=()=>{n--;draw();};coach.querySelector('[data-next]').onclick=()=>{if(++n===items.length)closeTour();else draw();};coach.querySelector('[data-close]').onclick=closeTour;coach.querySelector('[data-next]').focus();}draw();
-}
 const modeIcons = {
   overview: 'M12 2.5 2 11h3v9a1 1 0 0 0 1 1h3.5v-6h5v6H18a1 1 0 0 0 1-1v-9h3z',
   learn: 'M6 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm3.5 2h6a4 4 0 0 1 0 8H9a2 2 0 1 0 0 4h7.2l-2-2 1.4-1.4L20 19l-4.4 4.4-1.4-1.4 2-2H9a4 4 0 1 1 0-8h6.5a2 2 0 0 0 0-4h-6z',
@@ -94,7 +93,7 @@ function siteHeader() {
     <div class="top-tools">
       <div class="utility-group">
         ${iconButton(themeLabel,dark?toolIcons.sun:toolIcons.moon,'id="theme"')}
-        ${iconButton('Тур по сайту',toolIcons.tour,'data-guide="site" aria-haspopup="dialog"')}
+        ${iconButton('Тур по сайту',toolIcons.tour,'id="site-tour" aria-haspopup="dialog"')}
       </div>
     </div>
   </header>`;
@@ -137,14 +136,6 @@ function overviewBanner() {
   </section>`;
 }
 
-function siteBanner() {
-  if(mode==='overview')return overviewBanner();
-  return `<section class="hero study-intro banner-compact" aria-label="Демонстрационный экзамен">
-    <div class="banner-copy"><p class="banner-title">Демонстрационный экзамен</p></div>
-    <div class="banner-actions">${btn('Материалы задания','id="materials-open" aria-haspopup="dialog"',true)}</div>
-  </section>`;
-}
-
 function stageNode({number,title,detail,short,action,current,done=false}) {
   const marker = done?'<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>':number;
   const label = `${number}. ${title} · ${detail}${done?' · Выполнено':''}`;
@@ -172,12 +163,14 @@ function practiceNavigation(tasks) {
     <h2 class="stage-nav-caption">Задания</h2>
     <ol class="stage-nav-list" role="list">${tasks.map((item,i)=>stageNode({
       number:i+1, title:item.title, detail:`${item.minutes} мин`, short:shortLabels[i],
-      action:`data-task="${i}"`, current:i===task
+      action:`data-task="${i}"`, current:i===task, done:mode==='training'&&taskDone(i)
     })).join('')}</ol>
   </nav>`;
 }
 
-function header(title,goal,guide='lesson',heading='h1'){return `<header class="route-heading"><span class="section-code">ДЭ 2027 · БАЗОВЫЙ УРОВЕНЬ</span><${heading}>${title}</${heading}>${guide?btn('Гид по разбору',`data-guide="${guide}"`):''}<p>${goal}</p></header>`;}
+function header(title,description) {
+  return `<header class="workspace-intro"><div><h1>${E(title)}</h1>${description?`<p>${E(description)}</p>`:''}</div></header>`;
+}
 function phpBuildLesson(i) {
   const lesson = D.phpAssembly[i];
   const setup = i===0 ? `<a class="btn primary" href="downloads/conference-portal-php-starter.zip" download>Скачать учебный каркас PHP</a>
@@ -211,7 +204,127 @@ function stepCheck(id,index) {
   const check=D.stepChecks[id]?.[index];
   return check?`<div class="build-check"><strong>Проверьте себя</strong><p>${E(check)}</p></div>`:'';
 }
-function learn(){const s=S().find(s=>s.id===stage),i=currentStepIndex(s),step=s.steps[i];return `<header class="route-heading map-intro"><h1>Маршрут обучения</h1>${btn('Гид по разбору','data-guide="lesson"')}<p>Сначала разберите исходные документы. Дальше каждый этап даёт результат для следующего.</p></header>${stackPicker('Стек обучения')}<div class="route-layout">${learningNavigation()}<section class="route-content">${returnTask?btn('← Вернуться к тренировке','id="return-task"'):''}${header(s.title,s.goal,null,'h2')}<p class="stage-input"><strong>Перед началом</strong> ${E(D.stageChecks[stage][0])}</p>${stage==='documents'?`<div class="facts"><span>3 задания</span><span>3 ч 30 мин</span><span>75 баллов</span></div>${sources()}`:''}<article class="route-panel study-step"><p class="section-code">${s.module} · ШАГ ${i+1} ИЗ ${s.steps.length}</p><h3 id="study-step-title" tabindex="-1">${E(step[0])}</h3><p>${E(step[1])}</p><p class="source-note">Источник: ${E(step[2])}</p>${stage==='er'?'<div id="er-workspace"></div>':guidanceHTML(stage,i)}${lessonLinks(stage,i)}${beginnerHTML(stage,i)}${stage==='database'?databaseLesson(i):stage==='backend'?buildLesson(i):''}${stepCheck(stage,i)}${stage==='design'&&i<2?styleSamples(null):''}${['backend','design'].includes(stage)?resultPreview(stage,i):''}<div class="study-controls">${btn('← Назад',`data-step="${i-1}" ${i===0?'disabled':''}`)}<label>Шаг <select id="step-select">${s.steps.map((x,n)=>`<option value="${n}" ${n===i?'selected':''}>${n+1}. ${x[0]}</option>`).join('')}</select></label>${btn('Далее →',`data-step="${i+1}" ${i===s.steps.length-1?'disabled':''}`,true)}</div></article><div class="route-check"><strong>Что сохранить: ${E(s.output)}</strong><p>${E(D.stageChecks[stage][1])}</p><label><input type="checkbox" id="done" ${get(lessonProgressKey('done',stage),false)?'checked':''}>Я могу повторить этап самостоятельно и проверил результат.</label></div><div class="route-bottom">${sources()}${btn('Перейти к тренировке →','data-mode="training"')}</div></section></div>`;}
+const stageResources = {
+  documents:[['КИМ · PDF','materials/kim-2027.pdf#page=33'],['Приложения БУ · ZIP','materials/basic-inputs.zip']],
+  er:[['КИМ · стр. 33–36','materials/kim-2027.pdf#page=33'],['Образец ER · PDF','materials/database/er-example.pdf']],
+  design:[['Руководство по стилю · PDF','materials/style-guide.pdf'],['Изображения и шрифты · ZIP','materials/basic-inputs.zip']],
+  interaction:[['КИМ · стр. 36–37','materials/kim-2027.pdf#page=36']],
+  delivery:[['Критерии КИМ · стр. 13','materials/kim-2027.pdf#page=13']]
+};
+
+function learningMap() {
+  const lesson=S().find(item=>item.id===stage);
+  const done=id=>get(lessonProgressKey('done',id),false);
+  return `<section class="map-panel">
+    <div class="map-intro"><h1>Маршрут обучения</h1><p>Сначала разберите исходные документы. Дальше каждый этап даёт результат для следующего.</p></div>
+    ${stackPicker('Стек обучения')}
+    <div class="learning-map">
+      <ol class="map-nodes" aria-label="Этапы обучения">${S().map((item,index)=>`<li>
+        <button class="map-node" type="button" data-map-stage="${item.id}" aria-pressed="${item.id===stage}" ${item.id===stage?'aria-current="step"':''} ${done(item.id)?'data-completed':''}>
+          <span class="map-circle" aria-hidden="true">${done(item.id)?'✓':index}</span>
+          <span><strong>${E(item.title)}</strong><small>${E(item.module)}${done(item.id)?' · Завершён':''}</small></span>
+        </button></li>`).join('')}</ol>
+      <article class="map-detail" aria-labelledby="map-stage-title">
+        <h2 id="map-stage-title">${E(lesson.title)}</h2><p>${E(lesson.goal)}</p>
+        <h3>Результат этапа</h3><p>${E(lesson.output)}</p>
+        ${btn('Открыть этап →','data-lesson-view="brief"',true)}
+      </article>
+    </div>
+  </section>`;
+}
+
+function lessonBrief(lesson) {
+  const files=[...(stageResources[lesson.id]??[])];
+  const assignment=D.tasks[{er:0,database:0,backend:0,design:1,interaction:2}[lesson.id]];
+  if(assignment&&!files.some(([,href])=>href.startsWith(kimPdfPath)))files.unshift(['КИМ · стр. '+assignment.pages,kimPdfPath+'#page='+assignment.pages.match(/\d+/)[0]]);
+  if(lesson.id==='backend')files.push(['Скачать учебный каркас','downloads/conference-portal-'+(db==='php'?'php':'flask')+'-starter.zip']);
+  return `<section class="lesson-brief">
+    <p>${E(lesson.goal)}</p>
+    ${assignment?`<h3>Условие задания</h3><p>${E(assignment.text)}</p>`:''}
+    <h3>Что понадобится</h3><p>${E(D.stageChecks[lesson.id][0])}</p>
+    ${files.length?`<section class="task-files"><h3>Файлы этапа</h3><ul>${files.map(([name,url])=>`<li><a href="${E(url)}" ${url.endsWith('.zip')?'download':'target="_blank" rel="noopener"'}>${E(name)}</a></li>`).join('')}</ul></section>`:''}
+    ${btn(currentStepIndex(lesson)?'Продолжить с шага '+(currentStepIndex(lesson)+1)+' →':'Перейти к шагам →','data-lesson-view="steps"',true)}
+  </section>`;
+}
+
+function stepArrow(index, direction, label) {
+  const previous = direction==='previous';
+  const path = previous ? 'M20 12H4m7-7-7 7 7 7' : 'M4 12h16m-7-7 7 7-7 7';
+  const icon = `<svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></svg>`;
+  return btn(icon,`type="button" data-step="${index}" data-step-direction="${direction}" aria-label="${E(label)}"
+    title="${E(label)}" aria-keyshortcuts="${previous?'ArrowLeft':'ArrowRight'}"`,!previous);
+}
+
+function learn() {
+  if(learningView==='map')return learningMap();
+  const lesson=S().find(item=>item.id===stage);
+  const index=tourErStep?lesson.steps.length-1:currentStepIndex(lesson), step=lesson.steps[index];
+  const result=learningView==='result';
+  const er=stage==='er'&&index===lesson.steps.length-1;
+  const done=get(lessonProgressKey('done',stage),false);
+  const next=S()[S().indexOf(lesson)+1];
+  return `<header class="workspace-intro"><div><h1>Обучение</h1><p>Портал «Конференции.РФ»</p></div>
+      ${returnTask?btn('← Вернуться к тренировке','id="return-task"'):btn('← К маршруту','data-lesson-view="map"')}</header>
+    <div class="route-layout lesson-layout">
+      ${learningNavigation()}
+      <section class="route-content lesson-card" aria-labelledby="lesson-title">
+        <header class="lesson-card-heading"><h2 id="lesson-title">${E(lesson.title)}</h2><p class="task-meta">${E(lesson.module)}</p></header>
+        <nav class="lesson-tabs" aria-label="Разделы этапа">${[['brief','Условие и файлы'],['steps','Шаги']].map(([view,label])=>
+          btn(label,`data-lesson-view="${view}" ${view===learningView||result&&view==='steps'?'aria-current="page"':''}`)
+        ).join('')}</nav>
+        ${learningView==='brief'?lessonBrief(lesson):`<section class="study-step${er&&!result?' study-step-er':''}" aria-labelledby="study-step-title">
+          <div class="lesson-step-heading">
+            <h3 class="lesson-heading" id="study-step-title" tabindex="-1"><span class="lesson-step-number">${result?lesson.steps.length+1:index+1}</span><span>${result?'Что сохранить':E(step[0])}</span></h3>
+            ${btn('☰','id="lesson-steps" aria-label="Все шаги" title="Все шаги" aria-haspopup="dialog"')}
+          </div>
+          ${result?`<div class="lesson-result"><p>${E(lesson.output)}</p>${stepResultCheck(lesson.id)}</div>`:`
+            <p>${E(step[1])}</p><p class="source-note">Источник · ${E(step[2])}</p>
+            ${guidanceHTML(stage,index)}${lessonLinks(stage,index)}${beginnerHTML(stage,index)}
+            ${stage==='database'?databaseLesson(index):stage==='backend'?buildLesson(index):''}
+            ${stepCheck(stage,index)}
+            ${er?'<section class="er-workspace" id="er-workspace" aria-labelledby="er-title"></section>':''}
+            ${stage==='design'&&index<2?styleSamples(null):''}
+            ${stage==='design'&&index===2?btn('Изображения из приложений','id="lesson-images" aria-haspopup="dialog"'):''}
+            ${['backend','design'].includes(stage)?resultPreview(stage,index):''}
+          `}
+          <div class="study-controls">
+            ${result?stepArrow(lesson.steps.length-1,'previous','Последний шаг'):index>0?stepArrow(index-1,'previous','Предыдущий шаг'):''}
+            ${result?`<label class="lesson-complete"><input type="checkbox" id="done" ${done?'checked':''}> Этап выполнен</label>
+              ${done?(next?btn('Далее · '+E(next.title)+' →',`data-stage="${next.id}"`,true):btn('Перейти к тренировке →','data-mode="training"',true)):''}`
+              :stepArrow(index+1,'next',index===lesson.steps.length-1?'Что сохранить':'Следующий шаг')}
+          </div>
+        </section>`}
+      </section>
+    </div>`;
+}
+
+function stepResultCheck(id) {
+  return `<div class="build-check"><strong>Проверьте себя</strong><p>${E(D.stageChecks[id][1])}</p></div>`;
+}
+
+function showLessonSteps() {
+  const lesson=S().find(item=>item.id===stage);
+  const dialog=modal('Все шаги');
+  dialog.querySelector('.modal-body').innerHTML=`<ol class="lesson-step-list">${[...lesson.steps.map(step=>step[0]),'Что сохранить'].map((title,index)=>
+    `<li>${btn(E(title),`data-jump-step="${index}" ${(learningView==='result'?lesson.steps.length:currentStepIndex(lesson))===index?'aria-current="step"':''}`)}</li>`
+  ).join('')}</ol>`;
+  dialog.querySelectorAll('[data-jump-step]').forEach(button=>button.onclick=()=>{
+    dialog.close();
+    openStep(Number(button.dataset.jumpStep));
+  });
+}
+
+function openStep(index) {
+  const lesson=S().find(item=>item.id===stage);
+  if(index>=lesson.steps.length)learningView='result';
+  else {
+    set(lessonProgressKey('step',stage),index);
+    learningView='steps';
+  }
+  render({pushHistory:true});
+  document.getElementById('study-step-title')?.focus();
+}
+
 let mockId=get('mock-id','V01');if(!D.mockVariants.some(v=>v.id===mockId))mockId='V01';
 function examVariant(){return D.mockVariants.find(v=>v.id===mockId);}
 function activeTasks(){return mode==='mock'?D.tasks.map((t,i)=>({...t,...examVariant().tasks[i]})):D.tasks;}
@@ -224,103 +337,203 @@ function timer() {
   const key = 'timer:'+practiceKey();
   const saved = C.restoreTimer(JSON.stringify(get(key)),D.official.seconds,timerMode());
   const current = C.checkpoint(saved);
-  if(current.status==='running' || current.status!==saved.status || current.elapsedMs!==saved.elapsedMs) {
+  if(!tourActive&&(current.status==='running' || current.status!==saved.status || current.elapsedMs!==saved.elapsedMs)) {
     set(key,current);
   }
   return current;
 }
 
+const taskDone = index => get('task-done:'+practiceKey()+':'+index,false);
+const taskClock = () => get('task-clock:'+practiceKey(),{anchor:0,spent:{},alerted:{}});
+
+function taskElapsed(clock,elapsed) {
+  return (clock.spent[task]||0)+Math.max(0,elapsed-clock.anchor);
+}
+
+function selectPracticeTask(next) {
+  mockBrief=false;
+  if(mode==='training'&&next!==task){
+    const clock=taskClock(), elapsed=timer().elapsedMs;
+    clock.spent[task]=taskElapsed(clock,elapsed);
+    clock.anchor=elapsed;
+    set('task-clock:'+practiceKey(),clock);
+  }
+  set('task:'+practiceKey(),next);
+  render();
+  root.querySelector(`[data-task="${next}"]`)?.focus({preventScroll:true});
+}
+
+let audioContext;
+function enableTimerSound(){
+  if(!get('timer-sound',true)||!window.AudioContext)return;
+  audioContext??=new AudioContext();
+  audioContext.resume().catch(()=>{});
+}
+
+function signalTimer(){
+  if(!get('timer-sound',true)||audioContext?.state!=='running')return;
+  const tone=audioContext.createOscillator(),volume=audioContext.createGain();
+  const now=audioContext.currentTime;
+  tone.frequency.value=660;
+  volume.gain.setValueAtTime(.12,now);
+  volume.gain.exponentialRampToValueAtTime(.001,now+.25);
+  tone.connect(volume).connect(audioContext.destination);
+  tone.start(now);
+  tone.stop(now+.25);
+}
+
 function timerBox(state) {
-  const mock = mode==='mock';
-  const running = state.status==='running';
-  const finished = state.status==='finished';
-  const canFinish = running || state.status==='paused';
-  const view = C.timerView(state,state.lastSeenMs);
-  const status = finished && view.expired?'Время истекло':{
-    idle:'Готов к началу', running:'Идёт отсчёт', paused:'На паузе', finished:'Завершено'
-  }[state.status];
-  return `<aside class="assignment-tools timer-card" aria-label="${mock?'Время пробного экзамена':'Время тренировки'}">
+  const training=mode==='training', running=state.status==='running', idle=state.status==='idle', finished=state.status==='finished';
+  const view=C.timerView(state,state.lastSeenMs);
+  const status=finished&&view.expired?'Время истекло':{idle:'Готов к началу',running:'Идёт отсчёт',paused:'На паузе',finished:'Завершено'}[state.status];
+  const action=finished?btn('Начать заново','data-timer="reset"',true)
+    :training&&running?btn('Пауза','data-timer="pause"',true)
+    :running?'':btn(training?(idle?'Начать тренировку':'Продолжить тренировку'):'Начать','data-timer="start"',true);
+  return `<section class="timer-card" aria-label="${training?'Время тренировки':'Время пробного экзамена'}">
     <div class="training-timer-top">
-      <span class="eyebrow">${mock?'ТАЙМЕР ПРОБНОГО ЭКЗАМЕНА':'ТАЙМЕР ТРЕНИРОВКИ'}</span>
-      <output class="training-clock" id="clock" role="timer" aria-live="off" data-status="${state.status}">${C.format(view.left)}</output>
+      <span class="eyebrow">${training?'ТРЕНИРОВКА':'ПРОБНЫЙ ЭКЗАМЕН'}</span>
+      <output class="training-clock" id="clock" aria-live="off" data-status="${state.status}">${C.format(view.left)}</output>
       <span id="timer-status" role="status">${status}</span>
-      <progress id="timer-progress" max="1" value="${view.progress}" aria-label="Использованное время"></progress>
+      <progress id="timer-progress" aria-label="Использованное время" max="1" value="${view.progress}"></progress>
+      ${training?`<div class="timer-task"><span id="task-clock-label">Время на задание ${task+1}</span>
+        <output id="task-clock" aria-labelledby="task-clock-label" aria-live="off">${C.format(D.tasks[task].minutes*60000-taskElapsed(taskClock(),view.used))}</output></div>`:''}
     </div>
     <div class="training-timer-controls">
-      <div class="button-row">
-        ${finished?btn('Сбросить таймер','data-timer="reset"',true):''}
-        ${!finished&&!running?btn(state.status==='paused'?'Продолжить':'Начать','data-timer="start"',true):''}
-        ${!mock&&running?btn('Пауза','data-timer="pause"',true):''}
-        ${canFinish?btn('Завершить','data-timer="finish"'):''}
-      </div>
-      <span id="elapsed" class="small">Прошло: ${C.format(view.used)}</span>
-      ${mock?'<p class="small">Время идёт непрерывно, даже если закрыть страницу.</p>':''}
+      ${action}
+      ${!finished&&(!idle||!training)?btn('Завершить',`data-timer="finish" ${idle?'disabled':''}`):''}
     </div>
-  </aside>`;
+    ${training?`<div class="attempt-actions">
+      <label class="attempt-sound"><input type="checkbox" id="timer-sound" ${get('timer-sound',true)?'checked':''}> Звук таймера</label>
+      ${!finished?btn('Сбросить тренировку','data-timer="reset"'):''}
+    </div>`:!finished?'<p class="timer-hint">После начала время идёт непрерывно, даже при закрытой странице.</p>':''}
+  </section>`;
 }
 
 function attemptNotice(state) {
-  if(state.status==='paused') return `<section class="route-panel attempt-notice" tabindex="-1">
-    <h2>Тренировка на паузе</h2><p>Продолжите отсчёт, чтобы вернуться к заданиям и отметкам.</p>
-  </section>`;
-  if(state.status==='finished') return `<section class="route-panel attempt-notice" tabindex="-1">
-    <h2>${C.timerView(state).expired?'Время вышло':'Попытка завершена'}</h2>
-    <p>Условия, отметки и заметки доступны для просмотра. Сбросьте таймер, чтобы начать новый отсчёт.</p>
-  </section>`;
+  if(state.status==='paused')return '<section class="pause-screen route-panel" aria-labelledby="pause-title" tabindex="-1"><h2 id="pause-title">Тренировка на паузе</h2><p>Условия и отметки снова появятся после продолжения.</p></section>';
+  if(state.status==='finished')return `<section class="attempt-result route-panel" tabindex="-1"><h2>${C.timerView(state).expired?'Время вышло':'Попытка завершена'}</h2><p>Отметки этой попытки доступны до нового запуска.</p></section>`;
   return '';
 }
 
 function sampleText(){const parts=[];let paragraph=[];const flush=()=>{if(paragraph.length){parts.push('<p>'+E(paragraph.join(' '))+'</p>');paragraph=[];}};for(const raw of D.official.text.split('\n')){const line=raw.trim();if(!line){flush();continue;}if(/^(Задание \d+\.|Образец задания)/.test(line)){flush();parts.push('<h3>'+E(line)+'</h3>');continue;}if(/^\d+\.\s|^[•–—]\s/.test(line))flush();paragraph.push(line);if(/[.!?:;]$/.test(line))flush();}flush();return parts.join('');}
 
+function practiceFiles(selected,variant) {
+  const files=variant
+    ? [['Файлы варианта '+variant.id+' · ZIP','downloads/exam-'+variant.id+'.zip']]
+    : [['КИМ · стр. '+selected.pages,'materials/kim-2027.pdf#page='+selected.pages.match(/\d+/)[0]]];
+  if(!variant&&task===0)files.push(['Приложения БУ · ZIP','materials/basic-inputs.zip']);
+  if(task===1){
+    if(!variant)files.push(['Руководство по стилю · PDF','materials/style-guide.pdf']);
+    files.push(['Изображения и шрифты · ZIP','materials/basic-inputs.zip']);
+  }
+  return `<section class="task-files"><h3>Файлы задания</h3><ul>${files.map(([label,href])=>
+    `<li><a href="${E(href)}" ${href.endsWith('.zip')?'download':'target="_blank" rel="noopener"'}>${E(label)}</a></li>`
+  ).join('')}</ul></section>`;
+}
+
+function mockVariantBrief(variant) {
+  return `<article class="training-task">
+    <header class="mock-brief-heading"><h2>Условие варианта</h2>${btn('К заданию '+(task+1),`data-task="${task}"`)}</header>
+    <p>${E(variant.common)}</p>
+    <section class="mock-reference"><h3>Исходный каталог помещений</h3>
+      <div class="material-table"><table><thead><tr><th>Помещение</th><th>Тип</th><th>Город</th><th>Мест</th></tr></thead><tbody>
+      ${variant.rooms.map(room=>`<tr><td>${E(room.name)}</td><td>${E({auditorium:'Аудитория',coworking:'Коворкинг',cinema:'Кинозал'}[room.category])}</td><td>${E(room.city)}</td><td>${room.capacity}</td></tr>`).join('')}
+      </tbody></table></div>
+      <p><a href="downloads/exam-30-variants.zip" download>Все 30 вариантов · ZIP</a></p>
+    </section>
+  </article>`;
+}
+
 function practice() {
-  const list = activeTasks();
-  const selected = list[task];
-  const key = practiceKey();
-  const v = mode==='mock'?examVariant():null;
-  const state = timer();
-  const paused = state.status==='paused';
-  const finished = state.status==='finished';
-  const checked = index => get('check:'+key+':'+selected.id+':'+index,false);
-  return `<section class="training-page practice-page">
-    ${header(v?'Пробный экзамен':'Тренировка по образцу КИМ',v?'30 авторских вариантов · 3 задания · 210 минут · 75 баллов.':'Официальный образец «Конференции.РФ», страницы 33–37 КИМ.','training')}
-    <div class="attempt-layout">
-      ${timerBox(state)}
-      <div class="attempt-content">
-        ${attemptNotice(state)}
-        ${paused?'':`
-          ${v?`<section class="route-panel variant-panel">
-            <label for="mock-variant">Вариант пробного экзамена</label>
-            <select id="mock-variant" ${state.status==='running'?'disabled':''}>${D.mockVariants.map(x=>`<option value="${x.id}" ${x.id===mockId?'selected':''}>${x.number}. ${E(x.brand)} · ${E(x.city)}</option>`).join('')}</select>
-            <p>${E(v.common)}</p>
-            <div class="button-row"><a class="btn" href="downloads/exam-${v.id}.zip" download>Условие и данные ${v.id} · ZIP</a><a class="btn" href="downloads/exam-30-variants.zip" download>Все 30 вариантов · ZIP</a></div>
-            <p class="small">Возьмите изображения из приложений БУ или со стоков. Сохраните их локально и запишите источники в SOURCES.md.</p>
-          </section>`:btn('Полный текст базового образца','id="training-sample" aria-haspopup="dialog"')}
-          <div class="training-workspace">
-            ${practiceNavigation(list)}
-            <article class="training-task">
-              <h2>${E(selected.title)}</h2>
-              <p class="task-meta">Задание ${task+1} · ${selected.minutes} мин · ${v?v.id:'КИМ, стр. '+selected.pages}</p>
-              ${task===1?`<div class="button-row">${btn('Изображения к заданию','id="task-images"')}${btn('Требования к дизайну','id="task-style"')}<a class="btn" href="materials/style-guide.pdf" download>Руководство БУ · PDF</a></div>`:''}
-              <p>${E(selected.text)}</p>
-              ${!v?btn('Подсказка к заданию',`data-help="${selected.stage}"`):''}
-              <section class="self-check training-checklist" aria-labelledby="training-check-title">
-                <header><h3 id="training-check-title">Самопроверка</h3><span id="check-count" aria-live="polite">${selected.checks.filter((_,i)=>checked(i)).length} из ${selected.checks.length}</span></header>
-                ${selected.checks.map((x,i)=>`<label><input type="checkbox" data-check="${selected.id}:${i}" ${checked(i)?'checked':''} ${finished?'disabled':''}>${E(x)}</label>`).join('')}
-              </section>
-              <label class="training-notes">Заметки<textarea id="notes" ${finished?'readonly':''}>${E(get('notes:'+key+':'+selected.id,''))}</textarea></label>
-            </article>
-          </div>`}
+  const list=activeTasks(), selected=list[task], key=practiceKey();
+  const variant=mode==='mock'?examVariant():null, state=timer(), status=state.status;
+  const locked=status==='paused'||status==='finished';
+  const checked=index=>get('check:'+key+':'+selected.id+':'+index,false);
+  const checks=selected.checks.map((item,index)=>
+    `<label><input type="checkbox" data-check="${selected.id}:${index}" ${checked(index)?'checked':''} ${locked?'disabled':''}>${E(item)}</label>`
+  ).join('');
+  const workspace=`<div class="training-workspace" ${status==='paused'?'hidden':''}>
+    ${practiceNavigation(list)}
+    ${variant&&mockBrief?mockVariantBrief(variant):`<article class="training-task">
+      <h2>${E(selected.title)}</h2>
+      <p class="task-meta">Задание ${task+1} · ${selected.minutes} мин · ${variant?E(variant.id):'КИМ, стр. '+E(selected.pages)}</p>
+      <section class="practice-condition"><h3>Условие задания</h3><p>${E(selected.text)}</p></section>
+      <div class="task-support">
+        ${practiceFiles(selected,variant)}
+        ${!variant&&!locked?btn('Подсказка к заданию',`data-help="${selected.stage}"`):''}
       </div>
-    </div>
+      <section class="self-check training-checklist" aria-labelledby="training-check-title">
+        <header><h3 id="training-check-title">Самопроверка</h3><span id="check-count" aria-live="polite">${selected.checks.filter((_,index)=>checked(index)).length} из ${selected.checks.length}</span></header>
+        ${checks}
+        ${variant?'':`<label class="task-complete"><input type="checkbox" id="task-complete" ${taskDone(task)?'checked':''} ${locked?'disabled':''}> Задание выполнено</label>`}
+      </section>
+    </article>`}
+  </div>`;
+  const heading=variant?'<div><h1>Пробный экзамен</h1><p>30 учебных вариантов · 3 задания · 75 баллов</p></div>'
+    :`<div><h1>Тренировка</h1><p>Портал «Конференции.РФ» · официальный образец КИМ</p></div>
+       <div class="training-intro-actions">${btn('Условие КИМ и приложения','id="training-sample" aria-haspopup="dialog"')}</div>`;
+  return `<section class="training-page practice-page training-compact${variant?' mock-exam':''}">
+    <header class="workspace-intro">${heading}</header>
+    <div class="attempt-layout">${timerBox(state)}<div class="attempt-content">
+      ${variant?`<div class="mock-variant-bar">
+        <div class="training-source"><label for="mock-variant">Вариант<select id="mock-variant" ${status==='running'?'disabled':''}>${D.mockVariants.map(item=>
+          `<option value="${item.id}" ${item.id===variant.id?'selected':''}>${item.number}. ${E(item.brand)} · ${E(item.city)}</option>`).join('')}</select></label></div>
+        <div class="mock-variant-actions">${btn('Условие варианта',`id="mock-brief" aria-pressed="${mockBrief}"`)}
+          <a class="btn" id="mock-download" href="downloads/exam-${variant.id}.zip" download>Файлы ${variant.id} · ZIP</a></div>
+      </div>`:''}
+      ${attemptNotice(state)}${workspace}
+    </div></div>
   </section>`;
 }
 
-function launchGuide(){return `<section class="launch-guide"><h2>Как запустить пример на своём компьютере</h2><p>Инструкция соответствует выбранному стеку примера. Кнопка «Открыть» начинает работать после запуска сервера. При повторном запуске не создавайте базу заново.</p><div class="example-grid"><article class="route-panel" ${db!=='php'?'hidden':''}><h3>PHP + MySQL · XAMPP</h3><ol><li><a href="downloads/conference-portal-php.zip" download>Скачайте PHP ZIP</a>. Распакуйте файлы в <code>C:\\xampp\\htdocs\\conference-rvpm-2027</code>. Файл <code>index.php</code> должен находиться прямо в этой папке.</li><li>Откройте XAMPP Control Panel. Нажмите <strong>Start</strong> у <strong>Apache</strong> и <strong>MySQL</strong>; они должны работать.</li><li>Откройте <a href="http://localhost/phpmyadmin" target="_blank" rel="noopener">phpMyAdmin</a> → «Создать БД». Имя: <code>conference_php_2027</code>, кодировка: <code>utf8mb4_unicode_ci</code>. База должна быть новой и пустой.</li><li>В VS Code откройте эту папку → «Терминал» → «Создать терминал» (PowerShell). Выполните один раз:</li></ol><pre class="lesson-code">cd C:\\xampp\\htdocs\\conference-rvpm-2027
+function launchGuide(){return `<section class="launch-guide"><div class="example-grid"><article class="route-panel" ${db!=='php'?'hidden':''}><h3>PHP + MySQL · XAMPP</h3><ol><li><a href="downloads/conference-portal-php.zip" download>Скачайте PHP ZIP</a>. Распакуйте файлы в <code>C:\\xampp\\htdocs\\conference-rvpm-2027</code>. Файл <code>index.php</code> должен находиться прямо в этой папке.</li><li>Откройте XAMPP Control Panel. Нажмите <strong>Start</strong> у <strong>Apache</strong> и <strong>MySQL</strong>; они должны работать.</li><li>Откройте <a href="http://localhost/phpmyadmin" target="_blank" rel="noopener">phpMyAdmin</a> → «Создать БД». Имя: <code>conference_php_2027</code>, кодировка: <code>utf8mb4_unicode_ci</code>. База должна быть новой и пустой.</li><li>В VS Code откройте эту папку → «Терминал» → «Создать терминал» (PowerShell). Выполните один раз:</li></ol><pre class="lesson-code">cd C:\\xampp\\htdocs\\conference-rvpm-2027
 & C:\\xampp\\php\\php.exe setup.php</pre><p>Должно появиться сообщение о создании таблиц и шести помещений. Затем:</p>${link('Открыть PHP · локально','http://localhost/conference-rvpm-2027/')}<p class="small">При следующем запуске достаточно включить Apache и MySQL. Если таблицы и начальные данные уже созданы на этапе БД, пропустите setup.php. Если setup.php пишет «База не пуста», проверьте наличие всех пяти таблиц и начальных данных.</p></article><article class="route-panel" ${db==='php'?'hidden':''}><h3>Flask · Python</h3><ol><li><a href="downloads/conference-portal-flask.zip" download>Скачайте Flask ZIP</a>. Распакуйте в отдельную папку. Откройте её в VS Code: внутри должны быть <code>app.py</code> и <code>requirements.txt</code>.</li><li>Нужен Python 3.10+. Откройте «Терминал» → «Создать терминал» (PowerShell) именно в папке проекта. Один раз создайте окружение и установите зависимости:</li></ol><pre class="lesson-code">py -m venv .venv
 .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt</pre><p>Включите MySQL в XAMPP, создайте пустую базу <code>conference_rvpm_2027</code> в phpMyAdmin. В терминале выполните:</p><pre class="lesson-code">$env:DB_BACKEND='mysql'
 $env:MYSQL_DATABASE='conference_rvpm_2027'
 .\\.venv\\Scripts\\python.exe -m flask --app app run --port 5017</pre><p>Дождитесь строки <code>Running on http://127.0.0.1:5017</code>. Оставьте терминал открытым:</p>${link('Открыть Flask · локально','http://127.0.0.1:5017/')}<p class="small">Остановка: Ctrl+C в терминале. При следующем запуске повторите только команду сервера и выбор базы. Если команда py не найдена, установите Python или используйте python.</p></article></div><p>В стандартном XAMPP используется root без пароля. Другие параметры подключения описаны в README архивов. Для проверки: зарегистрируйтесь → создайте заявку → войдите как Conf2027 / Demo77 → завершите мероприятие → оставьте отзыв от пользователя.</p></section>`;}
-function examples(){return `<section class="training-page">${header('Готовый пример','Выберите стек, чтобы скачать пример и открыть его исходники.','files')}${stackPicker('Стек примера')}${launchGuide()}<div class="example-grid"><article class="route-panel"><h2>Скачать и запустить</h2><p>Регистрация, вход, каталог, заявки, отзывы после завершения и панель администратора. Flask-архив содержит обе SQL-схемы и тесты; PHP-архив — схему MySQL, установщик и инструкцию XAMPP.</p><a class="btn primary" href="downloads/conference-portal-${db==='php'?'php':'flask'}.zip" download>Скачать ${db==='php'?'PHP + MySQL':'Flask + MySQL'} ZIP</a><p class="small">Flask запускается через Python, PHP — через Apache/XAMPP. GitHub Pages размещает учебный сайт и архив, а серверные приложения запускаются на компьютере.</p>${btn('Инструкция Windows / XAMPP',`data-code="${db==='php'?'README.md':'docs/WINDOWS.md'}"`)}${btn('Отчёт о проверке',`data-code="${db==='php'?'QA.md':'docs/QA.md'}"`)}<p>Учебный администратор из КИМ: <code>Conf2027 / Demo77</code>.</p></article><article class="route-panel"><h2>Внутри проекта</h2><label class="file-picker">Файл<select id="example-file">${Object.keys(codes()).map(f=>`<option ${f===(db==='php'?'index.php':'app.py')?'selected':''}>${E(f)}</option>`).join('')}</select></label>${btn('Открыть файл','id="open-file"')}<p id="file-purpose">${E(filePurpose(db==='php'?'index.php':'app.py'))}</p><p>Исходный проект: <a href="https://github.com/OlgaKraven/conference-portal-flask">conference-portal-flask</a>. Версия 1c8001c, дополнена адаптером MySQL/MariaDB и инструкцией запуска.</p></article></div>${D.screenshots?.length?`<h2>Работающий портал</h2><div class="shot-grid">${D.screenshots.filter(f=>f.startsWith(db==='php'?'php':'flask')).map(f=>`<figure><button class="image-open" data-image="materials/screenshots/${f}" aria-label="Увеличить ${E(f)}"><img src="materials/screenshots/${f}" alt="Портал ${E(f)}" loading="lazy"></button><figcaption>${E(f)}</figcaption></figure>`).join('')}</div>`:''}</section>`;}
+function examples() {
+  const php=db==='php', name=php?'PHP + MySQL (XAMPP)':'Flask + MySQL / MariaDB';
+  const firstFile=php?'index.php':'app.py';
+  const screens=php?['php-login.png','php-application.png','php-catalog.png','php-registration-mobile.png']
+    :['flask-login.png','flask-application.png','flask-admin-mobile.png','flask-catalog.png'];
+  const captions=['Вход','Новая заявка',php?'Каталог помещений':'Панель администратора',php?'Регистрация на телефоне':'Каталог помещений'];
+  return `<section class="training-page example-page">
+    ${header('Готовый пример','Выберите стек и скачайте рабочий проект с учебными данными.')}
+    <div class="example-stacks" role="group" aria-label="Стек готового примера">${studyStacks.map(([id,title])=>
+      btn(E(title),`type="button" data-example-stack="${id}" aria-pressed="${id===db}"`)
+    ).join('')}</div>
+    <div class="example-grid">
+      <article class="route-panel">
+        <h2>${E(name)}</h2>
+        <p>В архив входят портал «Конференции.РФ», SQL-схема и учебный каталог. В портале можно зарегистрироваться, подать заявку, изменить её статус и оставить отзыв.</p>
+        <div class="example-actions">
+          <a class="btn primary" href="downloads/conference-portal-${php?'php':'flask'}.zip" download>Скачать ZIP · ${php?'PHP':'Flask'}</a>
+          ${btn('Инструкция по запуску','id="example-launch" aria-haspopup="dialog"')}
+        </div>
+        <div class="example-accounts"><p>Учебная учётная запись из КИМ. Для проверки пользовательского кабинета зарегистрируйте новую запись.</p>
+          <table aria-label="Учебная учётная запись"><thead><tr><th scope="col">Роль</th><th scope="col">Логин</th><th scope="col">Пароль</th></tr></thead>
+          <tbody><tr><th scope="row">Администратор</th><td><code>Conf2027</code></td><td><code>Demo77</code></td></tr></tbody></table>
+        </div>
+      </article>
+      <article class="route-panel">
+        <h2>Внутри проекта</h2><p>Откройте файл, чтобы прочитать код и скопировать его.</p>
+        <label class="file-picker">Файл<select id="example-file">${Object.keys(codes()).map(file=>
+          `<option ${file===firstFile?'selected':''}>${E(file)}</option>`
+        ).join('')}</select></label>
+        <p id="file-purpose">${E(filePurpose(firstFile))}</p>
+        ${btn('Открыть файл','id="open-file" aria-haspopup="dialog"')}
+      </article>
+    </div>
+    <h2>Работающий портал</h2>
+    <p>Откройте снимок, чтобы рассмотреть форму и сравнить её со своим результатом.</p>
+    <div class="shot-grid">${screens.map((file,index)=>`<figure>
+      <button class="image-open" data-image="materials/screenshots/${file}" aria-label="Увеличить: ${E(captions[index])}">
+        <img src="materials/screenshots/${file}" alt="${E(captions[index])}" loading="lazy">
+      </button><figcaption>${E(captions[index])}</figcaption></figure>`
+    ).join('')}</div>
+  </section>`;
+}
+
 const kimPdfPath = 'materials/kim-2027.pdf';
 const criteriaKimPage = 13;
 function criteria() {
@@ -369,29 +582,31 @@ function teacher() {
 }
 function teacherSettings(){const d=modal('Настройка перед занятием');d.classList.add('teacher-settings');d.querySelector('.modal-body').innerHTML=`<div class="settings-form">${[['teacher-name','ФИО преподавателя',120],['teacher-position','Должность',140],['teacher-department','Кафедра или лаборатория',160]].map(([id,title,max])=>`<label>${title}<input id="${id}" maxlength="${max}" value="${E(get(id,''))}"></label>`).join('')}<p class="small">Сохраняется в этом браузере и отображается на вводном слайде.</p></div>`;['teacher-name','teacher-position','teacher-department'].forEach(id=>on(id,e=>set(id,e.target.value),'oninput'));}
 function render({pushHistory=false}={}){
-  closeTour();
+  destroyER?.();
+  destroyER=null;
   if(isPractice()) {
     const taskKey = 'task:'+practiceKey();
     const legacyTask = get('task');
-    if(legacyTask!==null) {
+    if(!tourActive&&legacyTask!==null) {
       if(get(taskKey)===null)set(taskKey,legacyTask);
       set('task',null);
     }
     const saved = get(taskKey,0);
     task = Number.isInteger(saved) && saved>=0 && saved<D.tasks.length ? saved : 0;
   }
-  set('mode',mode);
-  set('stage',stage);
+  if(!tourActive){
+    set('mode',mode);
+    set('stage',stage);
+    const nextUrl=pagePath();
+    if(nextUrl!==location.search+location.hash)history[pushHistory?'pushState':'replaceState'](null,'',nextUrl);
+  }
   document.body.classList.toggle('dark',dark);
-  const nextUrl = pagePath();
-  if(nextUrl!==location.search+location.hash)history[pushHistory?'pushState':'replaceState'](null,'',nextUrl);
   root.innerHTML=`<div class="shell">
     ${siteHeader()}
     ${siteNavigation()}
     <main id="main" tabindex="-1">
-      ${siteBanner()}
       ${!storageOK?'<p class="notice">Браузер не сможет сохранить прогресс после закрытия страницы.</p>':''}
-      ${mode==='overview'?criteria():mode==='learn'?learn():['training','mock'].includes(mode)?practice():mode==='examples'?examples():teacher()}
+      ${mode==='overview'?overviewBanner()+criteria():mode==='learn'?learn():['training','mock'].includes(mode)?practice():mode==='examples'?examples():teacher()}
     </main>
   </div>`;
   bind();
@@ -400,30 +615,58 @@ function render({pushHistory=false}={}){
 function on(id,fn,event='onclick'){const el=document.getElementById(id);if(el)el[event]=fn;}
 function bind(){
   on('criteria-kim',openCriteriaKim);
-  on('task-images',()=>materialsModal('images'));
-  on('task-style',()=>materialsModal('style'));
-  if(document.getElementById('er-workspace'))mountER();
+  const workspace=document.getElementById('er-workspace');
+  if(workspace){
+    const stack=db;
+    destroyER=ExamErGuide.mount(workspace,{get:key=>get(stack+':'+key),set:(key,value)=>set(stack+':'+key,value)});
+  }
+  on('site-tour',tour);
+  on('lesson-steps',showLessonSteps);
   on('teacher-settings',teacherSettings);
   bindImages(root);
   on('example-file',()=>{document.getElementById('file-purpose').textContent=filePurpose(document.getElementById('example-file').value);},'onchange');
-  on('materials-open',materialsModal);
+  on('materials-open',()=>materialsModal());
+  on('lesson-images',()=>materialsModal('images'));
   document.querySelectorAll('[data-reference]').forEach(b=>b.onclick=()=>{const [target,index]=b.dataset.reference.split(':');stage=target;set(lessonProgressKey('step',stage),Number(index));mode='learn';render({pushHistory:true});document.querySelector('.study-step').scrollIntoView({block:'start'});});
-  on('mock-variant',e=>{mockId=e.target.value;set('mock-id',mockId);render();document.getElementById('mock-variant')?.focus();},'onchange');
+  on('mock-variant',e=>{mockBrief=false;mockId=e.target.value;set('mock-id',mockId);render();document.getElementById('mock-variant')?.focus();},'onchange');
   document.querySelectorAll('[data-copy-block]').forEach(b=>b.onclick=async()=>{const [i,j]=b.dataset.copyBlock.split(':').map(Number);try{await navigator.clipboard.writeText((db==='php'?D.phpAssembly:D.assembly)[i].blocks[j].text);b.textContent='Скопировано';}catch{b.textContent='Выделите код и нажмите Ctrl+C';}});
-  document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;render({pushHistory:true});document.querySelector(`.site-nav [data-mode="${mode}"]`).focus();});
-  document.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>{stage=b.dataset.stage;render({pushHistory:true});document.querySelector(`[data-stage="${stage}"]`).focus({preventScroll:true});});
-  document.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>{set(lessonProgressKey('step',stage),Number(b.dataset.step));render({pushHistory:true});document.getElementById('study-step-title').focus();});
-  document.querySelectorAll('[data-guide]').forEach(b=>b.onclick=()=>tour(b.dataset.guide));
+  root.querySelectorAll('[data-mode]').forEach(button=>button.onclick=()=>{
+    mode=button.dataset.mode;
+    returnTask=false;
+    mockBrief=false;
+    if(mode==='learn')learningView='map';
+    render({pushHistory:true});
+    root.querySelector(`.site-nav [data-mode="${mode}"]`)?.focus({preventScroll:true});
+  });
+  root.querySelectorAll('[data-map-stage]').forEach(button=>button.onclick=()=>{
+    stage=button.dataset.mapStage;
+    render({pushHistory:true});
+    root.querySelector(`[data-map-stage="${stage}"]`)?.focus({preventScroll:true});
+  });
+  root.querySelectorAll('[data-stage]').forEach(button=>button.onclick=()=>{
+    stage=button.dataset.stage;
+    learningView='brief';
+    render({pushHistory:true});
+    root.querySelector(`[data-stage="${stage}"]`)?.focus({preventScroll:true});
+  });
+  root.querySelectorAll('[data-lesson-view]').forEach(button=>button.onclick=()=>{
+    learningView=button.dataset.lessonView;
+    render({pushHistory:true});
+    root.querySelector('.lesson-tabs [aria-current]')?.focus({preventScroll:true});
+  });
+  root.querySelectorAll('[data-step]').forEach(button=>button.onclick=()=>openStep(Number(button.dataset.step)));
   document.querySelectorAll('[data-code]').forEach(b=>b.onclick=()=>fileModal(b.dataset.code));
-  document.querySelectorAll('[data-task]').forEach(b=>b.onclick=()=>{task=Number(b.dataset.task);set('task:'+practiceKey(),task);render();document.querySelector(`[data-task="${task}"]`).focus({preventScroll:true});});
+  root.querySelectorAll('[data-task]').forEach(button=>button.onclick=()=>selectPracticeTask(Number(button.dataset.task)));
+  on('mock-brief',()=>{mockBrief=!mockBrief;render();document.getElementById('mock-brief').focus({preventScroll:true});});
+  on('task-complete',event=>{set('task-done:'+practiceKey()+':'+task,event.target.checked);render();document.getElementById('task-complete')?.focus({preventScroll:true});},'onchange');
+  on('timer-sound',event=>{set('timer-sound',event.target.checked);if(event.target.checked)enableTimerSound();},'onchange');
   document.querySelectorAll('[data-check]').forEach(b=>b.onchange=()=>{
   set('check:'+practiceKey()+':'+b.dataset.check,b.checked);
   const checks=[...root.querySelectorAll('[data-check]')];
   document.getElementById('check-count').textContent=checks.filter(input=>input.checked).length+' из '+checks.length;
 });
-  document.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>{returnTask=true;stage=b.dataset.help;mode='learn';render();});
-  on('return-task',()=>{mode='training';returnTask=false;render();root.querySelector('.training-stage-list [aria-current=step]')?.focus();});
-  on('step-select',e=>{set(lessonProgressKey('step',stage),Number(e.target.value));render({pushHistory:true});document.getElementById('study-step-title').focus();},'onchange');
+  document.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>{returnTask=true;stage=b.dataset.help;mode='learn';learningView='steps';render({pushHistory:true});});
+  on('return-task',()=>{mode='training';returnTask=false;render({pushHistory:true});root.querySelector('.training-stage-list [aria-current=step]')?.focus();});
   on('done',e=>{set(lessonProgressKey('done',stage),e.target.checked);render();document.getElementById('done').focus({preventScroll:true});},'onchange');
   on('stack',event=>{
     db=event.target.value;
@@ -432,11 +675,23 @@ function bind(){
     document.getElementById('stack').focus({preventScroll:true});
   },'onchange');
   on('theme',()=>{dark=!dark;set('dark',dark);render();document.getElementById('theme').focus({preventScroll:true});});
-  on('notes',e=>set('notes:'+practiceKey()+':'+D.tasks[task].id,e.target.value),'oninput');
   ['teacher-name','teacher-position','teacher-department'].forEach(id=>on(id,e=>set(id,e.target.value),'oninput'));
   root.querySelectorAll('[data-timer]').forEach(button=>button.onclick=()=>changeTimer(button.dataset.timer));
   on('training-sample',()=>materialsModal());
   on('open-file',()=>fileModal(document.getElementById('example-file').value));
+  on('example-launch',()=>{
+    const dialog=modal('Инструкция по запуску');
+    dialog.classList.add('example-launch-dialog');
+    dialog.querySelector('.modal-body').innerHTML=launchGuide();
+  });
+  root.querySelectorAll('[data-example-stack]').forEach(button=>button.onclick=()=>{
+    const stack=button.dataset.exampleStack;
+    if(db===stack)return;
+    db=stack;
+    set('db',db);
+    render({pushHistory:true});
+    root.querySelector(`[data-example-stack="${stack}"]`)?.focus({preventScroll:true});
+  });
   const deckButtons=root.querySelectorAll('[data-deck-stack]');
   deckButtons.forEach(button=>button.onclick=()=>{
     const stack=button.dataset.deckStack;
@@ -448,35 +703,162 @@ function bind(){
 }
 
 function changeTimer(action) {
-  const key = 'timer:'+practiceKey();
-  if(action==='reset') {
-    if(!window.confirm('Сбросить таймер? Отметки и заметки этой попытки сохранятся.')) return;
+  const attempt=practiceKey(), key='timer:'+attempt;
+  if(action==='reset'){
+    if(!window.confirm('Начать новую попытку? Время и отметки этой попытки будут сброшены.'))return;
+    for(const [index,item] of D.tasks.entries()){
+      item.checks.forEach((_,check)=>set('check:'+attempt+':'+item.id+':'+check,null));
+      set('task-done:'+attempt+':'+index,null);
+    }
+    set('task-clock:'+attempt,null);
+    set('task:'+attempt,0);
+    mockBrief=false;
     set(key,C.freshTimer(D.official.seconds,timerMode()));
-  } else {
+  }else{
+    if(action==='start'&&mode==='training')enableTimerSound();
     set(key,C.transition(timer(),action));
   }
   render();
-  const target = root.querySelector('.attempt-notice') || root.querySelector('[data-timer]');
-  target?.focus({preventScroll:true});
+  (root.querySelector('.pause-screen,.attempt-result')||root.querySelector('[data-timer]'))?.focus({preventScroll:true});
 }
 
 function tick() {
-  const clock = document.getElementById('clock');
-  if(!clock) return;
-  const state = timer();
-  if(clock.dataset.status!==state.status) {
-    const restoreFocus = root.querySelector('.attempt-layout')?.contains(document.activeElement);
+  const clock=document.getElementById('clock');
+  if(!clock||tourActive)return;
+  const state=timer(),view=C.timerView(state,state.lastSeenMs);
+  if(clock.dataset.status!==state.status){
+    const focused=root.querySelector('.attempt-layout')?.contains(document.activeElement);
+    if(view.expired&&mode==='training')signalTimer();
     render();
-    if(restoreFocus)root.querySelector('.attempt-notice')?.focus({preventScroll:true});
+    if(focused)root.querySelector('.attempt-result')?.focus({preventScroll:true});
     return;
   }
-  const view = C.timerView(state,state.lastSeenMs);
-  clock.textContent = C.format(view.left);
-  document.getElementById('elapsed').textContent = 'Прошло: '+C.format(view.used);
-  document.getElementById('timer-progress').value = view.progress;
+  clock.textContent=C.format(view.left);
+  document.getElementById('timer-progress').value=view.progress;
+  const taskOutput=document.getElementById('task-clock');
+  if(taskOutput){
+    const taskState=taskClock(), left=D.tasks[task].minutes*60000-taskElapsed(taskState,view.used);
+    taskOutput.textContent=C.format(left);
+    if(state.status==='running'&&left<=0&&!taskState.alerted[task]){
+      taskState.alerted[task]=true;
+      set('task-clock:'+practiceKey(),taskState);
+      signalTimer();
+    }
+  }
 }
 
-function modal(title){closeTour();const d=document.createElement('dialog');d.className='course-dialog';d.setAttribute('aria-label',title);d.innerHTML=`<header class="modal-head"><h2>${title}</h2>${btn('Закрыть','data-dismiss')}</header><div class="modal-body"></div>`;document.body.append(d);d.querySelector('[data-dismiss]').onclick=()=>d.close();d.onclose=()=>{closeTour();d.remove();};d.showModal();return d;}
+function tour() {
+  const original={mode,stage,learningView,scroll:window.scrollY};
+  const items=[
+    ['overview','#materials-open','Материалы задания','Откройте официальный КИМ, изображения и руководство по стилю.'],
+    ['overview','.criteria-heading','Критерии оценки','Здесь указаны формулировки КИМ и баллы. Ссылка под таблицей открывает страницу 13.'],
+    ['learn','#stack','Стек обучения','Выберите PHP с XAMPP или Flask с MySQL. Каркас, примеры и шаги соответствуют выбранному стеку.','map'],
+    ['learn','.map-node[aria-pressed="true"]','Маршрут обучения','Выберите этап, прочитайте его цель и откройте карточку.','map'],
+    ['learn','.lesson-tabs [aria-current="page"]','Условие и файлы','Здесь собраны материалы и требования этапа. Затем перейдите к шагам.','brief','documents'],
+    ['learn','#lesson-steps','Шаги','Стрелки листают карточки. Кнопка у заголовка открывает список всех шагов и переход к результату.','steps','documents'],
+    ['learn','#er-full','ER-диаграмма','На последнем шаге ER можно построить схему поэтапно, открыть готовую схему и проверить ключи.','steps','er',true],
+    ['learn','#done','Что сохранить','Сверьте результат и отметьте выполнение этапа.','result','documents'],
+    ['training','#training-sample','Условие КИМ и приложения','Откройте полный текст и исходные файлы официального образца.'],
+    ['training','.timer-card','Два таймера тренировки','Верхний отсчитывает общее время, нижний показывает остаток по выбранному заданию. Пауза останавливает оба.'],
+    ['training','.training-checklist','Самопроверка','Отметьте проверенные пункты и завершение задания.'],
+    ['mock','#mock-variant','Пробный экзамен','Выберите учебный вариант. Условие и архив относятся к выбранному варианту.'],
+    ['mock','.timer-card','Непрерывный отсчёт','После запуска время пробного экзамена идёт даже при закрытой вкладке.'],
+    ['examples','.example-stacks','Готовый пример','Выберите стек и скачайте архив. Инструкция по запуску открывается по кнопке в левой карточке.'],
+    ['examples','#example-file','Исходники','Выберите файл в правой карточке и откройте его для чтения или копирования.'],
+    ['teacher','#deck-open','Преподавателю','Выберите стек, заполните данные преподавателя и откройте презентацию или PDF.']
+  ];
+  let index=0,target=null;
+  tourActive=true;
+  const dialog=modal('Тур по сайту');
+  dialog.classList.add('tour-dialog');
+  const card=document.createElement('section');
+  card.className='tour-card';
+  card.append(...dialog.childNodes);
+  const spot=document.createElement('div');
+  spot.className='tour-spotlight';
+  spot.setAttribute('aria-hidden','true');
+  dialog.append(spot,card);
+  const body=card.querySelector('.modal-body');
+
+  function position() {
+    const pad=8,gap=14,w=innerWidth,h=innerHeight;
+    const rect=target?.getBoundingClientRect();
+    spot.toggleAttribute('data-missing',!rect);
+    const top=rect?Math.min(h-pad,Math.max(pad,rect.top-5)):pad;
+    const left=rect?Math.min(w-pad,Math.max(pad,rect.left-5)):pad;
+    const right=rect?Math.max(left,Math.min(w-pad,rect.right+5)):left;
+    const bottom=rect?Math.max(top,Math.min(h-pad,rect.bottom+5)):top;
+    Object.assign(spot.style,{top:top+'px',left:left+'px',width:right-left+'px',height:bottom-top+'px'});
+    const width=card.offsetWidth,height=Math.min(card.scrollHeight,h-2*pad);
+    const above=top-gap-pad,below=h-pad-bottom-gap;
+    let x=Math.min(left,w-pad-width),y=pad;
+    if(!rect)y=Math.max(pad,(h-height)/2);
+    else if(below>=height)y=bottom+gap;
+    else if(above>=height)y=top-gap-height;
+    else if(w-right-gap-pad>=width||left-gap-pad>=width){
+      x=w-right-gap-pad>=width?right+gap:left-gap-width;
+      y=Math.min(top,h-pad-height);
+    }else if(below>=above)y=Math.min(bottom+gap,h-pad-height);
+    Object.assign(card.style,{top:Math.max(pad,y)+'px',left:Math.max(pad,x)+'px',maxHeight:h-2*pad+'px'});
+  }
+
+  function draw() {
+    const [nextMode,selector,title,description,view,nextStage,showEr]=items[index];
+    mode=nextMode;
+    stage=nextStage||original.stage;
+    learningView=view||'map';
+    tourErStep=showEr;
+    render();
+    const paused=nextMode==='training'&&selector==='.training-checklist'&&root.querySelector('#pause-title');
+    target=paused||root.querySelector(selector);
+    body.innerHTML=`<p class="section-code">${index+1} / ${items.length}</p><h3>${E(title)}</h3>
+      <p>${E(paused?'После продолжения снова откроются задания и самопроверка.':description)}</p>
+      <div class="button-row">${btn('← Назад',`id="tour-prev" ${index===0?'disabled':''}`)}
+        ${btn(index===items.length-1?'Готово':'Далее →','id="tour-next"',true)}</div>`;
+    target?.scrollIntoView({block:'center',behavior:'instant'});
+    position();
+    body.querySelector('#tour-prev').onclick=()=>{index--;draw();};
+    body.querySelector('#tour-next').onclick=()=>{if(index===items.length-1)cleanup(true);else{index++;draw();}};
+    body.querySelector('#tour-next').focus({preventScroll:true});
+  }
+
+  const cleanup=restore=>{
+    if(tourCleanup!==cleanup)return;
+    tourActive=false;
+    tourErStep=false;
+    tourCleanup=null;
+    window.removeEventListener('resize',position);
+    window.removeEventListener('scroll',position);
+    if(dialog.open)dialog.close();
+    if(restore){
+      ({mode,stage,learningView}=original);
+      render();
+      window.scrollTo(0,original.scroll);
+      document.getElementById('site-tour')?.focus({preventScroll:true});
+    }
+  };
+  tourCleanup=cleanup;
+  window.addEventListener('resize',position);
+  window.addEventListener('scroll',position);
+  dialog.addEventListener('close',()=>cleanup(true),{once:true});
+  draw();
+}
+
+function modal(title) {
+  const opener=document.activeElement;
+  const dialog=document.createElement('dialog');
+  dialog.className='course-dialog';
+  dialog.setAttribute('aria-label',title);
+  dialog.innerHTML=`<header class="modal-head"><h2>${E(title)}</h2>${btn('Закрыть','data-dismiss')}</header><div class="modal-body"></div>`;
+  document.body.append(dialog);
+  dialog.querySelector('[data-dismiss]').onclick=()=>dialog.close();
+  dialog.addEventListener('close',()=>{
+    dialog.remove();
+    if(opener?.isConnected)opener.focus({preventScroll:true});
+  },{once:true});
+  dialog.showModal();
+  return dialog;
+}
 function styleSamples(v){const colors=[v?.accent||'#007bff',v?.heading||'#0d47a1','#6c757d','#f8f9fa','#ffffff'];return `<section class="style-samples"><h3>Параметр и его вид</h3><p>Образцы ниже используют локальные файлы PT Sans. ${v?'Палитра адаптирована для выбранного учебного варианта.':'Параметры из руководства БУ.'}</p><div class="style-color-grid">${colors.map((c,i)=>`<div><span class="color-swatch" style="background:${c}"></span><code>${c}</code><span>${['Акцент','Заголовки','Вторичный текст','Фон','Карточки'][i]}</span></div>`).join('')}</div><div class="font-examples">${[[36,700,'normal','H1 · Заголовок страницы'],[24,700,'normal','H2 · Раздел страницы'],[18,700,'normal','H3 · Заголовок карточки'],[16,400,'normal','Основной текст: выберите помещение для конференции.'],[12,400,'italic','Пояснение к полю формы']].map(([size,weight,style,text])=>`<div class="font-example"><code>PT Sans · ${size}px · ${weight===700?'Bold':style==='italic'?'Italic':'Regular'}</code><span style="font-size:${size}px;font-weight:${weight};font-style:${style}">${text}</span></div>`).join('')}</div><a class="btn" href="materials/style-guide.pdf" target="_blank" rel="noopener">Открыть исходный PDF</a></section>`;}
 function kimPreview(page) {
   const file = 'materials/kim-2027.pdf';
@@ -488,19 +870,7 @@ function kimPreview(page) {
 }
 
 function materialsModal(initial='condition'){const v=mode==='mock'?examVariant():null,d=modal('Материалы задания'+(v?' · '+v.id:''));let tab=['images','style','kim'].includes(initial)?initial:'condition';const tabs=[['condition','Текст задания'],['kim','КИМ · PDF'],['images','Изображения'],['style','Руководство по стилю'],['downloads','Скачать материалы']];function draw(){d.querySelector('.modal-body').innerHTML=`<nav class="material-tabs lesson-tabs" aria-label="Материалы">${tabs.map(([id,label])=>btn(label,`data-material-tab="${id}" ${id===tab?'aria-current="page"':''}`)).join('')}</nav><section class="material-view">${tab==='condition'?(v?`<h3>${v.id} · ${E(v.brand)}</h3><p class="notice">Авторский учебный вариант по структуре базового КИМ. 3 задания · 210 минут · 75 баллов.</p>${v.tasks.map((t,i)=>`<h3>Задание ${i+1}. ${E(t.title)}</h3><p>${E(t.text)}</p>`).join('')}<h3>Исходный каталог варианта</h3><div class="material-table"><table><thead><tr><th>Помещение</th><th>Тип</th><th>Город</th><th>Мест</th></tr></thead><tbody>${v.rooms.map(r=>`<tr><td>${E(r.name)}</td><td>${{auditorium:'Аудитория',coworking:'Коворкинг',cinema:'Кинозал'}[r.category]}</td><td>${E(r.city)}</td><td>${r.capacity}</td></tr>`).join('')}</tbody></table></div>`:`<h3>Конференции.РФ · официальный образец БУ</h3><p>КИМ 09.02.07-3-2027 · страницы 33–37. Текст ниже доступен прямо на странице.</p><div class="sample-reading">${sampleText()}</div>`):tab==='kim'?kimPreview(33):tab==='images'?`<h3>Изображения из приложений БУ</h3><p>Выберите изображение для увеличения. Подпись сохраняет имя файла в исходном архиве. Эти материалы доступны для всех учебных вариантов.</p><div id="material-image-focus" aria-live="polite"></div><div class="material-gallery">${D.previews.gallery.map((x,i)=>`<button class="material-thumb" data-image="${i}"><img src="materials/preview/${x.file}" alt="Изображение ${E(x.source)}" loading="lazy"><span>${E(x.source)}</span></button>`).join('')}</div>`:tab==='style'?(v?`<h3>Стиль варианта ${v.id} · ${E(v.brand)}</h3><p>Учебное руководство этого варианта: акцент <strong>${v.accent}</strong>, заголовки <strong>${v.heading}</strong>, текст #6c757d, фон #f8f9fa, карточки #ffffff.</p><div class="palette">${[v.accent,v.heading,'#6c757d','#f8f9fa','#ffffff'].map(c=>`<div><span style="background:${c}"></span><code>${c}</code></div>`).join('')}</div><p>PT Sans: H1 — 36 px, H2 — 24 px, H3 — 18 px, основной текст — 16 px, пояснения — 12 px курсив. Все страницы: 390 × 844 px. Оптимизируйте изображения и используйте их локально.</p>`:`<h3>Руководство по стилю · оригинал из БУ</h3>${D.previews.style.map((f,i)=>`<img class="style-page" src="materials/preview/${f}" alt="Руководство по стилю, страница ${i+1}">`).join('')}`):`<h3>Сохранить для работы без интернета</h3><div class="button-row">${v?`<a class="btn primary" href="downloads/exam-${v.id}.zip" download>Условие и каталог ${v.id}</a><a class="btn" href="downloads/exam-30-variants.zip" download>Все 30 вариантов</a>`:''}<a class="btn" href="materials/kim-2027.pdf" download>КИМ PDF</a><a class="btn" href="materials/basic-inputs.zip" download>Приложения БУ ZIP</a><a class="btn" href="materials/style-guide.pdf" download>Оригинал руководства PDF</a></div><p>Для просмотра используйте вкладки этого окна. Скачивание нужно только для сохранения файлов на компьютере.</p>`}${tab==='style'?styleSamples(v):''}</section>`;d.querySelectorAll('[data-material-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.materialTab;draw();d.querySelector('[aria-current=page]').focus({preventScroll:true});});d.querySelectorAll('[data-image]').forEach(b=>b.onclick=()=>{const x=D.previews.gallery[Number(b.dataset.image)],focus=d.querySelector('#material-image-focus');focus.innerHTML=`<figure><img src="materials/preview/${x.file}" alt="${E(x.source)}"><figcaption>${E(x.source)}</figcaption></figure>`;focus.scrollIntoView({block:'center'});});}draw();}
-function fileModal(file){if(!(file in codes()))file=db==='php'?'index.php':'app.py';const d=modal('Исходники примера');const body=d.querySelector('.modal-body');body.innerHTML=`<label class="file-picker">Файл<select id="code-file">${Object.keys(codes()).map(f=>`<option ${f===file?'selected':''}>${E(f)}</option>`).join('')}</select></label><div class="button-row">${btn('Гид по файлам','id="file-guide"')}${btn('Копировать код','id="copy-code"')}</div><p class="small">Полный исходный файл. Перенос длинных строк включён; копирование сохраняет исходное форматирование.</p><pre class="code-preview" tabindex="0" aria-label="Исходный код"></pre>`;const show=()=>body.querySelector('pre').textContent=codes()[body.querySelector('select').value]||'Файл недоступен';show();body.querySelector('select').onchange=show;body.querySelector('#file-guide').onclick=()=>tour('files');body.querySelector('#copy-code').onclick=async e=>{try{await navigator.clipboard.writeText(body.querySelector('pre').textContent);e.target.textContent='Скопировано';}catch{e.target.textContent='Выделите код и нажмите Ctrl+C';}};}
-const entityStories=[
-{name:'Пользователь',page:34,quote:'По кнопке «Создать пользователя» данные заносятся в базу данных.',why:'Регистрация повторяется для разных людей. Поэтому один пользователь — одна запись, а все пользователи хранятся в таблице users.',fields:'Логин → username; пароль → password_hash; ФИО → full_name; телефон → phone; электронная почта → email.',extra:'id — придуманный нами уникальный номер записи; is_admin — способ хранить роль; created_at — служебное время. Английские имена полей выбирает разработчик: в КИМ они не заданы.'},
-{name:'Помещение',page:36,quote:'необходимо предоставить возможность выбора зала из предопределенного (конкретного) списка',why:'Один зал можно выбирать в разных заявках. Список выносим в отдельную таблицу rooms, чтобы не повторять описание зала в каждой заявке.',fields:'Название помещения → name; тип (аудитория, коворкинг, кинозал) → category. В заявку переносим только номер выбранного помещения: room_id.',extra:'Шесть названий, города, адреса, вместимость, цены и оборудование — демонстрационный каталог примера, а не готовая таблица из КИМ. В PHP он загружается из rooms.json; во Flask — также из rooms.json.'},
-{name:'Заявка',page:34,quote:'Пользователь указывает нужное помещение для конференции',why:'Заявка — отдельное событие: один человек может отправить несколько заявок, в том числе на один и тот же зал. Создаём таблицу applications.',fields:'Помещение → room_id; дата → event_date; предпочтительное время → start_time; оплата → payment_method. «Свои заявки» означает связь user_id → users.id.',extra:'user_id сервер берёт из сессии, а room_id — из списка залов. Статус new задаёт сервер, затем его меняет администратор (стр. 35). Название конференции и число участников — дополнительные поля примера.'},
-{name:'Отзыв',page:36,quote:'Возможность оставить отзыв появляется только после завершения мероприятия.',why:'Отзыв относится к конкретному завершённому мероприятию и его автору. Создаём reviews и связываем его с applications и users.',fields:'Текст отзыва → comment; выбранная заявка → application_id; автор из сессии → user_id. Сервер проверяет, что заявка своя и завершена.',extra:'Оценка rating от 1 до 5 и ограничение «один отзыв на заявку» — решения учебного примера. КИМ не задаёт эти поля и ограничения дословно.'},
-{name:'Защита входа',page:null,quote:'В КИМ такой сущности нет.',why:'rate_limits добавлена разработчиком для ограничения частых попыток входа и регистрации. Она не является частью предметной модели конференций.',fields:'key — действие и IP; window_start — начало окна времени; hits — количество попыток. Все значения вычисляет сервер, формы для них нет.',extra:'Сначала спроектируйте четыре предметные таблицы. Эту техническую таблицу добавляйте отдельно, когда реализуете защиту входа.'}
-];
-function entityStory(i){const x=entityStories[i],e=D.entities[i];return `<section class="entity-story"><p class="section-code">ПОЧЕМУ ПОЯВИЛАСЬ ЭТА ТАБЛИЦА · ${i+1} / 5</p><h3>${x.name} → <code>${e.name}</code></h3><div class="origin-chain"><div><strong>1. Читаем условие</strong><blockquote>${E(x.quote)}</blockquote>${x.page?link('Открыть КИМ · стр. '+x.page,'materials/kim-2027.pdf#page='+x.page):'<span class="origin-tag">Дополнение разработчика</span>'}</div><div><strong>2. Выделяем сущность</strong><p>${E(x.why)}</p></div><div><strong>3. Получаем поля</strong><p>${E(x.fields)}</p></div></div><p class="origin-extra"><strong>Что выбрал разработчик:</strong> ${E(x.extra)}</p></section>`;}
-function erDiagram(n){const box=(x,y,name,sub)=>`<g><rect x="${x}" y="${y}" width="200" height="72" rx="10"/><text x="${x+100}" y="${y+29}" text-anchor="middle" class="er-title">${name}</text><text x="${x+100}" y="${y+53}" text-anchor="middle">${sub}</text></g>`;return `<figure class="er-overview"><figcaption>Условие КИМ → сущности → таблицы → данные из форм</figcaption><svg viewBox="0 0 760 320" role="img" aria-label="Связи таблиц: пользователи и помещения имеют много заявок, у заявки не более одного отзыва">${n>=3?'<path d="M220 76 H285 V165 H330"/><path d="M220 246 H285 V195 H330"/><text x="245" y="98">1</text><text x="300" y="153">N</text><text x="244" y="236">1</text><text x="300" y="218">N</text>':''}${n>=4?'<path d="M530 180 H590 V76 H550"/><path d="M220 58 H550"/><text x="537" y="167">1</text><text x="605" y="126">0..1</text><text x="235" y="46">1</text><text x="520" y="46">N</text>':''}${box(20,30,'users','Регистрация и роль')}${n>=2?box(20,210,'rooms','Каталог помещений'):''}${n>=3?box(330,145,'applications','Форма заявки + сессия'):''}${n>=4?box(550,30,'reviews','Отзыв после завершения'):''}${n>=5?box(550,240,'rate_limits','Служебные счётчики'):''}</svg></figure>`;}
-function fieldDecision(field){const f=field.split(' ·')[0];if(f==='id')return 'Числовой PK даёт стабильную ссылку на запись: имя или логин могут меняться, идентификатор — нет.';if(f.endsWith('_id'))return 'Храним идентификатор связанной записи вместо копии её текста: FK проверяет существование, а JOIN получает актуальные сведения.';if(f==='password_hash')return 'Пароль не сохраняем открытым: записываем результат хеширования и проверяем введённый пароль специальной функцией.';if(['created_at','updated_at','window_start'].includes(f))return 'Время задаётся программой или СУБД, чтобы не зависеть от произвольного ввода пользователя.';if(['phone','username','email'].includes(f))return 'Используем текст: здесь важны символы и формат. Телефон не является числом для вычислений; уникальность и формат проверяются отдельно.';if(['status','category','payment_method'].includes(f))return 'Ограниченный набор значений предотвращает разные написания одного состояния. Пользователь видит подпись, сервер сохраняет согласованный код.';if(f==='is_admin')return 'Роль задаёт доверенная серверная логика; обычная регистрация не должна разрешать назначить себе администратора.';if(['capacity','attendees','rating','hits'].includes(f))return 'Числовое значение удобно сравнивать и проверять по допустимому диапазону; текстовые подписи хранятся отдельно.';if(f==='event_date'||f==='start_time')return 'Тип даты или времени позволяет сортировать и проверять значение; не сохраняем дату как произвольную фразу.';return 'Отдельное поле хранит одно понятное свойство. Формат и допустимую длину согласуем между формой, сервером и схемой базы.';}
-function fieldTable(i){const e=D.entities[i];return `<table class="origin-table"><thead><tr><th>Поле</th><th>Откуда данные и почему</th></tr></thead><tbody>${e.fields.map(f=>{const o=D.origins[e.name][f.split(' ·')[0]];return `<tr><th>${E(f)}</th><td><strong>${E(o[0])}</strong><p>${E(o[1])}</p><p class="field-decision">${E(fieldDecision(f))}</p></td></tr>`;}).join('')}</tbody></table>`;}
-function mountER(){const host=document.getElementById('er-workspace');const lesson=S().find(item=>item.id==='er');const step=currentStepIndex(lesson);let n=[1,1,3,4,1,1][step];function draw(){host.innerHTML=`<div class="er-sequence button-row">${btn('←',`id="er-prev" aria-label="Предыдущая таблица" ${n===1?'disabled':''}`)}<label>Таблица<select id="er-entity">${entityStories.map((x,i)=>`<option value="${i+1}" ${n===i+1?'selected':''}>${x.name} · ${D.entities[i].name}</option>`).join('')}</select></label>${btn('→',`id="er-next" aria-label="Следующая таблица" ${n===5?'disabled':''}`)}${btn('Гид по схеме','id="er-guide"')}</div><div class="er-inline"><div class="er-pinned">${erDiagram(n)}<p>Стрелки связывают FK дочерней таблицы с PK родительской. 1:N — одна запись связана с несколькими; 0..1 — отзыв может отсутствовать.</p></div><div class="schema-grid"><section class="schema-table"><h3>${E(D.entities[n-1].name)}</h3>${fieldTable(n-1)}</section>${entityStory(n-1)}</div></div>`;on('er-entity',e=>{n=Number(e.target.value);draw();},'onchange');on('er-prev',()=>{n--;draw();});on('er-next',()=>{n++;draw();});on('er-guide',()=>tour('er'));}draw();}
+function fileModal(file){if(!(file in codes()))file=db==='php'?'index.php':'app.py';const d=modal('Исходники примера');const body=d.querySelector('.modal-body');body.innerHTML=`<label class="file-picker">Файл<select id="code-file">${Object.keys(codes()).map(f=>`<option ${f===file?'selected':''}>${E(f)}</option>`).join('')}</select></label><div class="button-row">${btn('Копировать код','id="copy-code"')}</div><p class="small">Полный исходный файл. Перенос длинных строк включён; копирование сохраняет исходное форматирование.</p><pre class="code-preview" tabindex="0" aria-label="Исходный код"></pre>`;const show=()=>body.querySelector('pre').textContent=codes()[body.querySelector('select').value]||'Файл недоступен';show();body.querySelector('select').onchange=show;body.querySelector('#copy-code').onclick=async e=>{try{await navigator.clipboard.writeText(body.querySelector('pre').textContent);e.target.textContent='Скопировано';}catch{e.target.textContent='Выделите код и нажмите Ctrl+C';}};}
 function filePurpose(f){if(/schema/.test(f))return 'Описывает таблицы, типы полей, ограничения и связи базы данных.';if(f==='rooms.json')return 'Демонстрационный каталог помещений: начальные записи rooms, а не данные пользователей.';if(f==='app.py'||f==='index.php')return 'Принимает запросы браузера, проверяет данные и права, выполняет запросы к БД и возвращает страницу.';if(f==='lib.php'||f==='mysql_backend.py')return 'Общие функции и подключение к MySQL: запросы, соединение и вспомогательные операции.';if(f==='setup.php')return 'Однократная подготовка пустой учебной базы: таблицы, администратор и каталог.';if(f.endsWith('.html'))return 'HTML-шаблон страницы: подписи, поля формы и вывод данных, переданных сервером.';if(f.endsWith('.css'))return 'Оформление интерфейса: палитра, шрифты, сетки, состояния элементов и мобильная адаптация.';if(f.endsWith('.js'))return 'Поведение в браузере: обработка событий и обратная связь. Не заменяет проверки на сервере.';if(f.includes('test'))return 'Автоматическая проверка сценариев и ограничений приложения на тестовых данных.';if(f.endsWith('.md'))return 'Инструкция, описание источников или отчёт о проверке проекта.';if(f==='requirements.txt')return 'Список Python-зависимостей для установки в виртуальное окружение.';if(f==='.gitignore')return 'Исключает окружение, кэш и локальные секреты из новых добавлений в Git.';return 'Вспомогательный ресурс проекта. Смотрите путь файла и его содержимое перед изменением.';}
 function lessonGuidance(id,i,stack=db){return D.guidance[id==='backend'&&stack==='php'?'phpBackend':id]?.[i];}
 function guidanceHTML(id,i){const g=lessonGuidance(id,i);if(!g)return '';return `<section class="lesson-explanation"><h3>Как это понять</h3><p>${E(g.why)}</p><h3>Что сделать самостоятельно</h3><ol class="lesson-actions" role="list">${g.actions.map((x,index)=>`<li><span class="lesson-action-number" aria-hidden="true">${index+1}</span><span>${E(x)}</span></li>`).join('')}</ol>${g.code?`<pre class="lesson-code" tabindex="0">${E(g.code)}</pre>`:''}<div class="build-check"><strong>Проверьте себя</strong><p>${E(g.check)}</p></div></section>`;}
@@ -514,7 +884,15 @@ function beginnerHTML(id,index) {
 function resultImages(id,i,stack=db){const php=stack==='php';if(id==='backend'){const kind=php?['catalog','registration-mobile','login','application','application','catalog'][i]:['catalog','catalog','registration','login','catalog','application','admin-mobile','application','catalog'][i];return [{file:(php?'php-':'flask-')+kind+'.png',caption:kind.startsWith('registration')?'Регистрация: данные из условия превращены в подписанные поля формы.':kind==='login'?'Вход: логин и пароль проверяет сервер; после успеха создаётся сессия.':kind==='application'?'Заявка: помещение из rooms, остальные значения из формы, владелец из сессии.':kind==='admin-mobile'?'Администратор: фильтры и смена статуса на мобильном экране.':'Каталог: записи rooms превращены в карточки помещений.'}];}if(id==='design')return [{file:php?'php-catalog.png':'flask-catalog.png',caption:'Компьютер: общий стиль, локальные изображения и карточки каталога.'},{file:php?'php-registration-mobile.png':'flask-admin-mobile.png',caption:'Телефон: одна колонка, читаемый текст, доступные элементы управления.'}];return [];}
 function resultPreview(id,i){return `<section class="lesson-result"><h3>Что должно получиться</h3><p>Снимок работающего примера — ориентир для проверки. Повторите действие в своём приложении и сравните результат.</p><div class="shot-grid">${resultImages(id,i).map(x=>`<figure><button class="image-open" data-image="materials/screenshots/${x.file}" aria-label="Увеличить результат"><img src="materials/screenshots/${x.file}" alt="${E(x.caption)}" loading="lazy"></button><figcaption>${E(x.caption)}</figcaption></figure>`).join('')}</div></section>`;}
 function bindImages(scope){scope.querySelectorAll('[data-image]').forEach(b=>b.onclick=()=>{const d=modal('Просмотр изображения');d.classList.add('image-dialog');d.querySelector('.modal-body').innerHTML=`<img src="${E(b.dataset.image)}" alt="Увеличенное изображение результата">`;});}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&coach){e.preventDefault();e.stopPropagation();closeTour();}});setInterval(tick,1000);render();
-window.addEventListener('popstate',()=>{readRoute(new URLSearchParams(location.search));render();});
+document.addEventListener('keydown',event=>{
+  if(mode!=='learn'||!['steps','result'].includes(learningView)||document.querySelector('dialog[open]')||
+      event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||
+      event.target.closest('button:not([data-step-direction]),a,input,textarea,select,pre,#er-workspace'))return;
+  const direction={ArrowLeft:'previous',ArrowRight:'next'}[event.key];
+  const button=direction&&root.querySelector(`[data-step-direction="${direction}"]`);
+  if(button){event.preventDefault();button.click();}
+});
+setInterval(tick,1000);render();
+window.addEventListener('popstate',()=>{tourCleanup?.(false);returnTask=false;readRoute(new URLSearchParams(location.search));render();});
 if(location.hash==='#criteria')document.getElementById('criteria')?.scrollIntoView();
 })();

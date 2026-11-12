@@ -1,0 +1,10 @@
+import ELK from 'elkjs/lib/elk.bundled.js';
+export const layoutKey=tables=>tables.map(t=>t.id+':'+t.fields.length).sort().join('|');
+export function layoutGraph(tables,links){return {id:'schema',layoutOptions:{'elk.algorithm':'layered','elk.direction':'RIGHT','elk.edgeRouting':'ORTHOGONAL','elk.spacing.nodeNode':'28','elk.spacing.edgeEdge':'12','elk.layered.spacing.nodeNodeBetweenLayers':'80','elk.layered.spacing.edgeEdgeBetweenLayers':'14','elk.layered.mergeEdges':'false','elk.padding':'[top=20,left=28,bottom=20,right=28]','elk.aspectRatio':'1.5','elk.separateConnectedComponents':'true'},children:tables.map(t=>({id:t.id,width:232,height:66+t.fields.length*44,layoutOptions:{'elk.portConstraints':'FIXED_POS'},ports:t.fields.flatMap((f,i)=>[{id:t.id+'.'+f.id+'.out',x:232,y:65+i*44+22,width:0,height:0,layoutOptions:{'elk.port.side':'EAST'}},{id:t.id+'.'+f.id+'.in',x:0,y:65+i*44+22,width:0,height:0,layoutOptions:{'elk.port.side':'WEST'}}])})),edges:links.map(l=>({id:l.from+'.'+l.field,sources:[l.to+'.'+l.target+'.out'],targets:[l.from+'.'+l.field+'.in']}))};}
+export async function buildErLayouts(data){const elk=new ELK(),layouts={},schema=data.schema,visible=[];
+ // Reserve final table footprints and wire routes once for the entire walkthrough.
+ const graph=await elk.layout(layoutGraph(schema.tables,schema.links));
+ async function capture(){const links=schema.links.filter(l=>visible.some(t=>t.id===l.from&&t.fields.some(f=>f.id===l.field))&&visible.some(t=>t.id===l.to&&t.fields.some(f=>f.id===l.target)));layouts[layoutKey(visible)]={width:graph.width,height:graph.height,nodes:graph.children.filter(n=>visible.some(t=>t.id===n.id)).map(n=>({id:n.id,x:n.x,y:n.y,width:n.width,height:n.height})),edges:graph.edges.filter(e=>links.some(l=>e.id===l.from+'.'+l.field)).map(e=>({id:e.id,sections:e.sections||[]}))};}
+ for(const id of data.order){const table=schema.tables.find(t=>t.id===id),node={id,fields:[]};visible.push(node);await capture();for(const f of table.fields){node.fields.push(f);await capture();}}
+ return layouts;
+}

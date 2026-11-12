@@ -21,3 +21,20 @@ test('timer stops at the limit and normalizes saved overtime',()=>{
   assert.equal(ExamCore.timerView(restored,36000000).over,0);
 });
 test('built example archives, official files and entrypoints exist',()=>{for(const f of ['downloads/conference-portal-flask.zip','downloads/conference-portal-php.zip','materials/kim-2027.pdf','materials/basic-inputs.zip','materials/style-guide.pdf'])assert.ok(fs.statSync('site/'+f).size>1000,f);for(const f of ['app.js','core.js','content.js'])new vm.Script(fs.readFileSync('site/'+f,'utf8'));const d={};vm.runInNewContext(fs.readFileSync('site/content.js','utf8'),d);assert.ok(d.COURSE.code['mysql_backend.py']);assert.ok(d.COURSE.phpCode['index.php']);assert.ok(d.COURSE.phpCode['README.md']);assert.ok(d.COURSE.code['docs/WINDOWS.md']);for(const k of Object.keys(d.COURSE.code))assert.doesNotMatch(k,/instance|secret_key|\.venv/);});
+
+test('interactive ER has a complete layout and four linked foreign keys',()=>{
+  const content=fs.readFileSync('site/er-data.js','utf8');
+  const er=JSON.parse(content.slice('globalThis.ER_GUIDE='.length,-1));
+  const {tables,links}=er.schema;
+  const key=tables.map(table=>table.id+':'+table.fields.length).sort().join('|');
+  const full=er.layouts[key];
+  assert.deepEqual(tables.map(table=>table.id),['users','rooms','applications','reviews','rate_limits']);
+  assert.equal(full.nodes.length,5);
+  assert.equal(full.edges.length,4);
+  assert.equal(Object.keys(er.layouts).length,tables.reduce((n,table)=>n+table.fields.length+1,0));
+  for(const link of links){
+    assert(full.edges.some(edge=>edge.id===link.from+'.'+link.field&&edge.sections.length>0));
+    assert(tables.find(table=>table.id===link.to).fields.some(field=>field.id===link.target&&field.pk));
+  }
+  assert.equal(links.find(link=>link.from==='reviews'&&link.field==='application_id').cardinality,'1 : 0..1');
+});

@@ -1,3 +1,5 @@
+import {rvpmErGuide} from '../content/er-guide.mjs';
+import {buildErLayouts} from './er-layout.mjs';
 import {stageChecks,stepChecks,lessonFiles} from '../content/lesson-checks.mjs';
 import {beginnerGuidance} from '../content/beginner.mjs';
 import {teacherDeck} from '../content/teacher-deck.mjs';
@@ -23,6 +25,9 @@ const official=JSON.parse(fs.readFileSync('content/official.json'));
 const sources=fs.readdirSync('materials').filter(f=>/\.pdf$|\.zip$/.test(f)).map(f=>({file:f,sha256:createHash('sha256').update(fs.readFileSync('materials/'+f)).digest('hex')}));
 const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,stageChecks,stepChecks,lessonFiles,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
 fs.writeFileSync(out+'/downloads/source-manifest.json',JSON.stringify(sources,null,2));
+const er=rvpmErGuide(data);
+er.layouts=await buildErLayouts(er);
+fs.writeFileSync(out+'/er-data.js','globalThis.ER_GUIDE='+JSON.stringify(er)+';');
 const decks=Object.fromEntries(['php','mysql'].map(stack=>[stack,teacherDeck(data,stack)]));
 const deckData='globalThis.TEACHER_DECKS='+JSON.stringify(decks)+';';
 fs.writeFileSync(out+'/deck-data.js',deckData);

@@ -196,28 +196,58 @@ $env:MYSQL_DATABASE='conference_rvpm_2027'
     <a class="btn primary" href="${file}" download>Скачать учебный каркас ${stack}</a>
     <p>Оставьте MySQL включённым в XAMPP. В PowerShell из папки проекта выполните команды ниже. В <code>MYSQL_DATABASE</code> укажите ту же базу, где создали таблицы и загрузили каталог.</p>
     <pre class="lesson-code" tabindex="0" aria-label="Команды запуска каркаса"><code>${E(command)}</code></pre>
-    <p>Откройте <code>http://127.0.0.1:${php?8087:5017}/</code>. Главная пока показывает сообщение каркаса. На следующих шагах заменяйте заглушки по одной.</p>`;
+    <p>Откройте <code>http://127.0.0.1:${php?8087:5017}/</code>. Главная пока показывает сообщение каркаса. Базовые стили уже подключены, а палитру, адаптацию и JavaScript вы добавите в следующих этапах.</p>
+    ${php?'':'<p>Первые две команды выполняются один раз. После правки app.py остановите сервер через Ctrl+C в том же терминале и повторите последнюю команду. Затем обновите страницу.</p>'}`;
 }
 function phpBuildLesson(i) {
   const lesson = D.phpAssembly[i];
   const setup = i===0 ? starterIntro() : '';
   return `<section class="build-lesson"><h3>Соберите этот шаг в каркасе</h3>${setup}
-    ${lesson.blocks.map((block,j)=>`<section class="php-lesson-block">
+    ${lesson.blocks.map(block=>`<section class="php-lesson-block" data-edit-file="${E(block.file)}" data-edit-first="${E(block.first)}" data-edit-last="${E(block.last)}">
       <h4>${E(block.file)} · ${E(block.first.match(/BEGIN ([\w-]+)/)[1])}</h4>
       <p>Замените участок от <code>${E(block.first)}</code> до <code>${E(block.last)}</code> включительно. Вставьте фрагмент целиком на место этого участка.</p>
-      ${btn('Копировать фрагмент',`data-copy-block="${i}:${j}"`)}
+      ${btn('Копировать фрагмент','data-copy-block')}
       <pre class="lesson-code" tabindex="0" aria-label="Код ${E(block.file)}">${E(block.text)}</pre>
     </section>`).join('')}
+    ${lesson.blocks.length?'<p>Сохраните index.php и обновите страницу портала.</p>':''}
     <div class="build-check"><strong>Проверка после шага</strong><p>${E(lesson.check)}</p></div>
   </section>`;
 }
-function buildLesson(i){if(db==='php')return phpBuildLesson(i);const x=D.assembly[i];if(!x)return '';return `<section class="build-lesson"><h3>Что сделать в проекте</h3>${i===0?starterIntro():''}${x.map?`<p class="data-flow"><strong>От условия к данным:</strong> ${E(x.map)}</p>`:''}${x.blocks.map((b,j)=>`<details class="build-block" ${j===0?'open':''}><summary>${j+1}. ${E(b.file)} · ${b.file==='app.py'?'обработчик на сервере':'содержимое файла'}</summary><p>${E(b.where)}</p><p class="small">Строки ${b.start}–${b.start+b.text.split('\n').length-1} в готовом примере. В вашем каркасе ориентируйтесь на имена файлов и маркеры.</p><button class="btn" data-copy-block="${i}:${j}">Копировать фрагмент</button><pre class="lesson-code" tabindex="0" aria-label="Код ${E(b.file)}">${E(b.text)}</pre></details>`).join('')}<div class="build-check"><strong>Проверка после шага</strong><p>${E(x.check)}</p></div></section>`;}
+function buildLesson(index) {
+  if(db==='php')return phpBuildLesson(index);
+  const lesson=D.assembly[index];
+  return `<section class="build-lesson"><h3>Что сделать в проекте</h3>
+    ${index===0?starterIntro():''}
+    ${lesson.map?`<p class="data-flow"><strong>От условия к данным</strong> ${E(lesson.map)}</p>`:''}
+    ${lesson.blocks.map((block,i)=>{
+      const marker=block.where.match(/# BEGIN (\w+)/)?.[1];
+      return `<details class="build-block" ${i===0?'open':''} data-edit-file="${E(block.file)}"
+        ${marker?`data-edit-first="# BEGIN ${E(marker)}" data-edit-last="# END ${E(marker)}"`:''}>
+        <summary>${i+1}. ${E(block.file)} · ${marker?'обработчик':'содержимое файла'}</summary>
+        <p>${E(block.where)}</p>
+        <button class="btn" data-copy-block>Копировать фрагмент</button>
+        <pre class="lesson-code" tabindex="0" aria-label="Код ${E(block.file)}">${E(block.text)}</pre>
+      </details>`;
+    }).join('')}
+    ${lesson.blocks.some(block=>block.file==='app.py')?'<p>Сохраните файлы. Остановите Flask через Ctrl+C и запустите снова последней командой из шага 1. Обновите страницу.</p>':''}
+    <div class="build-check"><strong>Проверка после шага</strong><p>${E(lesson.check)}</p></div>
+  </section>`;
+}
 function lessonLinks(id,index) {
   const files=(D.lessonFiles[id]?.[index]??[]).filter(([, , stack])=>!stack||stack===db);
   if(!files.length)return '';
   return `<div class="button-row lesson-resources">${files.map(([name,url])=>
     /\.(zip|sql)$/.test(url)?`<a class="btn" href="${E(url)}" download>${E(name)}</a>`:link(E(name),E(url))
   ).join('')}</div>`;
+}
+function studentEdits(id,index) {
+  const edits=D.studentEdits[db][id]?.[index]??[];
+  return edits.map(({file,code})=>`<section class="build-block" data-edit-file="${E(file)}">
+    <h4>В конец файла <code>${E(file)}</code></h4>
+    <p>Откройте этот файл в рабочем проекте. Добавьте фрагмент один раз, сохраните и обновите портал через Ctrl+F5.</p>
+    ${btn('Копировать фрагмент','data-copy-block')}
+    <pre class="lesson-code" tabindex="0" aria-label="Код для ${E(file)}"><code>${E(code)}</code></pre>
+  </section>`).join('');
 }
 function seedData() {
   const rooms=JSON.parse(codes()['rooms.json']);
@@ -768,7 +798,15 @@ function bind(){
   on('lesson-images',()=>materialsModal('images'));
   document.querySelectorAll('[data-reference]').forEach(b=>b.onclick=()=>{const [target,index]=b.dataset.reference.split(':');stage=target;set(lessonProgressKey('step',stage),Number(index));mode='learn';render({pushHistory:true});document.querySelector('.study-step').scrollIntoView({block:'start'});});
   on('mock-variant',e=>{mockBrief=false;mockId=e.target.value;set('mock-id',mockId);render();document.getElementById('mock-variant')?.focus();},'onchange');
-  document.querySelectorAll('[data-copy-block]').forEach(b=>b.onclick=async()=>{const [i,j]=b.dataset.copyBlock.split(':').map(Number);try{await navigator.clipboard.writeText((db==='php'?D.phpAssembly:D.assembly)[i].blocks[j].text);b.textContent='Скопировано';}catch{b.textContent='Выделите код и нажмите Ctrl+C';}});
+  root.querySelectorAll('[data-copy-block]').forEach(button=>button.onclick=async()=>{
+    const code=button.closest('[data-edit-file]').querySelector('pre').textContent;
+    try {
+      await navigator.clipboard.writeText(code);
+      button.textContent='Скопировано';
+    } catch {
+      button.textContent='Выделите код и нажмите Ctrl+C';
+    }
+  });
   root.querySelectorAll('[data-mode]').forEach(button=>button.onclick=()=>{
     mode=button.dataset.mode;
     returnTask=false;
@@ -1028,7 +1066,7 @@ function lessonGuidance(id,i,stack=db){return D.guidance[id==='backend'&&stack==
 function lessonActions(actions) {
   return `<ol class="lesson-actions" role="list">${actions.map((action,index)=>`<li><span class="lesson-action-number" aria-hidden="true">${index+1}</span><span>${E(action)}</span></li>`).join('')}</ol>`;
 }
-function guidanceHTML(id,i){const g=lessonGuidance(id,i);if(!g)return '';return `<section class="lesson-explanation"><h3>Как это понять</h3><p>${E(g.why)}</p><h3>Что сделать самостоятельно</h3>${lessonActions(g.actions)}${g.code?`<pre class="lesson-code" tabindex="0">${E(g.code)}</pre>`:''}<div class="build-check"><strong>Проверьте себя</strong><p>${E(g.check)}</p></div></section>`;}
+function guidanceHTML(id,i){const g=lessonGuidance(id,i);if(!g)return '';return `<section class="lesson-explanation"><h3>Как это понять</h3><p>${E(g.why)}</p><h3>Что сделать самостоятельно</h3>${lessonActions(g.actions)}${g.code?`<pre class="lesson-code" tabindex="0">${E(g.code)}</pre>`:''}${studentEdits(id,i)}<div class="build-check"><strong>Проверьте себя</strong><p>${E(g.check)}</p></div></section>`;}
 function beginnerHTML(id,index) {
   const key=id==='backend'&&db==='php'?'phpBackend':id;
   const example=D.beginner[key]?.[index];

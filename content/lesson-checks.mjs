@@ -26,7 +26,7 @@ export const stepChecks = {
     'В rooms шесть записей. В users виден Conf2027 с is_admin = 1.',
     'В Designer видны все таблицы и четыре линии, rate_limits стоит отдельно.',
     'Сохранённый er-diagram.pdf открывается. Подписи и четыре связи читаются при увеличении.',
-    'В database.sql есть таблицы и начальные записи. Рядом сохранён отдельный er-diagram.pdf.'
+    'В database.sql рядом с README есть таблицы и начальные записи. В docs/er-diagram.pdf читаются поля и связи.'
   ]
 };
 

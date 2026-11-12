@@ -11,7 +11,7 @@
   }
   function elapsed(s, now = Date.now()) {
     const ongoing = s.status === 'running' ? Math.max(0, now - s.anchorMs) : 0;
-    return Math.max(0, s.elapsedMs + ongoing);
+    return Math.min(s.durationMs, Math.max(0, s.elapsedMs + ongoing));
   }
   function timerView(s, now = Date.now()) {
     const used = elapsed(s, now);
@@ -19,17 +19,21 @@
       expired:used >= s.durationMs, progress:Math.min(1, used/s.durationMs), clockChanged:s.clockChanged===true||now < s.lastSeenMs - 2000};
   }
   function checkpoint(s, now=Date.now()) {
-    return {...s,elapsedMs:elapsed(s,now),anchorMs:s.status==='running'?now:null,lastSeenMs:now,clockChanged:s.clockChanged===true||now<s.lastSeenMs-2000};
+    const elapsedMs = elapsed(s, now);
+    const status = elapsedMs >= s.durationMs ? 'finished' : s.status;
+    const clockChanged = s.clockChanged === true || now < s.lastSeenMs - 2000;
+    return {...s, status, elapsedMs, anchorMs:status==='running'?Math.max(s.anchorMs,now):null,
+      lastSeenMs:Math.max(s.lastSeenMs,now), clockChanged};
   }
   function transition(s, action, now = Date.now()) {
-    const n = {...s, lastSeenMs:now};
-    if (action === 'start' && (s.status === 'idle' || s.status === 'paused')) {
-      n.status='running'; n.anchorMs=now;
-    } else if (action === 'pause' && s.status === 'running') {
-      assert(s.mode !== 'mock', 'В пробном экзамене пауза не предусмотрена');
-      n.elapsedMs=elapsed(s,now); n.anchorMs=null; n.status='paused';
-    } else if (action === 'finish' && s.status !== 'finished') {
-      n.elapsedMs=elapsed(s,now); n.anchorMs=null; n.status='finished';
+    const n = checkpoint(s, now);
+    if (action === 'start' && (n.status === 'idle' || n.status === 'paused')) {
+      n.status='running'; n.anchorMs=n.lastSeenMs;
+    } else if (action === 'pause' && n.status === 'running') {
+      assert(n.mode !== 'mock', 'В пробном экзамене пауза не предусмотрена');
+      n.anchorMs=null; n.status='paused';
+    } else if (action === 'finish' && n.status !== 'finished') {
+      n.anchorMs=null; n.status='finished';
     } else if (action === 'assisted') n.assisted=true;
     return n;
   }

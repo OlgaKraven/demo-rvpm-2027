@@ -4,4 +4,20 @@ test('only basic 2027 source, three tasks, 210 minutes and 75 points',()=>{asser
 test('both routes have complete matching stages and source references',()=>{assert.deepEqual(stages.map(s=>s.id),phpStages.map(s=>s.id));for(const route of [stages,phpStages])for(const s of route){assert.ok(s.steps.length>=5);assert.ok(s.output);for(const step of s.steps){assert.ok(step[1].length>90);assert.ok(step[2]);}}assert.match(phpStages.find(s=>s.id==='backend').title,/PHP/);});
 test('every ER field has provenance and all example foreign keys are covered',()=>{for(const e of entities)for(const f of e.fields){const name=f.split(' ·')[0];assert.ok(origins[e.name][name],e.name+'.'+name);}for(const key of ['user_id','room_id'])assert.ok(origins.applications[key]);assert.ok(origins.reviews.application_id);});
 test('timer pause survives restore; mock pause is rejected',()=>{let s=ExamCore.freshTimer(12600,'practice',1000);s=ExamCore.transition(s,'start',1000);s=ExamCore.transition(s,'pause',4000);const r=ExamCore.restoreTimer(JSON.stringify(s),12600,'practice');assert.equal(ExamCore.elapsed(r,50000),3000);assert.equal(ExamCore.timerView(r,50000).left,12597000);const m=ExamCore.transition(ExamCore.freshTimer(12600,'mock',1000),'start',1000);assert.throws(()=>ExamCore.transition(m,'pause',4000));assert.equal(ExamCore.elapsed(m,61000),60000);});
+test('timer stops at the limit and normalizes saved overtime',()=>{
+  for(const mode of ['practice','mock']){
+    const start=ExamCore.transition(ExamCore.freshTimer(12600,mode,1000),'start',1000);
+    const reopened=ExamCore.restoreTimer(JSON.stringify(start),12600,mode);
+    const finished=ExamCore.checkpoint(reopened,36000000);
+    assert.equal(finished.status,'finished');
+    assert.equal(finished.elapsedMs,12600000);
+    assert.equal(finished.anchorMs,null);
+    assert.equal(ExamCore.timerView(finished,72000000).left,0);
+    assert.equal(ExamCore.transition(finished,'start',72000000).status,'finished');
+  }
+  const legacy={...ExamCore.freshTimer(12600,'practice',1000),status:'paused',elapsedMs:4500000000};
+  const restored=ExamCore.restoreTimer(JSON.stringify(legacy),12600,'practice');
+  assert.equal(ExamCore.transition(restored,'start',36000000).status,'finished');
+  assert.equal(ExamCore.timerView(restored,36000000).over,0);
+});
 test('built example archives, official files and entrypoints exist',()=>{for(const f of ['downloads/conference-portal-flask.zip','downloads/conference-portal-php.zip','materials/kim-2027.pdf','materials/basic-inputs.zip','materials/style-guide.pdf'])assert.ok(fs.statSync('site/'+f).size>1000,f);for(const f of ['app.js','core.js','content.js'])new vm.Script(fs.readFileSync('site/'+f,'utf8'));const d={};vm.runInNewContext(fs.readFileSync('site/content.js','utf8'),d);assert.ok(d.COURSE.code['mysql_backend.py']);assert.ok(d.COURSE.phpCode['index.php']);assert.ok(d.COURSE.phpCode['README.md']);assert.ok(d.COURSE.code['docs/WINDOWS.md']);for(const k of Object.keys(d.COURSE.code))assert.doesNotMatch(k,/instance|secret_key|\.venv/);});

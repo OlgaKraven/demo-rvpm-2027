@@ -12,7 +12,9 @@ def mysql_for_test(monkeypatch):
         return
     import pymysql
     name = 'rvpm_test_' + uuid.uuid4().hex
-    connection = pymysql.connect(host='127.0.0.1', user=os.environ.get('MYSQL_USER', 'root'),
+    connection = pymysql.connect(host=os.environ.get('MYSQL_HOST', '127.0.0.1'),
+                                 port=int(os.environ.get('MYSQL_PORT', '3306')),
+                                 user=os.environ.get('MYSQL_USER', 'root'),
                                  password=os.environ.get('MYSQL_PASSWORD', ''), autocommit=True)
     with connection.cursor() as cursor:
         cursor.execute('CREATE DATABASE `' + name + '` CHARACTER SET utf8mb4')

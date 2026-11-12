@@ -1,4 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';import {stages,tasks,criteria,entities} from '../content/course.mjs';import {phpStages,origins} from '../content/php.mjs';import '../src/core.js';
+import {lessonReference} from '../content/lesson-reference.mjs';
 const official=JSON.parse(fs.readFileSync('content/official.json'));
 test('only basic 2027 source, three tasks, 210 minutes and 75 points',()=>{assert.equal(official.level,'basic');assert.equal(official.year,2027);assert.equal(official.code,'09.02.07-3-2027');assert.equal(tasks.length,3);assert.equal(tasks.reduce((n,t)=>n+t.minutes,0)*60,official.seconds);assert.equal(criteria.reduce((n,c)=>n+c[1],0),75);assert.match(official.text,/Образец задания для ГИА ДЭ БУ/);assert.doesNotMatch(official.text,/Образец задания для ДЭ в рамках ПА/);});
 test('both routes have complete matching stages and source references',()=>{assert.deepEqual(stages.map(s=>s.id),phpStages.map(s=>s.id));for(const route of [stages,phpStages])for(const s of route){assert.ok(s.steps.length>=5);assert.ok(s.output);for(const step of s.steps){assert.ok(step[1].length>90);assert.ok(step[2]);}}assert.match(phpStages.find(s=>s.id==='backend').title,/PHP/);});
@@ -37,4 +38,25 @@ test('interactive ER has a complete layout and four linked foreign keys',()=>{
     assert(tables.find(table=>table.id===link.to).fields.some(field=>field.id===link.target&&field.pk));
   }
   assert.equal(links.find(link=>link.from==='reviews'&&link.field==='application_id').cardinality,'1 : 0..1');
+});
+
+test('every learning stage has contextual help and concrete deliverables',()=>{
+  assert.deepEqual(Object.keys(lessonReference),stages.map(stage=>stage.id));
+  for(const help of Object.values(lessonReference)){
+    assert.equal(help.intro.length,2);
+    assert.equal(help.example.length,2);
+    for(const items of [help.terms,help.errors,help.files]){
+      assert(items.length>0);
+      assert(items.every(entry=>entry.length===2&&entry.every(Boolean)));
+    }
+  }
+});
+
+test('the beginner download matches the users table in both MySQL examples',()=>{
+  const users=fs.readFileSync('site/materials/database/users.sql','utf8').trim();
+  for(const path of ['conference-portal-php/schema.sql','conference-portal-flask/schema-mysql.sql']){
+    const schema=fs.readFileSync('examples/'+path,'utf8');
+    const table=schema.match(/^CREATE TABLE users\s*\([\s\S]*?;/m)?.[0];
+    assert.equal(users.replaceAll('\r\n','\n'),table?.replaceAll('\r\n','\n'),path);
+  }
 });

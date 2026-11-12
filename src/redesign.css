@@ -329,8 +329,8 @@ body { font: 1rem/1.6 var(--font-ui); }
   font-size: .875rem;
   font-weight: 650;
 }
-.lesson-tabs .btn:hover, .lesson-tabs .btn[aria-current="page"] { color: var(--red); }
-.lesson-tabs .btn[aria-current="page"] { border-bottom-color: var(--red); background: transparent; }
+.lesson-tabs .btn:hover, .lesson-tabs .btn:is([aria-current="page"], [aria-selected="true"]) { color: var(--red); }
+.lesson-tabs .btn:is([aria-current="page"], [aria-selected="true"]) { border-bottom-color: var(--red); background: transparent; }
 
 .kim-preview {
   display: block;

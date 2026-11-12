@@ -62,16 +62,55 @@
   border-radius: 12px;
   padding: clamp(14px, 2.5vw, 24px);
 }
-.map-stage-preview {
-  grid-area: 1 / 1;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: minmax(0, 1fr);
-}
-/* Only the selected preview is visible, but every preview contributes to the row height. */
-.map-stage-preview[inert] { visibility: hidden; }
-.map-stage-preview > .btn { justify-self: start; max-width: 100%; white-space: normal; }
 .map-detail h2 { margin-top: 4px; }
+.map-detail .section-code { margin: 8px 0 12px; color: var(--red); }
+.map-detail .result-files { margin: 14px 0 18px; padding-inline-start: 20px; }
+.map-detail .result-files li { margin-block: 6px; }
+.result-files code { overflow-wrap: anywhere; }
+
+.lesson-back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: .875rem;
+  font-weight: 650;
+  color: var(--ink);
+  text-decoration: none;
+}
+.lesson-back-link:hover { text-decoration: underline; text-underline-offset: .2em; }
+.lesson-brief-actions { margin-top: 16px; }
+.lesson-panel > .study-step { margin-top: 16px; }
+.lesson-help-pane h3 { margin: 0 0 8px; }
+.lesson-help-pane p { color: var(--muted); }
+.lesson-glossary { margin-block: 8px 0; }
+.lesson-glossary div { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.lesson-glossary dt { font-weight: 650; }
+.lesson-glossary dd { margin: 4px 0 0; color: var(--muted); }
+.lesson-help-errors { padding-inline-start: 20px; }
+.lesson-help-errors li p { margin: 4px 0 12px; }
+.stage-nav-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.stage-nav-caption span { font-size: .75rem; color: var(--muted); }
+.practice-condition > h3 { margin: 16px 0 8px; font-size: 1.125rem; }
+.practice-condition > p { margin-top: 0; }
+.attempt-layout .timer-hint { margin: 0; color: var(--muted); font-size: .875rem; }
+@media (min-width: 1041px) {
+  .training-compact .training-timer-top { gap: 16px; }
+}
+@media (min-width: 361px) and (max-width: 700px) {
+  .training-compact .training-timer-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+  }
+  .training-compact .training-timer-top :is(.eyebrow, progress) { grid-column: 1 / -1; }
+  .training-compact .training-timer-top .training-clock { font-size: clamp(1.375rem, 7.7vw, 1.875rem); }
+  .training-compact #timer-status { align-self: center; }
+}
 
 .route-layout.lesson-layout,
 .training-compact .training-workspace {

@@ -36,6 +36,7 @@ export const lessonFiles = {
     2: [['Приложения БУ · ZIP','materials/basic-inputs.zip'],['Руководство по стилю · PDF','materials/style-guide.pdf']]
   },
   database: {
+    2: [['SQL для таблицы users','materials/database/users.sql']],
     3: [['SQL оставшихся таблиц','materials/database/remaining-tables.sql']],
     5: [['Начальные данные для PHP','materials/database/seed-php.sql','php'],['Начальные данные для Flask','materials/database/seed-flask.sql','mysql']],
     7: [['Посмотреть PDF из phpMyAdmin','materials/database/er-example.pdf']],

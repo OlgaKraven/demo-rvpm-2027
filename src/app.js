@@ -5,19 +5,24 @@ let memory={},storageOK=true;const prefix='rvpm-2027-basic-v1:';
 function get(k,f=null){try{return JSON.parse(localStorage.getItem(prefix+k))??f;}catch{storageOK=false;return memory[k]??f;}}
 function set(k,v){memory[k]=v;try{localStorage.setItem(prefix+k,JSON.stringify(v));}catch{storageOK=false;}}
 let mode=get('mode','overview'),stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false,learningView='map',mockBrief=false;
+const lessonTabs=[['brief','Условие и файлы'],['steps','Шаги'],['help','Справка']];
+const helpTabs=[['summary','Объяснение'],['example','Пример'],['terms','Термины'],['errors','Ошибки']];
+let helpTopic='summary';
 let tourActive=false, tourErStep=false, tourCleanup=null, destroyER=null;
 const modes=[['overview','Обзор'],['learn','Обучение'],['training','Тренировка'],['mock','Пробный экзамен'],['examples','Примеры'],['teacher','Преподавателю']];
 db=db==='php'?'php':'mysql';
 function lessonProgressKey(kind, id) {
-  return id==='backend' ? `${kind}:${db}:${id}` : `${kind}:${id}`;
+  return ['database','backend'].includes(id) ? `${kind}:${db}:${id}` : `${kind}:${id}`;
 }
-for(const kind of ['step','done']) {
-  const legacyKey = kind+':backend';
-  const saved = get(legacyKey);
-  if(saved===null)continue;
-  const key = lessonProgressKey(kind,'backend');
-  if(get(key)===null)set(key,saved);
-  set(legacyKey,null);
+for(const id of ['database','backend']) {
+  for(const kind of ['step','done']) {
+    const legacyKey=kind+':'+id;
+    const saved=get(legacyKey);
+    if(saved===null)continue;
+    const key=lessonProgressKey(kind,id);
+    if(get(key)===null)set(key,saved);
+    set(legacyKey,null);
+  }
 }
 function currentStepIndex(lesson) {
   const saved = get(lessonProgressKey('step',lesson.id),0);
@@ -35,7 +40,8 @@ function readRoute(query) {
   if(!S().some(lesson=>lesson.id===stage))stage='documents';
   const step = query.get('step');
   const view=query.get('view');
-  if(mode==='learn')learningView=['map','brief','result'].includes(view)?view:(step||query.has('stage'))?'steps':'map';
+  if(mode==='learn')learningView=['map','brief','help','result'].includes(view)?view:(step||query.has('stage'))?'steps':'map';
+  helpTopic=helpTabs.some(([id])=>id===query.get('topic'))?query.get('topic'):'summary';
   if(mode!=='learn' || !step || !/^\d+$/.test(step))return;
   const index = Number(step)-1;
   const lesson = S().find(item=>item.id===stage);
@@ -47,7 +53,10 @@ function pagePath() {
   if(['learn','examples'].includes(mode))query.set('stack',db);
   if(mode==='learn'){
     if(learningView==='steps')query.set('step',currentStepIndex(S().find(item=>item.id===stage))+1);
-    else query.set('view',learningView);
+    else {
+      query.set('view',learningView);
+      if(learningView==='help'&&helpTopic!=='summary')query.set('topic',helpTopic);
+    }
   }
   const criteriaAnchor = mode==='overview' && (location.hash==='#criteria' || new URLSearchParams(location.search).get('mode')==='criteria');
   return '?'+query+(criteriaAnchor?'#criteria':'');
@@ -148,10 +157,12 @@ function stageNode({number,title,detail,short,action,current,done=false}) {
 
 function learningNavigation() {
   const shortLabels = ['Документы','ER','База','Формы','Дизайн','Интерактив','Проверка'];
+  const lessons=S();
+  const completed=lessons.filter(item=>get(lessonProgressKey('done',item.id),false)).length;
   return `<nav class="route-sidebar stage-nav" aria-label="Этапы обучения">
-    <h2 class="stage-nav-caption">Мой веб-проект</h2>
-    <ol class="stage-nav-list" role="list">${S().map((item,i)=>stageNode({
-      number:i+1, title:item.title, detail:item.module, short:shortLabels[i],
+    <div class="stage-nav-caption"><strong>Этапы</strong><span>Выполнено ${completed} из ${lessons.length}</span></div>
+    <ol class="stage-nav-list" role="list">${lessons.map((item,i)=>stageNode({
+      number:i, title:item.title, detail:item.module, short:shortLabels[i],
       action:`data-stage="${item.id}"`, current:stage===item.id, done:get(lessonProgressKey('done',item.id),false)
     })).join('')}</ol>
   </nav>`;
@@ -159,8 +170,9 @@ function learningNavigation() {
 
 function practiceNavigation(tasks) {
   const shortLabels = ['Приложение','Дизайн','Интерактив'];
+  const training=mode==='training';
   return `<nav class="training-stage-list stage-nav" aria-label="Задания на выполнение">
-    <h2 class="stage-nav-caption">Задания</h2>
+    <div class="stage-nav-caption"><strong>Задания</strong>${training?`<span>Выполнено ${tasks.filter((_,i)=>taskDone(i)).length} из ${tasks.length}</span>`:''}</div>
     <ol class="stage-nav-list" role="list">${tasks.map((item,i)=>stageNode({
       number:i+1, title:item.title, detail:`${item.minutes} мин`, short:shortLabels[i],
       action:`data-task="${i}"`, current:i===task, done:mode==='training'&&taskDone(i)
@@ -196,7 +208,15 @@ function lessonLinks(id,index) {
 function databaseLesson(i) {
   const [file,caption]=D.databaseIllustrations[i];
   const extras={2:[['03-fields.png','Поля, типы и ограничения'],['04-users-structure.png','Структура таблицы users']],3:[['06-all-tables.png','Пять таблиц после импорта']]};
-  return `<section class="database-lesson">${[[file,caption],...(extras[i]??[])].map(([f,title])=>
+  const sql=i===2?D.usersSql:i===5?`SELECT id, name, capacity FROM rooms ORDER BY id;
+SELECT username, is_admin FROM users;
+SELECT COUNT(*) AS application_count FROM applications;
+SELECT COUNT(*) AS review_count FROM reviews;`:'';
+  return `<section class="database-lesson">
+    ${sql?`<h3>${i===2?'Запрос создания таблицы':'Проверка начальных записей'}</h3>
+      <pre class="lesson-code" tabindex="0" aria-label="Запрос SQL"><code>${E(sql)}</code></pre>
+      ${i===5?'<p>Ожидаемый результат: шесть помещений, одна учётная запись Conf2027 с ролью 1 и по 0 строк в applications и reviews.</p>':''}`:''}
+    ${[[file,caption],...(extras[i]??[])].map(([f,title])=>
     `<figure><a href="materials/database/${E(f)}" target="_blank" rel="noopener"><img src="materials/database/${E(f)}" alt="${E(title)}" loading="lazy"></a><figcaption>${E(title)} · нажмите для увеличения</figcaption></figure>`
   ).join('')}</section>`;
 }
@@ -212,9 +232,53 @@ const stageResources = {
   delivery:[['Критерии КИМ · стр. 13','materials/kim-2027.pdf#page=13']]
 };
 
+function savedStep(lesson) {
+  return Number.isInteger(get(lessonProgressKey('step',lesson.id)))?currentStepIndex(lesson)+1:null;
+}
+
+function lessonArtifacts(id) {
+  const files=D.lessonReference[id].files;
+  const items=id==='backend'
+    ? [[db==='php'?'index.php, lib.php, static/':'app.py, templates/, static/',files[0][1]]]
+    : files;
+  return `<ul class="result-files">${items.map(([name,description])=>
+    `<li><code>${E(name)}</code> <span>· ${E(description)}</span></li>`).join('')}</ul>`;
+}
+
+function lessonTabsHTML(items,active,group,panel) {
+  return items.map(([id,label])=>btn(E(label),`type="button" role="tab" id="${group}-${id}" data-${group}="${id}"
+    aria-selected="${id===active}" tabindex="${id===active?0:-1}" aria-controls="${panel}"`)).join('');
+}
+
+function lessonHelp(lesson) {
+  const {intro,example,terms,errors}=D.lessonReference[lesson.id];
+  const stackHint=lesson.id==='backend'&&helpTopic==='summary'
+    ? `<p>${db==='php'?'Откройте обработчик в index.php и найдите вызов PDO в lib.php.':'Откройте маршрут в app.py и найдите поля формы в соответствующем файле из templates/.'}</p>`
+    : '';
+  const content={
+    summary:`<h3>${E(intro[0])}</h3><p>${E(intro[1])}</p>${stackHint}`,
+    example:`<h3>${E(example[0])}</h3><p>${E(example[1])}</p>`,
+    terms:`<h3>Термины этапа</h3><dl class="lesson-glossary">${terms.map(([term,definition])=>
+      `<div><dt>${E(term)}</dt><dd>${E(definition)}</dd></div>`).join('')}</dl>`,
+    errors:`<h3>Типичные ошибки</h3><ul class="lesson-help-errors">${errors.map(([issue,fix])=>
+      `<li><strong>${E(issue)}</strong><p>${E(fix)}</p></li>`).join('')}</ul>`
+  };
+  return `<div class="lesson-help-body">
+    <div class="lesson-tabs lesson-help-menu" role="tablist" aria-label="Темы справки">
+      ${lessonTabsHTML(helpTabs,helpTopic,'lesson-topic','lesson-topic-panel')}
+    </div>
+    <div class="lesson-help-pane" id="lesson-topic-panel" role="tabpanel" aria-labelledby="lesson-topic-${helpTopic}" tabindex="0">
+      ${content[helpTopic]}
+    </div>
+  </div>`;
+}
+
 function learningMap() {
   const lesson=S().find(item=>item.id===stage);
   const done=id=>get(lessonProgressKey('done',id),false);
+  const saved=savedStep(lesson);
+  const resume=saved!==null&&!done(lesson.id);
+  const action=resume?`Продолжить с шага ${saved} →`:done(lesson.id)?'Открыть этап →':lesson.id==='documents'?'Открыть подготовку →':'Прочитать условие →';
   return `<section class="map-panel">
     <div class="map-intro"><h1>Маршрут обучения</h1><p>Сначала разберите исходные документы. Дальше каждый этап даёт результат для следующего.</p></div>
     ${stackPicker('Стек обучения')}
@@ -225,9 +289,12 @@ function learningMap() {
           <span><strong>${E(item.title)}</strong><small>${E(item.module)}${done(item.id)?' · Завершён':''}</small></span>
         </button></li>`).join('')}</ol>
       <article class="map-detail" aria-labelledby="map-stage-title">
-        <h2 id="map-stage-title">${E(lesson.title)}</h2><p>${E(lesson.goal)}</p>
-        <h3>Результат этапа</h3><p>${E(lesson.output)}</p>
-        ${btn('Открыть этап →','data-lesson-view="brief"',true)}
+        <div>
+          <p class="section-code">${E(lesson.module)}</p>
+          <h2 id="map-stage-title">${E(lesson.title)}</h2><p>${E(D.lessonReference[lesson.id].intro[1])}</p>
+          <strong>Что сохранить</strong>${lessonArtifacts(lesson.id)}
+          ${btn(action,`data-lesson-view="${resume||done(lesson.id)?'steps':'brief'}"`,true)}
+        </div>
       </article>
     </div>
   </section>`;
@@ -243,7 +310,7 @@ function lessonBrief(lesson) {
     ${assignment?`<h3>Условие задания</h3><p>${E(assignment.text)}</p>`:''}
     <h3>Что понадобится</h3><p>${E(D.stageChecks[lesson.id][0])}</p>
     ${files.length?`<section class="task-files"><h3>Файлы этапа</h3><ul>${files.map(([name,url])=>`<li><a href="${E(url)}" ${url.endsWith('.zip')?'download':'target="_blank" rel="noopener"'}>${E(name)}</a></li>`).join('')}</ul></section>`:''}
-    ${btn(currentStepIndex(lesson)?'Продолжить с шага '+(currentStepIndex(lesson)+1)+' →':'Перейти к шагам →','data-lesson-view="steps"',true)}
+    <div class="lesson-brief-actions">${btn(savedStep(lesson)!==null?'Продолжить с шага '+savedStep(lesson)+' →':'Перейти к шагам →','data-lesson-view="steps"',true)}</div>
   </section>`;
 }
 
@@ -260,24 +327,25 @@ function learn() {
   const lesson=S().find(item=>item.id===stage);
   const index=tourErStep?lesson.steps.length-1:currentStepIndex(lesson), step=lesson.steps[index];
   const result=learningView==='result';
+  const activeTab=result?'steps':learningView;
   const er=stage==='er'&&index===lesson.steps.length-1;
   const done=get(lessonProgressKey('done',stage),false);
   const next=S()[S().indexOf(lesson)+1];
+  const mapPath='?'+new URLSearchParams({mode:'learn',stage,stack:db,view:'map'});
   return `<header class="workspace-intro"><div><h1>Обучение</h1><p>Портал «Конференции.РФ»</p></div>
-      ${returnTask?btn('← Вернуться к тренировке','id="return-task"'):btn('← К маршруту','data-lesson-view="map"')}</header>
+      ${returnTask?btn('← Вернуться к тренировке','id="return-task"'):`<a class="lesson-back-link" href="${E(mapPath)}" data-lesson-view="map">← К маршруту</a>`}</header>
     <div class="route-layout lesson-layout">
       ${learningNavigation()}
       <section class="route-content lesson-card" aria-labelledby="lesson-title">
         <header class="lesson-card-heading"><h2 id="lesson-title">${E(lesson.title)}</h2><p class="task-meta">${E(lesson.module)}</p></header>
-        <nav class="lesson-tabs" aria-label="Разделы этапа">${[['brief','Условие и файлы'],['steps','Шаги']].map(([view,label])=>
-          btn(label,`data-lesson-view="${view}" ${view===learningView||result&&view==='steps'?'aria-current="page"':''}`)
-        ).join('')}</nav>
-        ${learningView==='brief'?lessonBrief(lesson):`<section class="study-step${er&&!result?' study-step-er':''}" aria-labelledby="study-step-title">
+        <div class="lesson-tabs lesson-section-tabs" role="tablist" aria-label="Разделы этапа">${lessonTabsHTML(lessonTabs,activeTab,'lesson-view','lesson-panel')}</div>
+        <div class="lesson-panel" id="lesson-panel" role="tabpanel" aria-labelledby="lesson-view-${activeTab}" tabindex="0">
+        ${learningView==='brief'?lessonBrief(lesson):learningView==='help'?lessonHelp(lesson):`<section class="study-step${er&&!result?' study-step-er':''}" aria-labelledby="study-step-title">
           <div class="lesson-step-heading">
             <h3 class="lesson-heading" id="study-step-title" tabindex="-1"><span class="lesson-step-number">${result?lesson.steps.length+1:index+1}</span><span>${result?'Что сохранить':E(step[0])}</span></h3>
             ${btn('☰','id="lesson-steps" aria-label="Все шаги" title="Все шаги" aria-haspopup="dialog"')}
           </div>
-          ${result?`<div class="lesson-result"><p>${E(lesson.output)}</p>${stepResultCheck(lesson.id)}</div>`:`
+          ${result?`<div class="lesson-result">${lessonArtifacts(lesson.id)}${stepResultCheck(lesson.id)}</div>`:`
             <p>${E(step[1])}</p><p class="source-note">Источник · ${E(step[2])}</p>
             ${guidanceHTML(stage,index)}${lessonLinks(stage,index)}${beginnerHTML(stage,index)}
             ${stage==='database'?databaseLesson(index):stage==='backend'?buildLesson(index):''}
@@ -287,13 +355,14 @@ function learn() {
             ${stage==='design'&&index===2?btn('Изображения из приложений','id="lesson-images" aria-haspopup="dialog"'):''}
             ${['backend','design'].includes(stage)?resultPreview(stage,index):''}
           `}
-          <div class="study-controls">
+          <div class="study-controls${result?' lesson-result-controls':''}">
             ${result?stepArrow(lesson.steps.length-1,'previous','Последний шаг'):index>0?stepArrow(index-1,'previous','Предыдущий шаг'):''}
             ${result?`<label class="lesson-complete"><input type="checkbox" id="done" ${done?'checked':''}> Этап выполнен</label>
               ${done?(next?btn('Далее · '+E(next.title)+' →',`data-stage="${next.id}"`,true):btn('Перейти к тренировке →','data-mode="training"',true)):''}`
               :stepArrow(index+1,'next',index===lesson.steps.length-1?'Что сохранить':'Следующий шаг')}
           </div>
         </section>`}
+        </div>
       </section>
     </div>`;
 }
@@ -613,6 +682,21 @@ function render({pushHistory=false}={}){
   tick();
 }
 function on(id,fn,event='onclick'){const el=document.getElementById(id);if(el)el[event]=fn;}
+function bindLessonTabs(selector) {
+  const list=root.querySelector(selector);
+  if(!list)return;
+  const tabs=[...list.querySelectorAll('[role="tab"]')];
+  list.onkeydown=event=>{
+    if(event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return;
+    const index=tabs.indexOf(event.target);
+    if(index<0)return;
+    const next={ArrowLeft:(index+tabs.length-1)%tabs.length,ArrowRight:(index+1)%tabs.length,Home:0,End:tabs.length-1}[event.key];
+    if(next===undefined)return;
+    event.preventDefault();
+    event.stopPropagation();
+    tabs[next].click();
+  };
+}
 function bind(){
   on('criteria-kim',openCriteriaKim);
   const workspace=document.getElementById('er-workspace');
@@ -646,14 +730,27 @@ function bind(){
   root.querySelectorAll('[data-stage]').forEach(button=>button.onclick=()=>{
     stage=button.dataset.stage;
     learningView='brief';
+    helpTopic='summary';
     render({pushHistory:true});
     root.querySelector(`[data-stage="${stage}"]`)?.focus({preventScroll:true});
   });
-  root.querySelectorAll('[data-lesson-view]').forEach(button=>button.onclick=()=>{
-    learningView=button.dataset.lessonView;
+  root.querySelectorAll('[data-lesson-view]').forEach(control=>control.onclick=event=>{
+    if(control.matches('a')&&(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey))return;
+    event.preventDefault();
+    const view=control.dataset.lessonView;
+    if(view==='steps'&&learningView==='result'&&control.matches('[role=tab]'))return;
+    learningView=view;
+    if(view==='steps'&&savedStep(S().find(item=>item.id===stage))===null)set(lessonProgressKey('step',stage),0);
     render({pushHistory:true});
-    root.querySelector('.lesson-tabs [aria-current]')?.focus({preventScroll:true});
+    root.querySelector(view==='map'?'[data-map-stage][aria-pressed="true"]':'.lesson-section-tabs [aria-selected="true"]')?.focus();
   });
+  root.querySelectorAll('[data-lesson-topic]').forEach(tab=>tab.onclick=()=>{
+    helpTopic=tab.dataset.lessonTopic;
+    render({pushHistory:true});
+    root.querySelector('.lesson-help-menu [aria-selected="true"]')?.focus({preventScroll:true});
+  });
+  bindLessonTabs('.lesson-section-tabs');
+  bindLessonTabs('.lesson-help-menu');
   root.querySelectorAll('[data-step]').forEach(button=>button.onclick=()=>openStep(Number(button.dataset.step)));
   document.querySelectorAll('[data-code]').forEach(b=>b.onclick=()=>fileModal(b.dataset.code));
   root.querySelectorAll('[data-task]').forEach(button=>button.onclick=()=>selectPracticeTask(Number(button.dataset.task)));
@@ -754,7 +851,7 @@ function tour() {
     ['overview','.criteria-heading','Критерии оценки','Здесь указаны формулировки КИМ и баллы. Ссылка под таблицей открывает страницу 13.'],
     ['learn','#stack','Стек обучения','Выберите PHP с XAMPP или Flask с MySQL. Каркас, примеры и шаги соответствуют выбранному стеку.','map'],
     ['learn','.map-node[aria-pressed="true"]','Маршрут обучения','Выберите этап, прочитайте его цель и откройте карточку.','map'],
-    ['learn','.lesson-tabs [aria-current="page"]','Условие и файлы','Здесь собраны материалы и требования этапа. Затем перейдите к шагам.','brief','documents'],
+    ['learn','.lesson-section-tabs [aria-selected="true"]','Условие и файлы','Здесь собраны материалы и требования этапа. Затем перейдите к шагам.','brief','documents'],
     ['learn','#lesson-steps','Шаги','Стрелки листают карточки. Кнопка у заголовка открывает список всех шагов и переход к результату.','steps','documents'],
     ['learn','#er-full','ER-диаграмма','На последнем шаге ER можно построить схему поэтапно, открыть готовую схему и проверить ключи.','steps','er',true],
     ['learn','#done','Что сохранить','Сверьте результат и отметьте выполнение этапа.','result','documents'],

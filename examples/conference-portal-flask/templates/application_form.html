@@ -47,14 +47,16 @@
                         {% if errors.get('attendees') %}<span class="field-error" id="attendees-error">{{ errors.attendees }}</span>{% endif %}
                     </div>
                 </div>
-                <fieldset class="field radio-field {% if errors.get('payment_method') %}has-error{% endif %}">
-                    <legend>Способ оплаты <span>*</span></legend>
-                    <div class="radio-grid">
-                        <label class="radio-card"><input type="radio" name="payment_method" value="onsite" {% if values.payment_method == 'onsite' %}checked{% endif %} required><span class="radio-check"></span><span><strong>При очном посещении</strong><small>Оплата администратору площадки</small></span></label>
-                        <label class="radio-card"><input type="radio" name="payment_method" value="sbp" {% if values.payment_method == 'sbp' %}checked{% endif %} required><span class="radio-check"></span><span><strong>Переводом по системе СБП</strong><small>Ссылка на оплату после назначения</small></span></label>
-                    </div>
-                    {% if errors.get('payment_method') %}<span class="field-error">{{ errors.payment_method }}</span>{% endif %}
-                </fieldset>
+                <div class="field {% if errors.get('payment_method') %}has-error{% endif %}">
+                    <label for="payment_method">Способ оплаты <span>*</span></label>
+                    <select id="payment_method" name="payment_method" required {% if errors.get('payment_method') %}aria-describedby="payment-error"{% endif %}>
+                        <option value="">Выберите способ оплаты</option>
+                        {% for method, label in payment_labels.items() %}
+                            <option value="{{ method }}" {% if values.payment_method == method %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    {% if errors.get('payment_method') %}<span class="field-error" id="payment-error">{{ errors.payment_method }}</span>{% endif %}
+                </div>
                 <button class="button button-primary button-full" type="submit">Отправить заявку <span aria-hidden="true">→</span></button>
             </form>
         </div>

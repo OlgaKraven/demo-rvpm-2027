@@ -408,3 +408,38 @@ body { font: 1rem/1.6 var(--font-ui); }
 }
 
 @media print { .stage-nav { display: none; } }
+
+.lesson-explanation .lesson-actions { list-style: none; padding-inline-start: 0; }
+.lesson-explanation .lesson-actions li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 6px 0;
+}
+.lesson-explanation .lesson-actions li + li { border-top: 1px solid var(--line); }
+.lesson-action-number {
+  display: grid;
+  place-items: center;
+  align-self: start;
+  aspect-ratio: 1;
+  border-radius: 7px;
+  background: #e8eef7;
+  color: #a51f42;
+  font-size: .8125rem;
+  font-weight: 700;
+}
+body.dark .lesson-action-number { background: #2a3649; color: #ff9cb6; }
+.worked-example dl { margin: .75rem 0; }
+.worked-example dl > div { padding: .55rem 0; }
+.worked-example dl > div + div { border-top: 1px solid var(--line); }
+.worked-example dt { font-weight: 750; }
+.worked-example dd { margin: .2rem 0 0; overflow-wrap: anywhere; }
+
+.teacher-stacks { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 0 16px; }
+.teacher-stacks .btn {
+  min-block-size: 44px;
+  max-inline-size: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.teacher-stacks .btn[aria-pressed="true"] { border-color: var(--red); background: var(--stage-active); color: var(--red); }

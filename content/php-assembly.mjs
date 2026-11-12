@@ -41,8 +41,8 @@ export function phpAssembly(code) {
     {blocks:[block('booking',booking,status,pendingPost(['new'])),
       block('booking-form',bookingForm,dashboards,`${bookingForm} ?>\n${pendingView}`,true)],
       check:'Откройте «Новая заявка» после входа и отправьте корректную форму. Сверьте новую запись в таблице applications.'},
-    {blocks:[block('status-review',status,'$titles=',pendingPost(['status','review'])),
-      block('dashboards',dashboards,'<?php endif?></main>',`${dashboards} ?>\n${pendingView}`,true)],
+    {blocks:[block('dashboards',dashboards,'<?php endif?></main>',`${dashboards} ?>\n${pendingView}`,true),
+      block('status-review',status,'$titles=',pendingPost(['status','review']))],
       check:'Назначьте и завершите мероприятие под администратором. Вернитесь в кабинет владельца и оставьте отзыв.'},
     {blocks:[],check:'Пройдите весь сценарий с новой учётной записью и проверьте результат по пунктам карточки.'}
   ];

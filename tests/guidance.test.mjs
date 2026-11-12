@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {guidance} from '../content/guidance.mjs';
 import {stages} from '../content/course.mjs';
+import {beginnerGuidance,beginnerStep} from '../content/beginner.mjs';
 import {phpStages} from '../content/php.mjs';
 test('independent instructions cover preparation, design, interaction and delivery',()=>{
  for(const id of ['documents','design','interaction','delivery']){
@@ -10,7 +11,12 @@ test('independent instructions cover preparation, design, interaction and delive
   for(const g of guidance[id])assert.ok(g.why&&g.actions.length>=2&&g.check);
  }
  assert.match(guidance.documents[3].code,/git add README.md/);
- assert.match(guidance.delivery[2].code,/git push -u origin main/);
+ assert.match(guidance.delivery[2].code,/git remote -v/);
+ assert.doesNotMatch(guidance.delivery[2].code,/git remote (add|set-url)|git push/);
+ const branches=beginnerStep(beginnerGuidance,'delivery',2,'php').rows.map(row=>row[1]);
+ assert.match(branches[0],/^git remote add origin /);
+ assert.match(branches[1],/git push -u origin main/);
+ assert.match(branches[2],/^git remote set-url origin /);
 });
 test('backend walkthroughs match every Flask and PHP step',()=>{
   for(const [route,steps] of [[stages,guidance.backend],[phpStages,guidance.phpBackend]]){

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ДЭ 2027 · Демонстрационный экзамен</title>
+  <link rel="stylesheet" href="deck.css">
+  <script defer src="core.js"></script>
+  <script defer src="deck-data.js"></script>
+  <script defer src="deck.js"></script>
+</head>
+<body>
+  <header class="toolbar" id="tools">
+    <a id="back" href="./?section=work&amp;mode=teacher">← К преподавателю</a>
+    <div class="tool-heading"><small>09.02.07 · КИМ 2027</small><strong>Демонстрационный экзамен</strong></div>
+    <div class="commands">
+      <button id="contents-open" title="Содержание" aria-label="Содержание">☰</button>
+      <button id="pointer" title="Указка" aria-label="Указка" aria-pressed="false">↖</button>
+      <button id="full" title="Во весь экран" aria-label="Во весь экран">⛶</button>
+      <button id="more-open" title="Ещё" aria-label="Ещё">⋯</button>
+      <button id="present" class="primary">Режим показа</button>
+    </div>
+  </header>
+  <progress id="progress" value="1" max="1" aria-label="Положение в презентации"></progress>
+  <main class="display">
+    <div class="slide-frame" id="frame" tabindex="-1"></div>
+    <aside id="speaker" hidden aria-label="Сценарий преподавателя"></aside>
+  </main>
+  <footer class="controls" id="controls">
+    <button id="prev">← Назад</button><output id="position" aria-live="polite"></output>
+    <button class="primary" id="next">Вперёд →</button>
+  </footer>
+  <p class="status" id="status" role="status" hidden></p>
+  <dialog id="contents"><header><h2>Содержание</h2><button data-close>Закрыть</button></header><nav id="chapters" aria-label="Разделы презентации"></nav></dialog>
+  <dialog id="more"><header><h2>Настройки показа</h2><button data-close>Закрыть</button></header>
+    <form id="profile">
+      <label>ФИО преподавателя<input name="name" autocomplete="name" maxlength="120"></label>
+      <label>Должность<input name="position" autocomplete="organization-title" maxlength="140"></label>
+      <label>Кафедра / лаборатория<input name="department" autocomplete="off" maxlength="160"></label>
+      <button type="submit" class="primary">Сохранить данные преподавателя</button>
+    </form>
+    <div class="more-tools"><button id="theme">Включить тёмную тему</button><button id="export">Печать / сохранить PDF</button></div>
+  </dialog>
+  <dialog id="visual"><header><h2>Иллюстрация</h2><button data-close>Закрыть</button></header><figure></figure></dialog>
+  <div id="print-pages"></div>
+  <i id="laser" aria-hidden="true" hidden></i>
+</body>
+</html>

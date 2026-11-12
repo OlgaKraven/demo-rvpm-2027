@@ -21,11 +21,11 @@ try {
         await route.fulfill({path:filename});
       });
       await page.emulateMedia({media:'print'});
-      const response = await page.goto(origin+'/?presentation=pdf&stack='+stack,{waitUntil:'domcontentloaded'});
+      const response = await page.goto(origin+'/deck.html?print=1&stack='+stack,{waitUntil:'domcontentloaded'});
       if(!response.ok())throw new Error('Could not open '+stack+' presentation');
       await page.waitForFunction(()=>globalThis.RvpmPdf!==undefined);
       const layout = await page.evaluate(()=>globalThis.RvpmPdf);
-      if(!layout.pages||layout.overflow.length)throw new Error(stack+': '+JSON.stringify(layout));
+      if(!layout.pages||layout.overflow.length||layout.broken.length)throw new Error(stack+': '+JSON.stringify(layout));
       const pdf = await page.pdf({preferCSSPageSize:true,printBackground:true,tagged:true});
       outputs.push({name,pdf});
       console.log(name+': '+layout.pages+' pages');

@@ -1,9 +1,11 @@
 (()=>{'use strict';
 const D=COURSE,C=ExamCore,E=C.escape,root=document.getElementById('app');
+const params = new URLSearchParams(location.search);
+const presentationView = ['audience','pdf'].includes(params.get('presentation')) ? params.get('presentation') : null;
 let memory={},storageOK=true;const prefix='rvpm-2027-basic-v1:';
-function get(k,f=null){try{return JSON.parse(localStorage.getItem(prefix+k))??f;}catch{storageOK=false;return memory[k]??f;}}
-function set(k,v){memory[k]=v;try{localStorage.setItem(prefix+k,JSON.stringify(v));}catch{storageOK=false;}}
-const params=new URLSearchParams(location.search);let mode=get('mode','overview'),stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false;
+function get(k,f=null){if(presentationView)return f;try{return JSON.parse(localStorage.getItem(prefix+k))??f;}catch{storageOK=false;return memory[k]??f;}}
+function set(k,v){if(presentationView)return;memory[k]=v;try{localStorage.setItem(prefix+k,JSON.stringify(v));}catch{storageOK=false;}}
+let mode=get('mode','overview'),stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false;
 const modes=[['overview','Обзор'],['learn','Обучение'],['training','Тренировка'],['mock','Пробный экзамен'],['examples','Примеры'],['teacher','Преподавателю']];
 db=db==='php'?'php':'mysql';
 function lessonProgressKey(kind, id) {
@@ -285,6 +287,8 @@ function teacherStack() {
   return saved==='php'?'php':'mysql';
 }
 
+function presentationPdf(stack){return `downloads/presentation-rvpm-${stack==='php'?'php':'flask'}.pdf`;}
+
 function teacher() {
   const stack = teacherStack();
   return `<section class="training-page">
@@ -296,8 +300,8 @@ function teacher() {
         <label><input type="radio" name="teacher-stack" value="php" ${stack==='php'?'checked':''}><span>PHP + MySQL (XAMPP)</span></label>
         <label><input type="radio" name="teacher-stack" value="mysql" ${stack==='mysql'?'checked':''}><span>Flask + MySQL / MariaDB</span></label>
       </fieldset>
-      <p>Слайды листаются стрелками, пробелом и кнопками по бокам. Esc закрывает показ.</p>
-      <div class="button-row">${btn('Данные преподавателя','id="teacher-settings"')}${btn('Открыть презентацию','id="deck-open"',true)}</div>
+      <p>Откройте презентацию и нажмите «Режим показа», чтобы вывести слайды в отдельное окно. Листайте со своего экрана. Esc закрывает презентацию.</p>
+      <div class="button-row">${btn('Данные преподавателя','id="teacher-settings"')}${btn('Открыть презентацию','id="deck-open"',true)}<a class="btn" id="teacher-pdf" href="${presentationPdf(stack)}" download>Скачать PDF</a></div>
     </article>
   </section>`;
 }
@@ -366,7 +370,11 @@ function bind(){
   root.querySelectorAll('[data-timer]').forEach(button=>button.onclick=()=>changeTimer(button.dataset.timer));
   on('training-sample',()=>materialsModal());
   on('open-file',()=>fileModal(document.getElementById('example-file').value));
-  on('teacher-db',e=>set('teacher-db',e.target.value),'onchange');
+  on('teacher-db',event=>{
+    const stack=event.target.value;
+    set('teacher-db',stack);
+    document.getElementById('teacher-pdf').href=presentationPdf(stack);
+  },'onchange');
   on('deck-open',deck);
 }
 
@@ -439,34 +447,31 @@ function appendBackendSlides(slides, stack, index, step) {
   }
 }
 
-function deck(){const stack=teacherStack();closeTour();const frame=document.createElement('section');frame.className='presentation';frame.setAttribute('role','dialog');frame.setAttribute('aria-modal','true');frame.setAttribute('aria-label','Презентация');frame.tabIndex=-1;const previous=document.activeElement;document.body.append(frame);document.body.classList.add('presenting');root.inert=true;let index=0,laser=false;const slides=[{title:'От условия к работающему проекту',text:'КИМ 09.02.07-3-2027 · базовый уровень · 3 задания · 3 ч 30 мин · 75 баллов.',comment:['teacher-name','teacher-position','teacher-department'].map(k=>get(k,'')).filter(Boolean).join(' · ')},{title:'Порядок работы',text:S(stack).map(x=>x.title).join(' → '),comment:'На каждом этапе: источник → объяснение → действие → проверка результата.'}];const used=new Set();for(const st of S(stack)){slides.push({title:st.title,text:st.goal,comment:'Сохраните результат: '+st.output});if(st.id==='er'){entityStories.forEach((x,i)=>{slides.push({title:x.name+' → '+D.entities[i].name,er:i,text:x.why,comment:x.fields+' '+x.extra});D.entities[i].fields.forEach(f=>{const o=D.origins[D.entities[i].name][f.split(' ·')[0]];slides.push({title:D.entities[i].name+' · '+f,er:i,text:o[0],comment:o[1]+' '+fieldDecision(f)});});});continue;}st.steps.forEach((x,i)=>{const g=lessonGuidance(st.id,i,stack);slides.push({title:x[0],text:x[1],comment:g?.why||'Источник: '+x[2]});if(g){g.actions.forEach((a,j)=>slides.push({title:x[0]+' · действие '+(j+1),text:a,comment:j===g.actions.length-1?'Проверка: '+g.check:g.why}));if(g.code)slides.push({title:x[0]+' · команды',code:g.code,comment:g.check});}if(st.id==='backend')appendBackendSlides(slides,stack,i,x);if(st.id==='database'){const [f,c]=D.databaseIllustrations[i];used.add(f);slides.push({title:x[0],image:'materials/database/'+f,text:c,comment:x[1]});}for(const img of resultImages(st.id,i,stack))slides.push({title:x[0]+' · результат',image:'materials/screenshots/'+img.file,text:img.caption,comment:g?.check||x[1]});});}for(const f of D.databaseScreens)if(!used.has(f))slides.push({title:'Работа в phpMyAdmin',image:'materials/database/'+f,text:'Учебная база conference_er_lesson',comment:'Сопоставьте поля, типы, ограничения и связи со своей ER-моделью.'});for(const f of D.screenshots.filter(file=>file.startsWith(stack==='php'?'php-':'flask-')))slides.push({title:'Работающий портал',image:'materials/screenshots/'+f,text:f.startsWith('php')?'PHP + MySQL':'Flask + MySQL',comment:'Сравните результат с требованиями к формам, данным и адаптации.'});for(const f of D.previews.style)slides.push({title:'Руководство по стилю',image:'materials/preview/'+f,text:'Оригинал приложения БУ',comment:'Проверьте палитру, типографику и размеры текста.'});for(const x of D.previews.gallery)slides.push({title:'Материалы БУ',image:'materials/preview/'+x.file,text:x.source,comment:'Источник — комплект БУ. Сохраните оригинал и оптимизированный ресурс отдельно.'});
-function close(){document.removeEventListener('keydown',keys);if(document.fullscreenElement===frame)document.exitFullscreen().catch(()=>{});frame.remove();root.inert=false;document.body.classList.remove('presenting');previous?.focus();}
-function move(delta){index=Math.max(0,Math.min(slides.length-1,index+delta));draw();}
-function keys(event) {
-  const forward = ['ArrowRight','PageDown'].includes(event.key) || (event.key===' ' && !event.target.closest?.('button'));
-  if(forward || ['ArrowLeft','PageUp'].includes(event.key)) {
-    event.preventDefault();
-    move(forward?1:-1);
-  }
-  if(event.key==='Tab') {
-    const buttons = [...frame.querySelectorAll('button:not(:disabled)')];
-    if(event.shiftKey && [buttons[0],frame].includes(document.activeElement)) {
-      event.preventDefault();
-      buttons.at(-1).focus();
-    } else if(!event.shiftKey && document.activeElement===buttons.at(-1)) {
-      event.preventDefault();
-      buttons[0].focus();
-    }
-  }
-  if(event.key==='Home'){event.preventDefault();index=0;draw();}
-  if(event.key==='End'){event.preventDefault();index=slides.length-1;draw();}
-  if(event.key==='Escape')close();
+function presentationSlides(stack, profile=[]) {
+  const slides=[{title:'От условия к работающему проекту',text:'КИМ 09.02.07-3-2027 · базовый уровень · 3 задания · 3 ч 30 мин · 75 баллов.',profile},{title:'Порядок работы',text:S(stack).map(x=>x.title).join(' → '),comment:'На каждом этапе: источник → объяснение → действие → проверка результата.'}];
+  const used=new Set();
+  for(const st of S(stack)){slides.push({title:st.title,text:st.goal,comment:'Сохраните результат: '+st.output});if(st.id==='er'){entityStories.forEach((x,i)=>{slides.push({title:x.name+' → '+D.entities[i].name,er:i,text:x.why,comment:x.fields+' '+x.extra});D.entities[i].fields.forEach(f=>{const o=D.origins[D.entities[i].name][f.split(' ·')[0]];slides.push({title:D.entities[i].name+' · '+f,er:i,text:o[0],comment:o[1]+' '+fieldDecision(f)});});});continue;}st.steps.forEach((x,i)=>{const g=lessonGuidance(st.id,i,stack);slides.push({title:x[0],text:x[1],comment:g?.why||'Источник: '+x[2]});if(g){g.actions.forEach((a,j)=>slides.push({title:x[0]+' · действие '+(j+1),text:a,comment:j===g.actions.length-1?'Проверка: '+g.check:g.why}));if(g.code)slides.push({title:x[0]+' · команды',code:g.code,comment:g.check});}if(st.id==='backend')appendBackendSlides(slides,stack,i,x);if(st.id==='database'){const [f,c]=D.databaseIllustrations[i];used.add(f);slides.push({title:x[0],image:'materials/database/'+f,text:c,comment:x[1]});}for(const img of resultImages(st.id,i,stack))slides.push({title:x[0]+' · результат',image:'materials/screenshots/'+img.file,text:img.caption,comment:g?.check||x[1]});});}
+  for(const f of D.databaseScreens)if(!used.has(f))slides.push({title:'Работа в phpMyAdmin',image:'materials/database/'+f,text:'Учебная база conference_er_lesson',comment:'Сопоставьте поля, типы, ограничения и связи со своей ER-моделью.'});
+  for(const f of D.screenshots.filter(file=>file.startsWith(stack==='php'?'php-':'flask-')))slides.push({title:'Работающий портал',image:'materials/screenshots/'+f,text:f.startsWith('php')?'PHP + MySQL':'Flask + MySQL',comment:'Сравните результат с требованиями к формам, данным и адаптации.'});
+  for(const f of D.previews.style)slides.push({title:'Руководство по стилю',image:'materials/preview/'+f,text:'Оригинал приложения БУ',comment:'Проверьте палитру, типографику и размеры текста.'});
+  for(const x of D.previews.gallery)slides.push({title:'Материалы БУ',image:'materials/preview/'+x.file,text:x.source,comment:'Источник — комплект БУ. Сохраните оригинал и оптимизированный ресурс отдельно.'});
+  return slides.map(slide=>slide.er===undefined?slide:{...slide,diagram:erDiagram(slide.er+1)});
 }
-function draw(){const focusedId=frame.contains(document.activeElement)?document.activeElement.id:'';const x=slides[index],visual=x.image||x.er!==undefined||x.code;frame.innerHTML=`<header class="presentation-head"><span>ДЭ 2027 · ${stack==='php'?'PHP':'Flask'} + MySQL</span><span>${index+1} / ${slides.length}</span><div class="presentation-tools">${btn('⛶','id="deck-full" aria-label="На весь экран" title="На весь экран"')}${btn('●',`id="deck-laser" aria-label="Лазерная указка" title="Лазерная указка" aria-pressed="${laser}"`)}${btn('×','id="deck-close" aria-label="Закрыть презентацию" title="Закрыть"')}</div></header><h2 class="presentation-title">${E(x.title)}</h2><div class="presentation-body ${visual?'has-visual':''}">${visual?`<div class="presentation-visual">${x.image?`<img src="${x.image}" alt="${E(x.text)}">`:x.er!==undefined?erDiagram(x.er+1)+`<h3>${E(D.entities[x.er].name)}</h3><p class="slide-fields">${D.entities[x.er].fields.map(f=>E(f)).join(' · ')}</p>`:`<pre class="lesson-code">${E(x.code)}</pre>`}</div>`:''}<div class="presentation-copy"><p>${E(x.text||'')}</p><aside><strong>Комментарий к разбору</strong><p>${E(x.comment||'')}</p></aside></div></div><button class="slide-arrow prev" id="slide-prev" aria-label="Предыдущий слайд" ${index===0?'disabled':''}>‹</button><button class="slide-arrow next" id="slide-next" aria-label="Следующий слайд" ${index===slides.length-1?'disabled':''}>›</button><div class="slide-progress" style="width:${100*(index+1)/slides.length}%"></div><span class="laser-dot" hidden></span>`;frame.querySelector('#deck-close').onclick=close;frame.querySelector('#deck-full').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else frame.requestFullscreen?.().catch(()=>{});};frame.querySelector('#deck-laser').onclick=()=>{laser=!laser;draw();};frame.querySelector('#slide-prev').onclick=()=>move(-1);frame.querySelector('#slide-next').onclick=()=>move(1);frame.onpointermove=e=>{const dot=frame.querySelector('.laser-dot');dot.hidden=!laser;dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';};frame.onpointerleave=()=>frame.querySelector('.laser-dot').hidden=true;
- const active = focusedId ? frame.querySelector('#'+focusedId+':not(:disabled)') : null;
- (active || frame).focus({preventScroll:true});
+
+function deck() {
+  closeTour();
+  const stack=teacherStack();
+  const profile=['teacher-name','teacher-position','teacher-department'].map(key=>get(key,'').trim()).filter(Boolean);
+  RvpmPresentation.openPresenter({root,stack,profile,slides:presentationSlides(stack,profile),dark});
 }
-document.addEventListener('keydown',keys);draw();frame.focus();frame.requestFullscreen?.().catch(()=>{});}
+
+if(presentationView) {
+  const stack = params.get('stack')==='php'?'php':'mysql';
+  const slides = presentationSlides(stack);
+  if(presentationView==='audience')RvpmPresentation.openAudience({root,stack,slides,session:params.get('session')});
+  else globalThis.RvpmPdf=RvpmPresentation.renderPdf({root,stack,slides});
+  return;
+}
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&coach){e.preventDefault();e.stopPropagation();closeTour();}});setInterval(tick,1000);render();
 window.addEventListener('popstate',()=>{readRoute(new URLSearchParams(location.search));render();});

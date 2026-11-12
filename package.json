@@ -1,1 +1,1 @@
-{"name":"demo-rvpm-2027","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test tests/*.test.mjs","preview":"node scripts/serve.mjs"}}
+{"name":"demo-rvpm-2027","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test tests/*.test.mjs","preview":"node scripts/serve.mjs","export:pdf":"node scripts/export-presentations.mjs"},"devDependencies":{"playwright":"1.62.1"}}

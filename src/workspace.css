@@ -98,6 +98,7 @@
 .lesson-back-link:hover { text-decoration: underline; text-underline-offset: .2em; }
 .lesson-brief-actions { margin-top: 16px; }
 .lesson-panel > .study-step { margin-top: 16px; }
+.lesson-card { overflow-wrap: anywhere; }
 .lesson-help-pane h3 { margin: 0 0 8px; }
 .lesson-help-pane p { color: var(--muted); }
 .lesson-glossary { margin-block: 8px 0; }

@@ -472,7 +472,9 @@ function openStep(index) {
     learningView='steps';
   }
   render({pushHistory:true});
-  document.getElementById('study-step-title')?.focus();
+  const heading=document.getElementById('study-step-title');
+  heading?.focus({preventScroll:true});
+  heading?.closest('.study-step').scrollIntoView({block:'start',behavior:'instant'});
 }
 
 let mockId=get('mock-id','V01');if(!D.mockVariants.some(v=>v.id===mockId))mockId='V01';

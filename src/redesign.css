@@ -354,6 +354,7 @@ body { font: 1rem/1.6 var(--font-ui); }
 .criteria-panel > .btn { margin-top: 14px; }
 
 .presentation { background: var(--paper); color: var(--ink); }
+.presentation-title, .presentation-copy { overflow-wrap: anywhere; }
 .presentation-head { border-color: var(--accent-fill); color: var(--muted); }
 .presentation-copy aside { border-color: var(--accent-fill); }
 .presentation button[aria-pressed="true"] { background: var(--accent-fill); color: var(--accent-text); }

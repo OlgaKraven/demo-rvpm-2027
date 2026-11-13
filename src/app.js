@@ -192,25 +192,30 @@ function starterIntro() {
 $env:DB_BACKEND='mysql'
 $env:MYSQL_DATABASE='conference_rvpm_2027'
 .\\.venv\\Scripts\\python.exe -m flask --app app run --port 5017`;
-  return `<p>Распакуйте учебный каркас во временную папку. Перенесите его файлы в проект, начатый на этапе подготовки. Сохраните свой README.md, .gitignore, папку docs и историю Git.</p>
+  return `<p>Распакуйте учебный каркас во временную папку. Откройте её и скопируйте содержимое в корень проекта. Файл <code>${php?'index.php':'app.py'}</code> должен лежать рядом с <code>README.md</code> и <code>database.sql</code>. Сохраните свои README.md, .gitignore, папку docs и историю Git.</p>
     <a class="btn primary" href="${file}" download>Скачать учебный каркас ${stack}</a>
     <p>Оставьте MySQL включённым в XAMPP. В PowerShell из папки проекта выполните команды ниже. В <code>MYSQL_DATABASE</code> укажите ту же базу, где создали таблицы и загрузили каталог.</p>
-    <pre class="lesson-code" tabindex="0" aria-label="Команды запуска каркаса"><code>${E(command)}</code></pre>
-    <p>Откройте <code>http://127.0.0.1:${php?8087:5017}/</code>. Главная пока показывает сообщение каркаса. Базовые стили уже подключены, а палитру, адаптацию и JavaScript вы добавите в следующих этапах.</p>
+    <div data-check-code>
+      ${btn('Копировать команды запуска','data-copy-block')}
+      <pre class="lesson-code" tabindex="0" aria-label="Команды запуска каркаса"><code>${E(command)}</code></pre>
+    </div>
+    <p>Откройте <code>http://127.0.0.1:${php?8087:5017}/</code>. ${php?'До вставки фрагмента каталог показывает «Добавьте экран по учебной карточке». После вставки обновите его.':'В каркасе главная показывает «Учебный каркас: index». Рабочую главную и каталог добавите на шаге 2.'}</p>
     ${php?'':'<p>Первые две команды выполняются один раз. После правки app.py остановите сервер через Ctrl+C в том же терминале и повторите последнюю команду. Затем обновите страницу.</p>'}`;
 }
 function phpBuildLesson(i) {
   const lesson = D.phpAssembly[i];
   const setup = i===0 ? starterIntro() : '';
   return `<section class="build-lesson"><h3>Соберите этот шаг в каркасе</h3>${setup}
-    ${lesson.blocks.map(block=>`<section class="php-lesson-block" data-edit-file="${E(block.file)}" data-edit-first="${E(block.first)}" data-edit-last="${E(block.last)}">
-      <h4>${E(block.file)} · ${E(block.first.match(/BEGIN ([\w-]+)/)[1])}</h4>
+    ${lesson.blocks.map((block,order)=>`<section class="php-lesson-block" data-edit-file="${E(block.file)}" data-edit-first="${E(block.first)}" data-edit-last="${E(block.last)}">
+      <h4>${order+1}. ${E(block.file)} · ${E(block.first.match(/BEGIN ([\w-]+)/)[1])}</h4>
+      <p>${E(block.purpose)}</p>
       <p>Замените участок от <code>${E(block.first)}</code> до <code>${E(block.last)}</code> включительно. Вставьте фрагмент целиком на место этого участка.</p>
       ${btn('Копировать фрагмент','data-copy-block')}
       <pre class="lesson-code" tabindex="0" aria-label="Код ${E(block.file)}">${E(block.text)}</pre>
     </section>`).join('')}
-    ${lesson.blocks.length?'<p>Сохраните index.php и обновите страницу портала.</p>':''}
+    ${lesson.blocks.length?'<p>Сохраните index.php и откройте адрес из проверки ниже. Если видна заглушка, сравните имя блока в карточке с оставшимся BEGIN в файле.</p>':''}
     <div class="build-check"><strong>Проверка после шага</strong><p>${E(lesson.check)}</p></div>
+    ${beginnerHTML('backend',i)}${studentChecks('backend',i)}
   </section>`;
 }
 function buildLesson(index) {
@@ -219,6 +224,7 @@ function buildLesson(index) {
   return `<section class="build-lesson"><h3>Что сделать в проекте</h3>
     ${index===0?starterIntro():''}
     ${lesson.map?`<p class="data-flow"><strong>От условия к данным</strong> ${E(lesson.map)}</p>`:''}
+    ${lesson.blocks.length>1?'<p>Выполните все пронумерованные фрагменты этого шага по порядку, затем откройте страницу проверки.</p>':''}
     ${lesson.blocks.map((block,i)=>{
       const marker=block.where.match(/# BEGIN (\w+)/)?.[1];
       return `<details class="build-block" ${i===0?'open':''} data-edit-file="${E(block.file)}"
@@ -231,6 +237,7 @@ function buildLesson(index) {
     }).join('')}
     ${lesson.blocks.some(block=>block.file==='app.py')?'<p>Сохраните файлы. Остановите Flask через Ctrl+C и запустите снова последней командой из шага 1. Обновите страницу.</p>':''}
     <div class="build-check"><strong>Проверка после шага</strong><p>${E(lesson.check)}</p></div>
+    ${beginnerHTML('backend',index)}${studentChecks('backend',index)}
   </section>`;
 }
 function lessonLinks(id,index) {
@@ -288,19 +295,18 @@ function databaseLesson(i) {
   const [file,caption]=D.databaseIllustrations[i];
   const guide=D.guidance.database[i];
   const extras={2:[['03-fields.png','Поля, типы и ограничения'],['04-users-structure.png','Структура таблицы users']],3:[['06-all-tables.png','Пять таблиц после импорта']]};
-  const sql=i===2?D.usersSql:i===5?`SELECT id, name, capacity FROM rooms ORDER BY id;
-SELECT category, COUNT(*) AS room_count FROM rooms GROUP BY category;
-SELECT username, is_admin FROM users;
-SELECT COUNT(*) AS application_count FROM applications;
-SELECT COUNT(*) AS review_count FROM reviews;`:'';
   return `<section class="lesson-explanation database-lesson">
     <h3>${i===5?'Откуда берутся данные':'Почему этот шаг нужен'}</h3><p>${E(guide.why)}</p>
     ${i===5?seedData():''}
     <h3>Что сделать</h3>${lessonActions(guide.actions)}
     ${lessonLinks('database',i)}
-    ${sql?`<h3>${i===2?'Запрос создания таблицы':'Проверка начальных записей'}</h3>
-      <pre class="lesson-code" tabindex="0" aria-label="Запрос SQL"><code>${E(sql)}</code></pre>
-      ${i===5?'<p>Сверьте результаты: шесть строк в каталоге, по два помещения каждого типа, одна учётная запись Conf2027 с ролью 1 и по 0 строк в applications и reviews. Если строк больше, проверьте имя базы и историю импортов до работы с формами.</p>':''}`:''}
+    ${i===2?`<section class="build-block" data-check-code>
+      <h4>Создание users · phpMyAdmin → SQL</h4>
+      <p>Выполните этот блок один раз в выбранной пустой базе. Если уже импортировали users.sql, переходите к проверке ниже.</p>
+      ${btn('Копировать SQL создания таблицы','data-copy-block')}
+      <pre class="lesson-code" tabindex="0" aria-label="Запрос создания таблицы users"><code>${E(D.usersSql)}</code></pre>
+    </section>`:''}
+    ${studentChecks('database',i)}
     ${[[file,caption],...(extras[i]??[])].map(([f,title])=>
     `<figure><a href="materials/database/${E(f)}" target="_blank" rel="noopener"><img src="materials/database/${E(f)}" alt="${E(title)}" loading="lazy"></a><figcaption>${E(title)} · нажмите для увеличения</figcaption></figure>`
   ).join('')}</section>`;
@@ -439,7 +445,7 @@ function learn() {
           ${result?`<div class="lesson-result">${lessonArtifacts(lesson.id)}${stepResultCheck(lesson.id)}</div>`:`
             <p>${E(step[1])}</p><p class="source-note">Источник · ${E(step[2])}</p>
             ${stage==='database'?databaseLesson(index):guidanceHTML(stage,index)+lessonLinks(stage,index)}
-            ${beginnerHTML(stage,index)}${stage==='backend'?buildLesson(index):''}
+            ${stage==='backend'?buildLesson(index):beginnerHTML(stage,index)}
             ${stage==='er'?'':stepCheck(stage,index)}
             ${er?'<section class="er-workspace" id="er-workspace" aria-labelledby="er-title"></section>':''}
             ${stage==='design'&&index<2?styleSamples(null):''}
@@ -1085,7 +1091,7 @@ function guidanceHTML(id,index) {
     <h3>Как это понять</h3><p>${E(guide.why)}</p>
     <h3>Что сделать самостоятельно</h3>${lessonActions(guide.actions)}
     ${guide.code?`<pre class="lesson-code" tabindex="0">${E(guide.code)}</pre>`:''}
-    ${studentEdits(id,index)}${studentChecks(id,index)}
+    ${studentEdits(id,index)}${id==='backend'?'':studentChecks(id,index)}
     <div class="build-check"><strong>Проверьте себя</strong><p>${E(guide.check)}</p></div>
   </section>`;
 }
@@ -1096,8 +1102,28 @@ function beginnerHTML(id,index) {
   const rows=example.rows.map(([label,value])=>`<div><dt>${E(label)}</dt><dd>${value.startsWith('git ')?`<code>${E(value)}</code>`:E(value)}</dd></div>`).join('');
   return `<section class="lesson-explanation worked-example"><h3>${E(example.title)}</h3><dl>${rows}</dl>${example.after?`<p>${E(example.after)}</p>`:''}</section>`;
 }
-function resultImages(id,i,stack=db){const php=stack==='php';if(id==='backend'){const kind=php?['catalog','registration-mobile','login','application','application','catalog'][i]:['catalog','catalog','registration','login','catalog','application','admin-mobile','application','catalog'][i];return [{file:(php?'php-':'flask-')+kind+'.png',caption:kind.startsWith('registration')?'Регистрация: данные из условия превращены в подписанные поля формы.':kind==='login'?'Вход: логин и пароль проверяет сервер; после успеха создаётся сессия.':kind==='application'?'Заявка: помещение из rooms, остальные значения из формы, владелец из сессии.':kind==='admin-mobile'?'Администратор: фильтры и смена статуса на мобильном экране.':'Каталог: записи rooms превращены в карточки помещений.'}];}if(id==='design')return [{file:php?'php-catalog.png':'flask-catalog.png',caption:'Компьютер: общий стиль, локальные изображения и карточки каталога.'},{file:php?'php-registration-mobile.png':'flask-admin-mobile.png',caption:'Телефон: одна колонка, читаемый текст, доступные элементы управления.'}];return [];}
-function resultPreview(id,i){return `<section class="lesson-result"><h3>Что должно получиться</h3><p>Снимок работающего примера — ориентир для проверки. Повторите действие в своём приложении и сравните результат.</p><div class="shot-grid">${resultImages(id,i).map(x=>`<figure><button class="image-open" data-image="materials/screenshots/${x.file}" aria-label="Увеличить результат"><img src="materials/screenshots/${x.file}" alt="${E(x.caption)}" loading="lazy"></button><figcaption>${E(x.caption)}</figcaption></figure>`).join('')}</div></section>`;}
+function resultImages(id,i,stack=db) {
+  const php=stack==='php';
+  if(id==='backend'){
+    const kind=(php?['catalog','registration-mobile','login','application']:[null,'catalog','registration','login',null,'application','admin-mobile'])[i];
+    const captions={
+      catalog:'Каталог: записи rooms превращены в карточки помещений.',
+      registration:'Регистрация: данные из условия превращены в подписанные поля формы.',
+      'registration-mobile':'Регистрация: данные из условия превращены в подписанные поля формы.',
+      login:'Вход: логин и пароль проверяет сервер. После успеха создаётся сессия.',
+      application:'Форма заявки: помещение из rooms, остальные значения из полей формы.',
+      'admin-mobile':'Администратор: фильтры и смена статуса на мобильном экране.'
+    };
+    return kind?[{file:(php?'php-':'flask-')+kind+'.png',caption:captions[kind]}]:[];
+  }
+  if(id==='design')return [{file:php?'php-catalog.png':'flask-catalog.png',caption:'Компьютер: общий стиль, локальные изображения и карточки каталога.'},{file:php?'php-registration-mobile.png':'flask-admin-mobile.png',caption:'Телефон: одна колонка, читаемый текст, доступные элементы управления.'}];
+  return [];
+}
+function resultPreview(id,index) {
+  const images=resultImages(id,index);
+  if(!images.length)return '';
+  return `<section class="lesson-result"><h3>Снимок готового примера</h3><p>${id==='backend'?'Сравните состав и назначение элементов. Оформление добавляется на следующем этапе.':'Сравните расположение, размеры и читаемость элементов на своём экране.'}</p><div class="shot-grid">${images.map(x=>`<figure><button class="image-open" data-image="materials/screenshots/${x.file}" aria-label="Увеличить результат"><img src="materials/screenshots/${x.file}" alt="${E(x.caption)}" loading="lazy"></button><figcaption>${E(x.caption)}</figcaption></figure>`).join('')}</div></section>`;
+}
 function bindImages(scope){scope.querySelectorAll('[data-image]').forEach(b=>b.onclick=()=>{const d=modal('Просмотр изображения');d.classList.add('image-dialog');d.querySelector('.modal-body').innerHTML=`<img src="${E(b.dataset.image)}" alt="Увеличенное изображение результата">`;});}
 document.addEventListener('keydown',event=>{
   if(mode!=='learn'||!['steps','result'].includes(learningView)||document.querySelector('dialog[open]')||

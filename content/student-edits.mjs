@@ -1,3 +1,5 @@
+import {databaseCheckpoints,backendCheckpoints} from './data-checkpoints.mjs';
+
 export const starterCss = `* { box-sizing: border-box; }
 body { margin: 0; font: 1rem/1.5 system-ui, sans-serif; }
 main, header, footer { padding: 1rem; }
@@ -205,6 +207,8 @@ const terminal = (instruction,code)=>({target:'PowerShell в папке прое
 export function studentChecks(stack) {
   const php=stack==='php';
   return {
+    database:databaseCheckpoints(stack),
+    backend:backendCheckpoints(stack),
     design:{
       4:[sql('Выберите свою учебную базу и выполните запрос после отправки заявки «Проверка списка».',applicationCheck)],
       5:[terminal('Сохраните снимки в docs. После git diff проверьте список подготовленных файлов, затем выполните последнюю команду.',`git status

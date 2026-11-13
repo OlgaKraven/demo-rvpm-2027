@@ -61,6 +61,25 @@ test('every design and interaction card has an edit or a runnable check for both
     }
   }
 });
+test('database and forms checkpoints cover imports and the intermediate states of both routes',()=>{
+ const data=JSON.parse(fs.readFileSync('site/content.js','utf8').slice('globalThis.COURSE='.length,-1));
+ for(const [stack,expected] of [['php',[0,1,3,4,5]],['mysql',[0,1,2,4,5,6,7,8]]]){
+  const {database,backend}=data.studentChecks[stack];
+  assert.deepEqual(Object.keys(database).map(Number),[0,1,2,3,4,5,8]);
+  assert.deepEqual(Object.keys(backend).map(Number),expected);
+  for(const checks of [database,backend]){
+   for(const items of Object.values(checks)){
+    for(const {target,instruction,code} of items)assert(target&&instruction&&code);
+   }
+  }
+  assert.match(database[4][0].code,/TABLE_SCHEMA = DATABASE\(\)/);
+  assert.match(database[5][0].code,/SELECT username, is_admin FROM users/);
+  assert.match(backend[stack==='php'?4:7][0].code,/LEFT JOIN reviews/);
+ }
+ assert(data.phpAssembly.flatMap(lesson=>lesson.blocks).every(block=>block.purpose));
+ assert.deepEqual(data.assembly[0].blocks,[]);
+ assert.deepEqual(data.assembly.at(-1).blocks,[]);
+});
 test('all result screenshots needed by both learning routes exist',()=>{
  for(const f of ['flask-registration.png','flask-login.png','flask-application.png','php-login.png','php-application.png','php-registration-mobile.png'])assert.ok(fs.statSync('materials/screenshots/'+f).size>1000);
 });

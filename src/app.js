@@ -403,6 +403,8 @@ function lessonBrief(lesson) {
   if(lesson.id==='backend')files.push(['Скачать учебный каркас','downloads/conference-portal-'+(db==='php'?'php':'flask')+'-starter.zip']);
   return `<section class="lesson-brief">
     <p>${E(lesson.goal)}</p>
+    ${lesson.id==='documents'?'<p><a href="preparation.html">0. Установка и настройка программ</a> · <a href="preparation.html#faq">ЧаВО об экзамене</a></p>':''}
+    ${lesson.id==='backend'?`<p><a href="preparation.html#${db==='php'?'php':'flask'}">Библиотеки и запуск без интернета</a></p>`:''}
     ${assignment?`<h3>Условие задания</h3><p>${E(assignment.text)}</p>`:''}
     <h3>Что понадобится</h3><p>${E(D.stageChecks[lesson.id][0])}</p>
     ${projectProgress(lesson.id)}
@@ -658,11 +660,6 @@ function practice() {
   </section>`;
 }
 
-function launchGuide(){return `<section class="launch-guide"><div class="example-grid"><article class="route-panel" ${db!=='php'?'hidden':''}><h3>PHP + MySQL · XAMPP</h3><ol><li><a href="downloads/conference-portal-php.zip" download>Скачайте PHP ZIP</a>. Распакуйте файлы в <code>C:\\xampp\\htdocs\\conference-rvpm-2027</code>. Файл <code>index.php</code> должен находиться прямо в этой папке.</li><li>Откройте XAMPP Control Panel. Нажмите <strong>Start</strong> у <strong>Apache</strong> и <strong>MySQL</strong>; они должны работать.</li><li>Откройте <a href="http://localhost/phpmyadmin" target="_blank" rel="noopener">phpMyAdmin</a> → «Создать БД». Имя: <code>conference_php_2027</code>, кодировка: <code>utf8mb4_unicode_ci</code>. База должна быть новой и пустой.</li><li>В VS Code откройте эту папку → «Терминал» → «Создать терминал» (PowerShell). Выполните один раз:</li></ol><pre class="lesson-code">cd C:\\xampp\\htdocs\\conference-rvpm-2027
-& C:\\xampp\\php\\php.exe setup.php</pre><p>Должно появиться сообщение о создании таблиц и шести помещений. Затем:</p>${link('Открыть PHP · локально','http://localhost/conference-rvpm-2027/')}<p class="small">При следующем запуске достаточно включить Apache и MySQL. Если таблицы и начальные данные уже созданы на этапе БД, пропустите setup.php. Если setup.php пишет «База не пуста», проверьте наличие всех пяти таблиц и начальных данных.</p></article><article class="route-panel" ${db==='php'?'hidden':''}><h3>Flask · Python</h3><ol><li><a href="downloads/conference-portal-flask.zip" download>Скачайте Flask ZIP</a>. Распакуйте в отдельную папку. Откройте её в VS Code: внутри должны быть <code>app.py</code> и <code>requirements.txt</code>.</li><li>Нужен Python 3.10+. Откройте «Терминал» → «Создать терминал» (PowerShell) именно в папке проекта. Один раз создайте окружение и установите зависимости:</li></ol><pre class="lesson-code">py -m venv .venv
-.\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt</pre><p>Включите MySQL в XAMPP, создайте пустую базу <code>conference_rvpm_2027</code> в phpMyAdmin. В терминале выполните:</p><pre class="lesson-code">$env:DB_BACKEND='mysql'
-$env:MYSQL_DATABASE='conference_rvpm_2027'
-.\\.venv\\Scripts\\python.exe -m flask --app app run --port 5017</pre><p>Дождитесь строки <code>Running on http://127.0.0.1:5017</code>. Оставьте терминал открытым:</p>${link('Открыть Flask · локально','http://127.0.0.1:5017/')}<p class="small">Остановка: Ctrl+C в терминале. При следующем запуске повторите только команду сервера и выбор базы. Если команда py не найдена, установите Python или используйте python.</p></article></div><p>В стандартном XAMPP используется root без пароля. Другие параметры подключения описаны в README архивов. Для проверки: зарегистрируйтесь → создайте заявку → войдите как Conf2027 / Demo77 → завершите мероприятие → оставьте отзыв от пользователя.</p></section>`;}
 function examples() {
   const php=db==='php', name=php?'PHP + MySQL (XAMPP)':'Flask + MySQL / MariaDB';
   const firstFile=php?'index.php':'app.py';
@@ -677,11 +674,13 @@ function examples() {
     <div class="example-grid">
       <article class="route-panel">
         <h2>${E(name)}</h2>
-        <p>В архив входят портал «Конференции.РФ», SQL-схема и учебный каталог. В портале можно зарегистрироваться, подать заявку, изменить её статус и оставить отзыв.</p>
+        <p>В архив входят портал «Конференции.РФ» и заполненная учебная база.${php?'':' В папке wheels уже есть библиотеки Flask и драйвер MySQL.'}</p>
         <div class="example-actions">
           <a class="btn primary" href="downloads/conference-portal-${php?'php':'flask'}.zip" download>Скачать ZIP · ${php?'PHP':'Flask'}</a>
           ${btn('Инструкция по запуску','id="example-launch" aria-haspopup="dialog"')}
         </div>
+        <h3>Проверьте запуск готового примера</h3>
+        <p>Распакуйте ZIP и импортируйте <code>database-filled.sql</code> в пустую базу. Запустите ${php?'PHP':'Flask'} по инструкции рядом с ZIP. На главной должно появиться шесть помещений.</p>
         <div class="example-accounts"><p>Учебная учётная запись из КИМ. Для проверки пользовательского кабинета зарегистрируйте новую запись.</p>
           <table aria-label="Учебная учётная запись"><thead><tr><th scope="col">Роль</th><th scope="col">Логин</th><th scope="col">Пароль</th></tr></thead>
           <tbody><tr><th scope="row">Администратор</th><td><code>Conf2027</code></td><td><code>Demo77</code></td></tr></tbody></table>
@@ -889,7 +888,7 @@ function bind(){
   on('example-launch',()=>{
     const dialog=modal('Инструкция по запуску');
     dialog.classList.add('example-launch-dialog');
-    dialog.querySelector('.modal-body').innerHTML=launchGuide();
+    dialog.querySelector('.modal-body').innerHTML=D.launchGuide[db==='php'?'php':'flask'];
   });
   root.querySelectorAll('[data-example-stack]').forEach(button=>button.onclick=()=>{
     const stack=button.dataset.exampleStack;

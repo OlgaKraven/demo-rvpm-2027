@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подготовка к ДЭ · РВМП 2027</title>
+<style>
+  body { max-width: 60rem; margin: 2rem auto; padding: 0 1.25rem; font: 1rem/1.65 system-ui, sans-serif; color-scheme: light dark; }
+  section { margin-block: 2rem; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  summary { cursor: pointer; font-weight: 600; }
+</style>
+<main>
+  <h1>0. Установка и настройка программ</h1>
+  <ol>
+    <li>Скачайте <a href="https://update.code.visualstudio.com/latest/win32-x64-user/stable">VS Code для Windows x64</a> и <a href="https://git-scm.com/install/windows">Git for Windows</a>. В установщике Git разрешите использование Git из командной строки. Проверьте <code>git --version</code> в новом окне PowerShell.</li>
+    <li>Скачайте <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download">XAMPP для Windows</a>. Выберите Apache, PHP, MySQL (MariaDB) и phpMyAdmin. В XAMPP Control Panel запустите Apache и MySQL. Откройте <code>http://localhost/phpmyadmin</code> и проверьте подключение к базе. Если порт Apache изменён, укажите его в адресе браузера.</li>
+    <li>Для Flask скачайте <a href="https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe">Python 3.12 для Windows x64</a>. Включите Python Launcher и pip. Проверьте <code>py -3.12 --version</code>. Папка <code>wheels</code> из ZIP рассчитана на эту версию и архитектуру.</li>
+    <li>Для диаграмм скачайте <a href="https://github.com/jgraph/drawio-desktop/releases/latest">diagrams.net Desktop</a> (Windows installer) или используйте Designer в phpMyAdmin. Проверьте экспорт диаграммы в PDF. Распакуйте ZIP через «Извлечь всё».</li>
+  </ol>
+  <section id="flask">
+    <h2>Flask и MySQL без интернета</h2>
+    <ol>
+      <li>Распакуйте ZIP Flask. В phpMyAdmin создайте новую пустую базу <code>conference_rvpm_2027</code> с кодировкой utf8mb4. Откройте её → «Импорт» → выберите <code>database-filled.sql</code> → «Импорт». В таблице <code>rooms</code> должно быть шесть помещений, в <code>users</code> — администратор.</li>
+      <li>Откройте PowerShell в распакованной папке и выполните команды. Подставьте порт и реквизиты своего MySQL. Пустой пароль показан для стандартного локального XAMPP.</li>
+    </ol>
+    <pre><code>py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --no-index --find-links .\wheels -r requirements.txt
+$env:DB_BACKEND='mysql'
+$env:MYSQL_HOST='127.0.0.1'
+$env:MYSQL_PORT='3306'
+$env:MYSQL_DATABASE='conference_rvpm_2027'
+$env:MYSQL_USER='root'
+$env:MYSQL_PASSWORD=''
+.\.venv\Scripts\python.exe -m flask --app app run --port 5017</code></pre>
+    <p>Откройте <code>http://127.0.0.1:5017</code>. Войдите как <code>Conf2027 / Demo77</code>. Для проверки роли посетителя зарегистрируйте отдельного пользователя и подайте заявку. После импорта заполненной базы команду <code>init-db</code> не запускайте.</p>
+    <h3>Пакеты для нового проекта</h3>
+    <p>Заранее скопируйте <code>requirements.txt</code> и <code>wheels</code> из архива или на компьютере с интернетом выполните <code>py -3.12 -m pip download --only-binary=:all: -r requirements.txt -d wheels</code>. На рабочем месте создайте новую <code>.venv</code> и примените команду установки с <code>--no-index</code> из примера. В VS Code выберите <code>.venv\Scripts\python.exe</code> через Python: Select Interpreter, если установлено расширение Python. При ошибке <code>No matching distribution</code> проверьте версию Python, архитектуру и комплектность <code>wheels</code>.</p>
+  </section>
+  <section id="php">
+    <h2>PHP и MySQL без интернета</h2>
+    <p>В XAMPP уже есть PHP 8.2 и расширение <code>pdo_mysql</code>. Загрузка пакетов Composer для примера не требуется. Выполните <code>&amp; C:\xampp\php\php.exe -m</code> и найдите <code>pdo_mysql</code>. Если расширение выключено, в <code>C:\xampp\php\php.ini</code> уберите <code>;</code> перед <code>extension=pdo_mysql</code> и перезапустите Apache, если работаете через него.</p>
+    <p>В phpMyAdmin создайте новую пустую базу <code>conference_php_2027</code> с кодировкой utf8mb4 и импортируйте <code>database-filled.sql</code> из ZIP PHP. Сверьте шесть помещений и администратора. Для локального просмотра через командную строку выполните в папке с <code>index.php</code>:</p>
+    <pre><code>$env:MYSQL_HOST='127.0.0.1'
+$env:MYSQL_PORT='3306'
+$env:MYSQL_DATABASE='conference_php_2027'
+$env:MYSQL_USER='root'
+$env:MYSQL_PASSWORD=''
+&amp; C:\xampp\php\php.exe -S 127.0.0.1:8087</code></pre>
+    <p>Откройте <code>http://127.0.0.1:8087</code> и войдите как <code>Conf2027 / Demo77</code>. Для Apache вместо встроенного сервера можно распаковать проект в <code>C:\xampp\htdocs\conference-rvpm-2027</code> и открыть <code>http://localhost/conference-rvpm-2027/</code>. Если настройки подключения отличаются от стандартных, укажите их в окружении запуска Apache.</p>
+  </section>
+  <section id="faq">
+    <h2>ЧаВО об экзамене</h2>
+    <details><summary>Как распределены задания?</summary><p>Три задания базового уровня КИМ 09.02.07-3-2027 выполняются в одном веб-проекте. Сверьте критерии по базе и серверу, оформлению и интерактивности с документами на этапе 0.</p></details>
+    <details><summary>Можно ли пользоваться интернетом и своими заготовками?</summary><p>КИМ, с. 23, предусматривает локальную сеть без доступа в интернет. Нужные зависимости и установщики подготовьте дома заранее. На экзамене используйте программы, локальную справку, файлы и носители, разрешённые организаторами. Git работает локально.</p></details>
+    <details><summary>Можно ли выбрать PHP или Flask?</summary><p>Курс показывает обе реализации. На экзамене выбирайте среду и технологии из тех, которые доступны и допускаются на площадке. Уточните это, доступ к СУБД и способ сдачи до начала работы.</p></details>
+    <details><summary>Что делать, если не включается СУБД или не открываются файлы?</summary><p>Сообщите эксперту номер места, ошибку и шаг, на котором она возникла. Для домашнего стенда проверьте журнал XAMPP, состояние службы и порт.</p></details>
+    <details><summary>Что проверить перед сдачей?</summary><p>Откройте сайт локально, проверьте регистрацию, заявку, смену статуса, допустимость отзыва и мобильный экран. Сохраните SQL, файлы проекта и остальные материалы в папке сдачи по инструктажу.</p></details>
+  </section>
+</main>
+</html>

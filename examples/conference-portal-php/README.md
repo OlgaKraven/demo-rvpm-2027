@@ -4,6 +4,8 @@
 
 ## Запуск в XAMPP на Windows
 
+В ZIP откройте `preparation.html`. Там описаны импорт готовой базы `database-filled.sql` и запуск из PowerShell. При таком импорте `setup.php` не требуется.
+
 1. Распакуйте архив в `C:\xampp\htdocs\conference-rvpm-2027` (в папке должен быть `index.php`).
 2. Запустите Apache и MySQL в XAMPP Control Panel.
 3. В http://localhost/phpmyadmin создайте **новую пустую** базу `conference_php_2027` с кодировкой utf8mb4. Не используйте базу Flask: хеши паролей у примеров различаются.

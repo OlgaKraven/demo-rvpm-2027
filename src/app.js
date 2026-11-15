@@ -4,7 +4,7 @@ const params = new URLSearchParams(location.search);
 let memory={},storageOK=true;const prefix='rvpm-2027-basic-v1:';
 function get(k,f=null){try{return JSON.parse(localStorage.getItem(prefix+k))??f;}catch{storageOK=false;return memory[k]??f;}}
 function set(k,v){memory[k]=v;try{localStorage.setItem(prefix+k,JSON.stringify(v));}catch{storageOK=false;}}
-let mode=get('mode','overview'),stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false,learningView='map',mockBrief=false;
+let mode,stage=get('stage','documents'),task=0,db=get('db','mysql'),dark=get('dark',false),returnTask=false,learningView='map',mockBrief=false;
 const lessonTabs=[['brief','Условие и файлы'],['steps','Шаги'],['help','Справка']];
 const helpTabs=[['summary','Объяснение'],['example','Пример'],['terms','Термины'],['errors','Ошибки']];
 let helpTopic='summary';
@@ -30,7 +30,7 @@ function currentStepIndex(lesson) {
 }
 
 function readRoute(query) {
-  mode = query.get('mode') || mode;
+  mode = query.get('mode');
   if(mode==='criteria' || !modes.some(([id])=>id===mode))mode='overview';
   const stack = query.get('stack');
   if(['learn','examples'].includes(mode) && (stack==='php'||stack==='mysql'))db=stack;
@@ -767,7 +767,6 @@ function render({pushHistory=false}={}){
     task = Number.isInteger(saved) && saved>=0 && saved<D.tasks.length ? saved : 0;
   }
   if(!tourActive){
-    set('mode',mode);
     set('stage',stage);
     const nextUrl=pagePath();
     if(nextUrl!==location.search+location.hash)history[pushHistory?'pushState':'replaceState'](null,'',nextUrl);

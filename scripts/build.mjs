@@ -30,6 +30,7 @@ fs.writeFileSync(out+'/downloads/conference-portal-flask.zip',ExamCore.zip({...f
   'preparation.html':preparation,
   'database-filled.sql':populatedDatabase(files['schema-mysql.sql'],'seed-flask.sql'),
 }));
+fs.writeFileSync(out+'/downloads/flask-wheels.zip',ExamCore.zip(wheels));
 const code={};for(const [name,bytes] of Object.entries(files))if(name==='.gitignore'||/\.(py|sql|html|css|js|json|md|txt)$/.test(name))code[name]=bytes.toString('utf8');
 const construction=assembly(code);
 const starterFiles={...files,'app.py':construction.starter,'static/css/style.css':starterCss,'static/js/app.js':'','START-HERE.md':'# Учебный каркас Flask\n\nНачните с карточки https://olgakraven.github.io/demo-rvpm-2027/?mode=learn&stage=backend&stack=mysql&step=1. В ней есть команды для рабочей базы, разметка, код и проверки.\n\nРаспакуйте архив во временную папку. Перенесите файлы в начатый проект, сохранив свой README.md, .gitignore, docs и историю Git. Выполняйте изменения в порядке карточек. Базовые стили уже подключены. Палитру, адаптацию и JavaScript добавляйте на этапах дизайна и интерактивности.\n'};
@@ -53,10 +54,31 @@ const phpStarterFiles={
 };
 for(const file of ['README.md','QA.md','setup.php'])delete phpStarterFiles[file];
 fs.writeFileSync(out+'/downloads/conference-portal-php-starter.zip',ExamCore.zip({...phpStarterFiles,'preparation.html':preparation}));
+const projectAssets=Object.fromEntries(Object.entries(files).filter(([name])=>
+  name.startsWith('static/img/') || name.startsWith('static/fonts/')));
+fs.writeFileSync(out+'/downloads/portal-assets.zip',ExamCore.zip(projectAssets));
+const setupFiles={
+  php:{
+    'lib.php':phpCode['lib.php'],
+    'index.php':phpConstruction.starter,
+    'static/style.css':starterCss
+  },
+  mysql:{
+    'requirements.txt':code['requirements.txt'],
+    'mysql_backend.py':code['mysql_backend.py'],
+    'app.py':construction.starter,
+    'templates/base.html':code['templates/base.html'],
+    'templates/error.html':code['templates/error.html'],
+    'static/css/style.css':starterCss
+  }
+};
+const sqlBlocks=Object.fromEntries(['users','remaining-tables','seed-php','seed-flask','schema-export'].map(name=>[
+  'materials/database/'+name+'.sql',fs.readFileSync(out+'/materials/database/'+name+'.sql','utf8')
+]));
 const allVariants={};for(const v of mockVariants){const vf={'Задание.md':variantMarkdown(v),'rooms.csv':variantCSV(v)};fs.writeFileSync(out+'/downloads/exam-'+v.id+'.zip',ExamCore.zip(vf));for(const [name,value]of Object.entries(vf))allVariants[v.id+'/'+name]=value;}fs.writeFileSync(out+'/downloads/exam-30-variants.zip',ExamCore.zip(allVariants));
 const official=JSON.parse(fs.readFileSync('content/official.json'));
 const sources=fs.readdirSync('materials').filter(f=>/\.pdf$|\.zip$/.test(f)).map(f=>({file:f,sha256:createHash('sha256').update(fs.readFileSync('materials/'+f)).digest('hex')}));
-const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,stageChecks,stepChecks,lessonFiles,lessonReference,projectFlow,studentEdits:Object.fromEntries(['php','mysql'].map(stack=>[stack,studentEdits(stack)])),studentChecks:Object.fromEntries(['php','mysql'].map(stack=>[stack,studentChecks(stack)])),usersSql,roomInsertExample,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
+const screenshots=fs.existsSync('materials/screenshots')?fs.readdirSync('materials/screenshots').filter(f=>f.endsWith('.png')):[];const data={guidance,setupFiles,sqlBlocks,stageChecks,stepChecks,lessonFiles,lessonReference,projectFlow,studentEdits:Object.fromEntries(['php','mysql'].map(stack=>[stack,studentEdits(stack)])),studentChecks:Object.fromEntries(['php','mysql'].map(stack=>[stack,studentChecks(stack)])),usersSql,roomInsertExample,beginner:beginnerGuidance,databaseIllustrations,databaseScreens:fs.readdirSync('materials/database').filter(f=>f.endsWith('.png')),previews:JSON.parse(fs.readFileSync('materials/preview-index.json','utf8')),mockVariants,assembly:construction.lessons,phpAssembly:phpConstruction.lessons,stages,phpStages,origins,tasks,criteria,entities,official,code,phpCode,sources,screenshots};
 fs.writeFileSync(out+'/downloads/source-manifest.json',JSON.stringify(sources,null,2));
 const er=rvpmErGuide(data);
 er.layouts=await buildErLayouts(er);

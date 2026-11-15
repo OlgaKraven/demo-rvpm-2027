@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подготовка к ДЭ · РВМП 2027</title>
+<style>
+  body { max-width: 60rem; margin: 2rem auto; padding: 0 1.25rem; font: 1rem/1.65 system-ui, sans-serif; color-scheme: light dark; }
+  section { margin-block: 2rem; }
+  pre { white-space: pre-wrap; }
+  code { overflow-wrap: anywhere; }
+  summary { cursor: pointer; font-weight: 600; }
+</style>
+<main>
+  <h1>0. Установка и настройка программ</h1>
+  <ol>
+    <li>Скачайте <a href="https://update.code.visualstudio.com/latest/win32-x64-user/stable">VS Code для Windows x64</a> и <a href="https://git-scm.com/install/windows">Git for Windows</a>. В установщике Git разрешите использование Git из командной строки. Проверьте <code>git --version</code> в новом окне PowerShell.</li>
+    <li>Скачайте <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download">XAMPP для Windows</a>. Выберите Apache, PHP, MySQL (MariaDB) и phpMyAdmin. В XAMPP Control Panel запустите Apache и MySQL. Откройте <code>http://localhost/phpmyadmin</code> и проверьте подключение к базе. Если порт Apache изменён, укажите его в адресе браузера.</li>
+    <li>Для Flask скачайте <a href="https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe">Python 3.12 для Windows x64</a>. Включите Python Launcher и pip. Проверьте <code>py -3.12 --version</code>. Папка <code>wheels</code> из ZIP рассчитана на эту версию и архитектуру.</li>
+    <li>Для диаграмм скачайте <a href="https://github.com/jgraph/drawio-desktop/releases/latest">diagrams.net Desktop</a> (Windows installer) или используйте Designer в phpMyAdmin. Проверьте экспорт диаграммы в PDF. Распакуйте ZIP через «Извлечь всё».</li>
+  </ol>
+  <section id="flask">
+    <h2>Подготовьте библиотеки Flask</h2>
+    <p>Скачайте <a href="downloads/flask-wheels.zip" download>библиотеки Python 3.12 x64</a>. При распаковке сохраните папку <code>wheels</code>. На этапе «Формы» создайте <code>requirements.txt</code> по карточке, добавьте <code>wheels</code> рядом с этим файлом и выполните команды для своего проекта. Из <code>.venv</code> запускаются и установщик пакетов, и локальный Flask.</p>
+  </section>
+  <section id="php">
+    <h2>Проверьте PHP и MySQL</h2>
+    <p>Для собственного проекта используйте PHP из XAMPP. В панели XAMPP запустите MySQL. Для phpMyAdmin также запустите Apache. В <code>C:\xampp\php\php.ini</code> проверьте, что расширение <code>extension=pdo_mysql</code> включено. После изменений перезапустите Apache. На этапе «Формы» создайте свой <code>index.php</code> и запустите его командой из карточки.</p>
+  </section>
+  <section id="faq">
+    <h2>ЧаВО об экзамене</h2>
+    <details><summary>Как распределены задания?</summary><p>Три задания базового уровня КИМ 09.02.07-3-2027 выполняются в одном веб-проекте. Сверьте критерии по базе и серверу, оформлению и интерактивности с документами на этапе 0.</p></details>
+    <details><summary>Можно ли пользоваться интернетом и своими заготовками?</summary><p>КИМ, с. 23, предусматривает локальную сеть без доступа в интернет. Нужные зависимости и установщики подготовьте дома заранее. На экзамене используйте программы, локальную справку, файлы и носители, разрешённые организаторами. Git работает локально.</p></details>
+    <details><summary>Можно ли выбрать PHP или Flask?</summary><p>Курс показывает обе реализации. На экзамене выбирайте среду и технологии из тех, которые доступны и допускаются на площадке. Уточните это, доступ к СУБД и способ сдачи до начала работы.</p></details>
+    <details><summary>Что делать, если не включается СУБД или не открываются файлы?</summary><p>Сообщите эксперту номер места, ошибку и шаг, на котором она возникла. Для домашнего стенда проверьте журнал XAMPP, состояние службы и порт.</p></details>
+    <details><summary>Что проверить перед сдачей?</summary><p>Откройте сайт локально, проверьте регистрацию, заявку, смену статуса, допустимость отзыва и мобильный экран. Сохраните SQL, файлы проекта и остальные материалы в папке сдачи по инструктажу.</p></details>
+  </section>
+</main>
+</html>

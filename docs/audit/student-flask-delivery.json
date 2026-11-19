@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-19",
+  "result": "PASS — own student delivery copy and README route",
+  "source": "Student-created Flask project, not ready example ZIP; new folder without old .venv, own SQL and ER retained",
+  "database": "Separate rvmp27_delivery_flask; own SQL imported through phpMyAdmin GUI, 48 statements",
+  "baseline": {
+    "users": 1,
+    "rooms": 6,
+    "applications": 0,
+    "reviews": 0,
+    "rate_limits": 0
+  },
+  "metadata_equal_to_student": {
+    "columns": true,
+    "indexes": true,
+    "relations": true,
+    "checks": true
+  },
+  "catalogue_all_9_fields_equal_original": true,
+  "dependencies": "New Python 3.12 x64 venv; 14 wheels; --no-index --no-cache-dir --disable-pip-version-check; pip check pass",
+  "ui_passed": [
+    "Empty registration rejected with five field errors; no account added",
+    "Correct student27 registration; wrong password refused; correct login opens empty dashboard",
+    "Ordinary user /admin returns 403",
+    "Past date and capacity 121 separately refused; corrected 12-person booking saved once after two reloads",
+    "Admin in independent profile: new -> scheduled -> completed; owner sees scheduled with no review form",
+    "Duplicate username rejected; separate student28 account has no applications",
+    "Completed owner expands Leave review, selects star title 5 of 5, saves one review; two reloads show one review and no second form"
+  ],
+  "additional_http_checks": {
+    "other_owner_review": 404,
+    "ordinary_user_status_change": 403,
+    "business_rows_unchanged": true
+  },
+  "student_http_checks": "4 passed in 0.29s; actual localhost server, read-only checks",
+  "final_counts": {
+    "users": 3,
+    "rooms": 6,
+    "applications": 1,
+    "reviews": 1,
+    "rate_limits": 1
+  },
+  "network_scope": "Pip install forbids external index. Physical computer network stayed enabled. Separate interaction report proves browser external-request blocking."
+}

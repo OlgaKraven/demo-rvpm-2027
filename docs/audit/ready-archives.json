@@ -1,0 +1,153 @@
+{
+  "date": "2026-11-19",
+  "result": "PASS for ready-example README route",
+  "offline_scope": "pip --no-index --no-cache-dir --disable-pip-version-check; isolated browser aborts all external requests. Computer internet remained connected.",
+  "database_interface": "phpMyAdmin 5.2.1: create a new empty database and import database-filled.sql through GUI. Both imports: 20 queries.",
+  "stacks": {
+    "php": {
+      "result": "PASS",
+      "archive_sha256": "b747c7b24739063c29ea054d783611db89a85826849f1ac2a8395bd53b2a35dc",
+      "source_matches_fresh_unpack": true,
+      "database": "rvmp27_readme_php",
+      "counts": {
+        "users": 2,
+        "rooms": 6,
+        "applications": 1,
+        "reviews": 1
+      },
+      "all_catalogue_fields_equal": true,
+      "checks": 11,
+      "foreign_keys": 4,
+      "roles": [
+        {
+          "username": "Conf2027",
+          "is_admin": 1
+        },
+        {
+          "username": "student27",
+          "is_admin": 0
+        }
+      ],
+      "application": {
+        "conference_name": "Учебная конференция",
+        "event_date": "2026-11-20",
+        "start_time": "10:00",
+        "attendees": 12,
+        "payment_method": "onsite",
+        "status": "completed"
+      },
+      "review": {
+        "rating": 5,
+        "comment": "Зал подходит для учебной конференции"
+      },
+      "browser": [
+        "Registration from README values",
+        "Separate administrator session",
+        "new -> scheduled -> completed visible to owner",
+        "Review after completion, two reloads, no duplicates",
+        "Logout and guest dashboard redirect",
+        "390px document width equals viewport"
+      ],
+      "runtime": "PHP 8.2.12 / PDO MySQL / mbstring",
+      "tested_archive_sha256": "a290ce61d457807a2b5f63de6fd8c46ac69a1dbe156f492f96e85557b161fa46",
+      "final_reconciliation": {
+        "entries": 28,
+        "unchanged_entries": 27,
+        "changed": [
+          "preparation.html"
+        ],
+        "missing": [],
+        "scope": "Every final ZIP entry compared byte-for-byte to the tested clean extraction. Only preparation.html changed; its shared commands and copy function were checked separately in the course and native clipboard pass."
+      }
+    },
+    "flask": {
+      "result": "PASS",
+      "archive_sha256": "ce56d6fec24fc5dd2ec8dd5e42e25448a84cd8141991e60757aa63ac36b370d3",
+      "source_matches_fresh_unpack": true,
+      "database": "rvmp27_readme_flask",
+      "counts": {
+        "users": 2,
+        "rooms": 6,
+        "applications": 1,
+        "reviews": 1
+      },
+      "all_catalogue_fields_equal": true,
+      "checks": 11,
+      "foreign_keys": 4,
+      "roles": [
+        {
+          "username": "Conf2027",
+          "is_admin": 1
+        },
+        {
+          "username": "student27",
+          "is_admin": 0
+        }
+      ],
+      "application": {
+        "conference_name": "Учебная конференция",
+        "event_date": "2026-11-20",
+        "start_time": "10:00",
+        "attendees": 12,
+        "payment_method": "onsite",
+        "status": "completed"
+      },
+      "review": {
+        "rating": 5,
+        "comment": "Зал подходит для учебной конференции"
+      },
+      "browser": [
+        "Registration from README values",
+        "Separate administrator session",
+        "new -> scheduled -> completed visible to owner",
+        "Review after completion, two reloads, no duplicates",
+        "Logout and guest dashboard redirect",
+        "390px document width equals viewport"
+      ],
+      "runtime": "Python 3.12.0 x64; 14 wheels installed in new .venv, pip check passes",
+      "ordinary_user_admin_status": 403,
+      "tested_archive_sha256": "a91df1be6d12192d78bba031c03a1905789b63bce247f4aa772e4c71fd7ff178",
+      "final_reconciliation": {
+        "entries": 60,
+        "unchanged_entries": 59,
+        "changed": [
+          "preparation.html"
+        ],
+        "missing": [],
+        "scope": "Every final ZIP entry compared byte-for-byte to the tested clean extraction. Only preparation.html changed; its shared commands and copy function were checked separately in the course and native clipboard pass."
+      }
+    }
+  },
+  "final_date": "2026-11-20",
+  "wheels": {
+    "count": 14,
+    "identical_to_tested_fresh_install": true
+  },
+  "source_manifest": [
+    {
+      "file": "basic-inputs.zip",
+      "sha256": "84b5e026083e73dd705cdf3b60c4ed5961d68dc8509024db3aff680d6014b609",
+      "unchanged_vs_git_baseline": true
+    },
+    {
+      "file": "kim-2027.pdf",
+      "sha256": "911c759a66010ce044e611f29ecbcaf4231acdf88864e2870e6a442e5ad48d7d",
+      "unchanged_vs_git_baseline": true
+    },
+    {
+      "file": "recommendations-college.pdf",
+      "sha256": "cbfbefe2d10d1ead74c5a9f24c0398557a024dd090192a21463052ff091a81db",
+      "unchanged_vs_git_baseline": true
+    },
+    {
+      "file": "recommendations-graduate.pdf",
+      "sha256": "ad2e7df573bae327973aebb77d6e5190c2047ac336c060dcfa106c1c60919872",
+      "unchanged_vs_git_baseline": true
+    },
+    {
+      "file": "style-guide.pdf",
+      "sha256": "078e612e533048244a26d7b2cc50177b70c532031c2f8c276e7b6b4ab683fed1",
+      "unchanged_vs_git_baseline": true
+    }
+  ]
+}

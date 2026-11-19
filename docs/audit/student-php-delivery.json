@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-19",
+  "result": "PASS — own student PHP delivery copy and README route",
+  "source": "Own student-created PHP files, CSS, JS, media, SQL and ER; separate clean folder, no ready example ZIP",
+  "database": "Own SQL imported through phpMyAdmin into fresh rvmp27_delivery_php, 40 statements",
+  "baseline": {
+    "users": 1,
+    "rooms": 6,
+    "applications": 0,
+    "reviews": 0,
+    "rate_limits": 0
+  },
+  "metadata_equal_to_student": {
+    "columns": true,
+    "indexes": true,
+    "relations": true,
+    "checks": true
+  },
+  "catalogue_all_9_fields_equal_original": true,
+  "runtime": "XAMPP PHP 8.2.12; PDO MySQL and mbstring; no Composer dependencies",
+  "ui_passed": [
+    "Empty registration shows five field errors; correct student27 is registered once",
+    "Wrong password refused; correct login shows empty dashboard",
+    "Ordinary user /index.php?r=admin returns 403",
+    "Past date and capacity 121 separately rejected; correct 12-person booking persisted once after two reloads",
+    "Administrator in independent profile sets scheduled, then completed; owner sees scheduled without review form",
+    "Duplicate login refused; separate student28 sees no foreign application",
+    "Owner saves one rating-5 review after completed; two reloads show one review and no second form",
+    "Six catalogue images and local PT Sans loaded; 390px viewport and 390px document",
+    "Logout and guest dashboard redirect to login"
+  ],
+  "additional_http_checks": {
+    "other_owner_review": 404,
+    "ordinary_user_status_change": 403,
+    "business_rows_unchanged": true
+  },
+  "final_counts": {
+    "users": 3,
+    "rooms": 6,
+    "applications": 1,
+    "reviews": 1,
+    "rate_limits": 2
+  }
+}

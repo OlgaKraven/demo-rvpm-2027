@@ -24,7 +24,8 @@ assert 'уже используется' in post(user,'register',data)[1]
 assert 'Неверный логин' in login(user,name,'wrong')[1]
 assert 'Мои заявки' in login(user,name,'ExamplePass8')[1]
 assert request(user,'admin')[0]==403
-title='Проверка '+suffix
+boundary=os.environ.get('PHP_UNICODE_LIMITS')=='1'
+title='Я'*120 if boundary else 'Проверка '+suffix
 data={'conference_name':title,'room_id':'1','event_date':(date.today()+timedelta(days=30)).isoformat(),'start_time':'12:00','attendees':'10','payment_method':'sbp'}
 assert 'Дата' in post(user,'new',{**data,'event_date':'2027-02-30'})[1]
 status,html=post(user,'new',data);assert status==200 and 'Заявка отправлена' in html
@@ -39,9 +40,11 @@ assert post(admin,'status',{'id':ident,'status':'scheduled'},'admin')[0]==200
 assert 'Мероприятие назначено' in request(user,'dashboard')[1]
 post(admin,'status',{'id':ident,'status':'completed'},'admin')
 assert 'Оставить отзыв' in request(user,'dashboard')[1]
-review={'id':ident,'rating':'5','comment':'Учебная проверка завершённого мероприятия.'}
+comment='Я'*500 if boundary else 'Учебная проверка завершённого мероприятия.'
+review={'id':ident,'rating':'5','comment':comment}
 assert 'Отзыв опубликован' in post(user,'review',review,'dashboard')[1]
+assert comment in request(user,'dashboard')[1]
 assert 'Отзыв уже существует' in post(user,'review',review,'dashboard')[1]
 assert request(user,'status',{'csrf':'invalid','id':ident,'status':'new'})[0]==403
 assert request(user,'logout')[0]==405
-print('PHP HTTP smoke passed: registration, validation, duplicates, auth, CSRF, ownership, booking, status and review.')
+print('PHP HTTP smoke passed: registration, validation, duplicates, auth, CSRF, ownership, booking, status and review.'+(' Includes 120/500 Cyrillic character limits.' if boundary else ''))

@@ -9,6 +9,26 @@ test('both presentations cover each lesson step and link to their own sections',
   for(const stack of ['php','mysql']){
     const deck=teacherDeck(data,stack);
     const stages=stack==='php'?data.phpStages:data.stages;
+    for(const [file,code] of Object.entries(data.setupFiles[stack])){
+      const pages=deck.slides.filter(slide=>slide.stepKey==='backend:1'&&slide.heading===file&&slide.kind==='code');
+      assert(pages.length,file+' · initial code must be present in the presentation');
+      const full=pages[0].snippet!==undefined?deck.snippets[pages[0].snippet]:pages.map(page=>page.code).join('\n');
+      assert.equal(full.replace(/\r\n/g,'\n').trimEnd(),code.replace(/\r\n/g,'\n').trimEnd(),file);
+    }
+    for(const [kind,collection] of [['edits',data.studentEdits[stack]],['checks',data.studentChecks[stack]]]){
+      for(const [stage,steps] of Object.entries(collection))for(const [index,blocks] of Object.entries(steps))for(const block of blocks){
+        const heading=kind==='edits'?'В конец файла '+block.file:block.target;
+        const pages=deck.slides.filter(slide=>slide.stepKey===stage+':'+(Number(index)+1)&&slide.kind==='code'&&slide.heading===heading);
+        assert(pages.length,heading+' must be present');
+        for(const page of pages){
+          const copied=deck.snippets[page.snippet]??page.code;
+          assert.equal(copied.replace(/\r\n/g,'\n').trimEnd(),block.code.replace(/\r\n/g,'\n').trimEnd(),heading+' must copy the complete block from every page');
+        }
+      }
+    }
+    for(const slide of deck.slides.filter(slide=>slide.chapter!=='example'))
+      for(const [,href] of slide.links??[])
+        assert(!/downloads\/conference-portal-(?:php|flask)(?:-starter)?\.zip$/.test(href),'Learning presentation must teach file creation instead of downloading a project');
     assert.deepEqual(deck.chapters.map(chapter=>chapter.id),['intro',...stages.map(stage=>stage.id),'example']);
     for(const stage of stages){
       const chapter=deck.chapters.find(item=>item.id===stage.id);
@@ -32,6 +52,11 @@ test('both presentations cover each lesson step and link to their own sections',
       if(slide.image)assert(fs.existsSync(site+slide.image.file),slide.image.file);
       for(const [,href] of slide.links??[]){
         const url=new URL(href,deck.site);
+        if(url.origin!==new URL(deck.site).origin){
+          assert.equal(url.protocol,'https:');
+          assert(['code.visualstudio.com','update.code.visualstudio.com','git-scm.com','www.apachefriends.org','sourceforge.net','www.python.org'].includes(url.hostname),href);
+          continue;
+        }
         assert(url.href.startsWith(deck.site),href);
         const asset=url.pathname.slice(new URL(deck.site).pathname.length);
         assert(asset ? fs.existsSync(site+asset) : url.searchParams.has('mode'),href);
@@ -45,13 +70,16 @@ test('both presentations cover each lesson step and link to their own sections',
       }
     }
     const resourceLinks=(step,asset)=>deck.slides.some(slide=>slide.stepKey===step&&slide.links?.some(([,href])=>href===asset));
-    assert(resourceLinks('database:4','materials/database/remaining-tables.sql'));
-    assert(resourceLinks('database:6','materials/database/seed-'+(stack==='php'?'php':'flask')+'.sql'));
+    for(const slide of deck.slides.filter(slide=>slide.chapter!=='example'))
+      for(const [,href] of slide.links??[])
+        assert(!/materials\/database\/[^/]+\.sql$/.test(href),'Learning must show SQL inline instead of downloading it');
+    const seed=data.sqlBlocks['materials/database/seed-'+(stack==='php'?'php':'flask')+'.sql'];
+    assert([...deck.snippets,...deck.slides.filter(slide=>slide.stepKey==='database:6').map(slide=>slide.code??'')]
+      .some(code=>code.replace(/\r\n/g,'\n').trimEnd()===seed.replace(/\r\n/g,'\n').trimEnd()),'The complete seed must be copyable from the presentation');
     const catalogue=deck.slides.find(slide=>slide.title==='Из каталога в таблицу rooms');
     assert.equal(catalogue.rows.length,6);
     assert(catalogue.rows.every(row=>row.length===2));
     assert.match(catalogue.rows[0][1],/auditorium.*120 мест/);
     assert(resourceLinks('database:8','materials/database/er-example.pdf'));
-    assert(resourceLinks('database:9','materials/database/schema-export.sql'));
   }
 });

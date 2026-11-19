@@ -59,10 +59,14 @@
       body=slide.actions?.length||slide.body||slide.check?'<div class="visual-grid"><div>'+subtitle+prose+'</div>'+image+'</div>':subtitle+'<div class="visual-only">'+image+'</div>'+prose;
     }
     if(slide.facts)body='<div class="facts-grid">'+slide.facts.map(([value,label])=>'<div class="fact"><strong>'+esc(value)+'</strong><span>'+esc(label)+'</span></div>').join('')+'</div>'+prose;
-    if(slide.rows)body='<table class="'+(slide.wrapTable?'field-table':slide.rows.length>7?'compact-table':'')+'"><thead><tr>'+slide.columns.map(x=>'<th scope="col">'+esc(x)+'</th>').join('')+'</tr></thead><tbody>'+slide.rows.map(([label,value,destination])=>{
-      const text=esc(label);
-      const name=destination===undefined||audience?text:'<a href="#slide-'+(destination+1)+'" data-contents-slide="'+destination+'">'+text+'</a>';
-      return '<tr><th scope="row">'+name+'</th><td>'+esc(value)+'</td></tr>';
+    if(slide.rows)body='<table class="'+(slide.wrapTable?'field-table':slide.rows.length>7?'compact-table':'')+' columns-'+slide.columns.length+'"><thead><tr>'+slide.columns.map(x=>'<th scope="col">'+esc(x)+'</th>').join('')+'</tr></thead><tbody>'+slide.rows.map(row=>{
+      const destination=slide.columns.length===2&&Number.isInteger(row[2])?row[2]:undefined;
+      return '<tr>'+row.slice(0,slide.columns.length).map((value,column)=>{
+        const text=esc(value);
+        if(column)return '<td>'+text+'</td>';
+        const name=destination===undefined||audience?text:'<a href="#slide-'+(destination+1)+'" data-contents-slide="'+destination+'">'+text+'</a>';
+        return '<th scope="row">'+name+'</th>';
+      }).join('')+'</tr>';
     }).join('')+'</tbody></table>'+prose;
     if(slide.code)body=subtitle+(interactive?'<button class="copy-code" type="button">' + (slide.snippet===undefined?'Копировать код':'Копировать весь фрагмент') + '</button>':'')+'<pre><code>'+esc(slide.code)+'</code></pre>'+drawLinks(slide,interactive);
     return '<article class="slide slide-'+slide.kind+'">'+head+(slide.kind==='section'?'<i class="chevron" aria-hidden="true"></i>':'')+'<div class="slide-content">'+title+body+'</div>'+foot+'</article>';
@@ -83,8 +87,20 @@
       const clipped=[body,prose].some(el=>el && (el.scrollHeight>el.clientHeight+2||el.scrollWidth>el.clientWidth+2));
       return clipped?[{page:i+1,title:deck.slides[i].title,vertical:body.scrollHeight-body.clientHeight}]:[];
     });
-    const wrongLinks=[...print.querySelectorAll('.slide-links a')].map(link=>link.href).filter(href=>!href.startsWith(deck.site));
-    return {pages:frames.length,overflow,broken,wrongLinks};
+    const externalLinks=new Set(deck.externalLinks??[]);
+    const wrongLinks=[...print.querySelectorAll('.slide-links a')].map(link=>link.href).filter(href=>!href.startsWith(deck.site)&&!externalLinks.has(href));
+    const tableErrors=frames.flatMap((frame,index)=>{
+      const slide=deck.slides[index];
+      if(!slide.rows)return [];
+      const table=frame.querySelector('table');
+      if(table?.tHead.rows[0].cells.length!==slide.columns.length||table?.tBodies[0].rows.length!==slide.rows.length)return [{page:index+1,error:'Table dimensions differ from lesson data'}];
+      return [...table.tBodies[0].rows].flatMap((row,rowIndex)=>{
+        const expected=slide.rows[rowIndex].slice(0,slide.columns.length).map(String);
+        const actual=[...row.cells].map(cell=>cell.textContent);
+        return JSON.stringify(actual)===JSON.stringify(expected)?[]:[{page:index+1,row:rowIndex+1,expected,actual}];
+      });
+    });
+    return {pages:frames.length,overflow,broken,wrongLinks,tableErrors};
   }
   function sendState(){channel?.postMessage({kind:'state',index,dark,profile,position});}
   function draw(focus){

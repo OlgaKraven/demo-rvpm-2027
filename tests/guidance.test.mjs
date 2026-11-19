@@ -78,7 +78,8 @@ test('database and forms checkpoints cover imports and the intermediate states o
  }
  assert(data.phpAssembly.flatMap(lesson=>lesson.blocks).every(block=>block.purpose));
  assert.deepEqual(data.assembly[0].blocks,[]);
- assert.deepEqual(data.assembly.at(-1).blocks,[]);
+ assert.deepEqual(data.assembly.at(-1).blocks.map(block=>block.file),['tests/test_portal.py']);
+ assert.match(data.studentChecks.mysql.backend[8][0].code,/pytest -q tests\/test_portal\.py/);
 });
 test('all result screenshots needed by both learning routes exist',()=>{
  for(const f of ['flask-registration.png','flask-login.png','flask-application.png','php-login.png','php-application.png','php-registration-mobile.png'])assert.ok(fs.statSync('materials/screenshots/'+f).size>1000);

@@ -1,0 +1,391 @@
+{
+  "scope": "First setup and backend card in both routes at three widths; FAQ; DOM copy-button coverage. Clipboard is not read or written.",
+  "records": [
+    {
+      "width": 390,
+      "stack": "php",
+      "stage": "documents",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 14
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 174
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 58
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 109
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 4,
+      "guide_present": true
+    },
+    {
+      "width": 390,
+      "stack": "php",
+      "stage": "backend",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 1721
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 4396
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 540
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 82
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 1814
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 49
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 0,
+      "guide_present": false
+    },
+    {
+      "width": 390,
+      "stack": "mysql",
+      "stage": "documents",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 14
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 174
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 58
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 109
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 4,
+      "guide_present": true
+    },
+    {
+      "width": 390,
+      "stack": "mysql",
+      "stage": "backend",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 44
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 2342
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 12454
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 4822
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 363
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 540
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 246
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 49
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 0,
+      "guide_present": false
+    },
+    {
+      "width": 768,
+      "stack": "php",
+      "stage": "documents",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 14
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 174
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 58
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 109
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 4,
+      "guide_present": true
+    },
+    {
+      "width": 768,
+      "stack": "php",
+      "stage": "backend",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 1721
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 4396
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 540
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 82
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 1814
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 49
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 0,
+      "guide_present": false
+    },
+    {
+      "width": 768,
+      "stack": "mysql",
+      "stage": "documents",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 14
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 174
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 58
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 109
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 4,
+      "guide_present": true
+    },
+    {
+      "width": 768,
+      "stack": "mysql",
+      "stage": "backend",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 44
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 2342
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 12454
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 4822
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 363
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 540
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 246
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 49
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 0,
+      "guide_present": false
+    },
+    {
+      "width": 1440,
+      "stack": "php",
+      "stage": "documents",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 14
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 174
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 58
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 109
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 4,
+      "guide_present": true
+    },
+    {
+      "width": 1440,
+      "stack": "php",
+      "stage": "backend",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 1721
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 4396
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 540
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 82
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 1814
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 49
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 0,
+      "guide_present": false
+    },
+    {
+      "width": 1440,
+      "stack": "mysql",
+      "stage": "documents",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 14
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 174
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 58
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 109
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 4,
+      "guide_present": true
+    },
+    {
+      "width": 1440,
+      "stack": "mysql",
+      "stage": "backend",
+      "blocks": [
+        {
+          "copy_buttons": 1,
+          "chars": 44
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 2342
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 12454
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 4822
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 363
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 540
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 246
+        },
+        {
+          "copy_buttons": 1,
+          "chars": 49
+        }
+      ],
+      "ready_projects": [],
+      "setup_images": 0,
+      "guide_present": false
+    }
+  ],
+  "errors": [],
+  "result": "PASS"
+}

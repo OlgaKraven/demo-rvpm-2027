@@ -34,7 +34,8 @@ CREATE TABLE applications (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
     room_id INTEGER NOT NULL,
-    conference_name TEXT NOT NULL CHECK (length(conference_name) BETWEEN 3 AND 120),
+    -- CHAR_LENGTH считает символы, LENGTH считает байты текста UTF-8.
+    conference_name TEXT NOT NULL CHECK (CHAR_LENGTH(conference_name) BETWEEN 3 AND 120),
     event_date TEXT NOT NULL,
     start_time TEXT NOT NULL,
     attendees INTEGER NOT NULL CHECK (attendees > 0),
@@ -51,7 +52,7 @@ CREATE TABLE reviews (
     application_id INTEGER NOT NULL UNIQUE,
     user_id INTEGER NOT NULL,
     rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
-    comment TEXT NOT NULL CHECK (length(comment) BETWEEN 10 AND 500),
+    comment TEXT NOT NULL CHECK (CHAR_LENGTH(comment) BETWEEN 10 AND 500),
     created_at VARCHAR(30) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

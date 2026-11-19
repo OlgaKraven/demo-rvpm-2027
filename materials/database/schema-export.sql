@@ -31,7 +31,7 @@ CREATE TABLE `applications` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `conference_name` text NOT NULL CHECK (octet_length(`conference_name`) between 3 and 120),
+  `conference_name` text NOT NULL CHECK (char_length(`conference_name`) between 3 and 120),
   `event_date` text NOT NULL,
   `start_time` text NOT NULL,
   `attendees` int(11) NOT NULL CHECK (`attendees` > 0),
@@ -64,7 +64,7 @@ CREATE TABLE `reviews` (
   `application_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `rating` int(11) NOT NULL CHECK (`rating` between 1 and 5),
-  `comment` text NOT NULL CHECK (octet_length(`comment`) between 10 and 500),
+  `comment` text NOT NULL CHECK (char_length(`comment`) between 10 and 500),
   `created_at` varchar(30) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

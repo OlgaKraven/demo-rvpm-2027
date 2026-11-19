@@ -20,5 +20,7 @@ test('the PHP starter can be completed by following the published lessons',()=>{
     }
   }
   assert.equal(source,phpCode['index.php'].replaceAll('\r\n','\n'));
-  assert.ok(fs.statSync('site/downloads/conference-portal-php-starter.zip').size>1000);
+  assert.equal(sandbox.COURSE.setupFiles.php['index.php'],starter);
+  for(const stack of ['php','flask'])
+    assert.equal(fs.existsSync('site/downloads/conference-portal-'+stack+'-starter.zip'),false);
 });

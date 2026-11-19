@@ -1,0 +1,804 @@
+{
+  "result": "PASS",
+  "variants": 30,
+  "taskStates": 90,
+  "records": [
+    {
+      "variant": "1. Наука рядом · Москва",
+      "task": 1,
+      "chars": 1687,
+      "links": [
+        "downloads/exam-V01.zip"
+      ]
+    },
+    {
+      "variant": "1. Наука рядом · Москва",
+      "task": 2,
+      "chars": 1240,
+      "links": [
+        "downloads/exam-V01.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "1. Наука рядом · Москва",
+      "task": 3,
+      "chars": 997,
+      "links": [
+        "downloads/exam-V01.zip"
+      ]
+    },
+    {
+      "variant": "2. Код будущего · Санкт-Петербург",
+      "task": 1,
+      "chars": 1700,
+      "links": [
+        "downloads/exam-V02.zip"
+      ]
+    },
+    {
+      "variant": "2. Код будущего · Санкт-Петербург",
+      "task": 2,
+      "chars": 1223,
+      "links": [
+        "downloads/exam-V02.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "2. Код будущего · Санкт-Петербург",
+      "task": 3,
+      "chars": 998,
+      "links": [
+        "downloads/exam-V02.zip"
+      ]
+    },
+    {
+      "variant": "3. МедиаЛаб · Казань",
+      "task": 1,
+      "chars": 1670,
+      "links": [
+        "downloads/exam-V03.zip"
+      ]
+    },
+    {
+      "variant": "3. МедиаЛаб · Казань",
+      "task": 2,
+      "chars": 1231,
+      "links": [
+        "downloads/exam-V03.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "3. МедиаЛаб · Казань",
+      "task": 3,
+      "chars": 994,
+      "links": [
+        "downloads/exam-V03.zip"
+      ]
+    },
+    {
+      "variant": "4. Зелёный город · Екатеринбург",
+      "task": 1,
+      "chars": 1678,
+      "links": [
+        "downloads/exam-V04.zip"
+      ]
+    },
+    {
+      "variant": "4. Зелёный город · Екатеринбург",
+      "task": 2,
+      "chars": 1229,
+      "links": [
+        "downloads/exam-V04.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "4. Зелёный город · Екатеринбург",
+      "task": 3,
+      "chars": 999,
+      "links": [
+        "downloads/exam-V04.zip"
+      ]
+    },
+    {
+      "variant": "5. Учительская среда · Новосибирск",
+      "task": 1,
+      "chars": 1679,
+      "links": [
+        "downloads/exam-V05.zip"
+      ]
+    },
+    {
+      "variant": "5. Учительская среда · Новосибирск",
+      "task": 2,
+      "chars": 1230,
+      "links": [
+        "downloads/exam-V05.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "5. Учительская среда · Новосибирск",
+      "task": 3,
+      "chars": 1003,
+      "links": [
+        "downloads/exam-V05.zip"
+      ]
+    },
+    {
+      "variant": "6. РобоФорум · Нижний Новгород",
+      "task": 1,
+      "chars": 1689,
+      "links": [
+        "downloads/exam-V06.zip"
+      ]
+    },
+    {
+      "variant": "6. РобоФорум · Нижний Новгород",
+      "task": 2,
+      "chars": 1237,
+      "links": [
+        "downloads/exam-V06.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "6. РобоФорум · Нижний Новгород",
+      "task": 3,
+      "chars": 995,
+      "links": [
+        "downloads/exam-V06.zip"
+      ]
+    },
+    {
+      "variant": "7. ДизайнДиалог · Самара",
+      "task": 1,
+      "chars": 1685,
+      "links": [
+        "downloads/exam-V07.zip"
+      ]
+    },
+    {
+      "variant": "7. ДизайнДиалог · Самара",
+      "task": 2,
+      "chars": 1236,
+      "links": [
+        "downloads/exam-V07.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "7. ДизайнДиалог · Самара",
+      "task": 3,
+      "chars": 998,
+      "links": [
+        "downloads/exam-V07.zip"
+      ]
+    },
+    {
+      "variant": "8. Музей онлайн · Пермь",
+      "task": 1,
+      "chars": 1684,
+      "links": [
+        "downloads/exam-V08.zip"
+      ]
+    },
+    {
+      "variant": "8. Музей онлайн · Пермь",
+      "task": 2,
+      "chars": 1245,
+      "links": [
+        "downloads/exam-V08.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "8. Музей онлайн · Пермь",
+      "task": 3,
+      "chars": 998,
+      "links": [
+        "downloads/exam-V08.zip"
+      ]
+    },
+    {
+      "variant": "9. Открытый бизнес · Тюмень",
+      "task": 1,
+      "chars": 1681,
+      "links": [
+        "downloads/exam-V09.zip"
+      ]
+    },
+    {
+      "variant": "9. Открытый бизнес · Тюмень",
+      "task": 2,
+      "chars": 1231,
+      "links": [
+        "downloads/exam-V09.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "9. Открытый бизнес · Тюмень",
+      "task": 3,
+      "chars": 1001,
+      "links": [
+        "downloads/exam-V09.zip"
+      ]
+    },
+    {
+      "variant": "10. Точка данных · Томск",
+      "task": 1,
+      "chars": 1666,
+      "links": [
+        "downloads/exam-V10.zip"
+      ]
+    },
+    {
+      "variant": "10. Точка данных · Томск",
+      "task": 2,
+      "chars": 1220,
+      "links": [
+        "downloads/exam-V10.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "10. Точка данных · Томск",
+      "task": 3,
+      "chars": 998,
+      "links": [
+        "downloads/exam-V10.zip"
+      ]
+    },
+    {
+      "variant": "11. Культурный код · Омск",
+      "task": 1,
+      "chars": 1681,
+      "links": [
+        "downloads/exam-V11.zip"
+      ]
+    },
+    {
+      "variant": "11. Культурный код · Омск",
+      "task": 2,
+      "chars": 1233,
+      "links": [
+        "downloads/exam-V11.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "11. Культурный код · Омск",
+      "task": 3,
+      "chars": 1000,
+      "links": [
+        "downloads/exam-V11.zip"
+      ]
+    },
+    {
+      "variant": "12. Город в движении · Уфа",
+      "task": 1,
+      "chars": 1673,
+      "links": [
+        "downloads/exam-V12.zip"
+      ]
+    },
+    {
+      "variant": "12. Город в движении · Уфа",
+      "task": 2,
+      "chars": 1230,
+      "links": [
+        "downloads/exam-V12.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "12. Город в движении · Уфа",
+      "task": 3,
+      "chars": 1002,
+      "links": [
+        "downloads/exam-V12.zip"
+      ]
+    },
+    {
+      "variant": "13. Игровая мастерская · Воронеж",
+      "task": 1,
+      "chars": 1682,
+      "links": [
+        "downloads/exam-V13.zip"
+      ]
+    },
+    {
+      "variant": "13. Игровая мастерская · Воронеж",
+      "task": 2,
+      "chars": 1234,
+      "links": [
+        "downloads/exam-V13.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "13. Игровая мастерская · Воронеж",
+      "task": 3,
+      "chars": 1004,
+      "links": [
+        "downloads/exam-V13.zip"
+      ]
+    },
+    {
+      "variant": "14. Новая энергия · Челябинск",
+      "task": 1,
+      "chars": 1683,
+      "links": [
+        "downloads/exam-V14.zip"
+      ]
+    },
+    {
+      "variant": "14. Новая энергия · Челябинск",
+      "task": 2,
+      "chars": 1225,
+      "links": [
+        "downloads/exam-V14.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "14. Новая энергия · Челябинск",
+      "task": 3,
+      "chars": 999,
+      "links": [
+        "downloads/exam-V14.zip"
+      ]
+    },
+    {
+      "variant": "15. Доступная среда · Ярославль",
+      "task": 1,
+      "chars": 1697,
+      "links": [
+        "downloads/exam-V15.zip"
+      ]
+    },
+    {
+      "variant": "15. Доступная среда · Ярославль",
+      "task": 2,
+      "chars": 1241,
+      "links": [
+        "downloads/exam-V15.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "15. Доступная среда · Ярославль",
+      "task": 3,
+      "chars": 1001,
+      "links": [
+        "downloads/exam-V15.zip"
+      ]
+    },
+    {
+      "variant": "16. АгроТехнологии · Краснодар",
+      "task": 1,
+      "chars": 1689,
+      "links": [
+        "downloads/exam-V16.zip"
+      ]
+    },
+    {
+      "variant": "16. АгроТехнологии · Краснодар",
+      "task": 2,
+      "chars": 1225,
+      "links": [
+        "downloads/exam-V16.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "16. АгроТехнологии · Краснодар",
+      "task": 3,
+      "chars": 1000,
+      "links": [
+        "downloads/exam-V16.zip"
+      ]
+    },
+    {
+      "variant": "17. Северный диалог · Архангельск",
+      "task": 1,
+      "chars": 1698,
+      "links": [
+        "downloads/exam-V17.zip"
+      ]
+    },
+    {
+      "variant": "17. Северный диалог · Архангельск",
+      "task": 2,
+      "chars": 1237,
+      "links": [
+        "downloads/exam-V17.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "17. Северный диалог · Архангельск",
+      "task": 3,
+      "chars": 1001,
+      "links": [
+        "downloads/exam-V17.zip"
+      ]
+    },
+    {
+      "variant": "18. Язык и цифра · Иркутск",
+      "task": 1,
+      "chars": 1674,
+      "links": [
+        "downloads/exam-V18.zip"
+      ]
+    },
+    {
+      "variant": "18. Язык и цифра · Иркутск",
+      "task": 2,
+      "chars": 1224,
+      "links": [
+        "downloads/exam-V18.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "18. Язык и цифра · Иркутск",
+      "task": 3,
+      "chars": 998,
+      "links": [
+        "downloads/exam-V18.zip"
+      ]
+    },
+    {
+      "variant": "19. Океан идей · Владивосток",
+      "task": 1,
+      "chars": 1672,
+      "links": [
+        "downloads/exam-V19.zip"
+      ]
+    },
+    {
+      "variant": "19. Океан идей · Владивосток",
+      "task": 2,
+      "chars": 1222,
+      "links": [
+        "downloads/exam-V19.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "19. Океан идей · Владивосток",
+      "task": 3,
+      "chars": 996,
+      "links": [
+        "downloads/exam-V19.zip"
+      ]
+    },
+    {
+      "variant": "20. Молодёжный маршрут · Хабаровск",
+      "task": 1,
+      "chars": 1685,
+      "links": [
+        "downloads/exam-V20.zip"
+      ]
+    },
+    {
+      "variant": "20. Молодёжный маршрут · Хабаровск",
+      "task": 2,
+      "chars": 1235,
+      "links": [
+        "downloads/exam-V20.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "20. Молодёжный маршрут · Хабаровск",
+      "task": 3,
+      "chars": 1004,
+      "links": [
+        "downloads/exam-V20.zip"
+      ]
+    },
+    {
+      "variant": "21. Звук пространства · Калининград",
+      "task": 1,
+      "chars": 1710,
+      "links": [
+        "downloads/exam-V21.zip"
+      ]
+    },
+    {
+      "variant": "21. Звук пространства · Калининград",
+      "task": 2,
+      "chars": 1240,
+      "links": [
+        "downloads/exam-V21.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "21. Звук пространства · Калининград",
+      "task": 3,
+      "chars": 1003,
+      "links": [
+        "downloads/exam-V21.zip"
+      ]
+    },
+    {
+      "variant": "22. Архитектура завтра · Ростов-на-Дону",
+      "task": 1,
+      "chars": 1685,
+      "links": [
+        "downloads/exam-V22.zip"
+      ]
+    },
+    {
+      "variant": "22. Архитектура завтра · Ростов-на-Дону",
+      "task": 2,
+      "chars": 1234,
+      "links": [
+        "downloads/exam-V22.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "22. Архитектура завтра · Ростов-на-Дону",
+      "task": 3,
+      "chars": 1004,
+      "links": [
+        "downloads/exam-V22.zip"
+      ]
+    },
+    {
+      "variant": "23. Безопасный код · Рязань",
+      "task": 1,
+      "chars": 1681,
+      "links": [
+        "downloads/exam-V23.zip"
+      ]
+    },
+    {
+      "variant": "23. Безопасный код · Рязань",
+      "task": 2,
+      "chars": 1230,
+      "links": [
+        "downloads/exam-V23.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "23. Безопасный код · Рязань",
+      "task": 3,
+      "chars": 1000,
+      "links": [
+        "downloads/exam-V23.zip"
+      ]
+    },
+    {
+      "variant": "24. Цифровое наследие · Великий Новгород",
+      "task": 1,
+      "chars": 1688,
+      "links": [
+        "downloads/exam-V24.zip"
+      ]
+    },
+    {
+      "variant": "24. Цифровое наследие · Великий Новгород",
+      "task": 2,
+      "chars": 1229,
+      "links": [
+        "downloads/exam-V24.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "24. Цифровое наследие · Великий Новгород",
+      "task": 3,
+      "chars": 1003,
+      "links": [
+        "downloads/exam-V24.zip"
+      ]
+    },
+    {
+      "variant": "25. Добрый проект · Белгород",
+      "task": 1,
+      "chars": 1674,
+      "links": [
+        "downloads/exam-V25.zip"
+      ]
+    },
+    {
+      "variant": "25. Добрый проект · Белгород",
+      "task": 2,
+      "chars": 1225,
+      "links": [
+        "downloads/exam-V25.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "25. Добрый проект · Белгород",
+      "task": 3,
+      "chars": 999,
+      "links": [
+        "downloads/exam-V25.zip"
+      ]
+    },
+    {
+      "variant": "26. Космос знаний · Королёв",
+      "task": 1,
+      "chars": 1675,
+      "links": [
+        "downloads/exam-V26.zip"
+      ]
+    },
+    {
+      "variant": "26. Космос знаний · Королёв",
+      "task": 2,
+      "chars": 1220,
+      "links": [
+        "downloads/exam-V26.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "26. Космос знаний · Королёв",
+      "task": 3,
+      "chars": 999,
+      "links": [
+        "downloads/exam-V26.zip"
+      ]
+    },
+    {
+      "variant": "27. Туризм и технологии · Сочи",
+      "task": 1,
+      "chars": 1692,
+      "links": [
+        "downloads/exam-V27.zip"
+      ]
+    },
+    {
+      "variant": "27. Туризм и технологии · Сочи",
+      "task": 2,
+      "chars": 1242,
+      "links": [
+        "downloads/exam-V27.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "27. Туризм и технологии · Сочи",
+      "task": 3,
+      "chars": 1005,
+      "links": [
+        "downloads/exam-V27.zip"
+      ]
+    },
+    {
+      "variant": "28. Спорт и данные · Саранск",
+      "task": 1,
+      "chars": 1686,
+      "links": [
+        "downloads/exam-V28.zip"
+      ]
+    },
+    {
+      "variant": "28. Спорт и данные · Саранск",
+      "task": 2,
+      "chars": 1239,
+      "links": [
+        "downloads/exam-V28.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "28. Спорт и данные · Саранск",
+      "task": 3,
+      "chars": 1000,
+      "links": [
+        "downloads/exam-V28.zip"
+      ]
+    },
+    {
+      "variant": "29. Материал будущего · Липецк",
+      "task": 1,
+      "chars": 1689,
+      "links": [
+        "downloads/exam-V29.zip"
+      ]
+    },
+    {
+      "variant": "29. Материал будущего · Липецк",
+      "task": 2,
+      "chars": 1243,
+      "links": [
+        "downloads/exam-V29.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "29. Материал будущего · Липецк",
+      "task": 3,
+      "chars": 1003,
+      "links": [
+        "downloads/exam-V29.zip"
+      ]
+    },
+    {
+      "variant": "30. Театр новых медиа · Тула",
+      "task": 1,
+      "chars": 1698,
+      "links": [
+        "downloads/exam-V30.zip"
+      ]
+    },
+    {
+      "variant": "30. Театр новых медиа · Тула",
+      "task": 2,
+      "chars": 1238,
+      "links": [
+        "downloads/exam-V30.zip",
+        "materials/basic-inputs.zip"
+      ]
+    },
+    {
+      "variant": "30. Театр новых медиа · Тула",
+      "task": 3,
+      "chars": 1003,
+      "links": [
+        "downloads/exam-V30.zip"
+      ]
+    }
+  ],
+  "exam": {
+    "beforeReload": "ПРОБНЫЙ ЭКЗАМЕН\n03:30:00\nИдёт отсчёт\nЗавершить\n\nПосле начала время идёт непрерывно, даже при закрытой странице.",
+    "afterReload": "ПРОБНЫЙ ЭКЗАМЕН\n03:30:00\nИдёт отсчёт\nЗавершить\n\nПосле начала время идёт непрерывно, даже при закрытой странице.",
+    "noPause": true,
+    "finished": true
+  },
+  "faq": {
+    "questions": [
+      "Как распределены задания?",
+      "Можно ли пользоваться интернетом и своими заготовками?",
+      "Можно ли выбрать PHP или Flask?",
+      "Что делать, если не включается СУБД или не открываются файлы?",
+      "Задание 1. Что должно получиться после базы и форм?",
+      "Задание 2. Как проверить оформление?",
+      "Задание 3. Как проверить взаимодействие страниц?",
+      "Что проверить перед сдачей?"
+    ],
+    "text": "ЧаВО об экзамене\nКак распределены задания?\n\nВ базовом уровне КИМ 09.02.07-3-2027 три задания на 210 минут: база и сервер — 90 минут, оформление — 60, интерактивность — 60. Продолжайте один веб-проект и сохраняйте коммиты начала и завершения каждого задания.\n\nМожно ли пользоваться интернетом и своими заготовками?\n\nКИМ, с. 23, предусматривает локальную сеть без доступа в интернет. Нужные зависимости и установщики подготовьте дома заранее. На экзамене используйте программы, локальную справку, файлы и носители, разрешённые организаторами. Git работает локально.\n\nМожно ли выбрать PHP или Flask?\n\nКурс показывает обе реализации. На экзамене выбирайте среду и технологии из тех, которые доступны и допускаются на площадке. Уточните это, доступ к СУБД и способ сдачи до начала работы.\n\nЧто делать, если не включается СУБД или не открываются файлы?\n\nСообщите эксперту номер места, ошибку и шаг, на котором она возникла. Для домашнего стенда проверьте журнал XAMPP, состояние службы и порт.\n\nЗадание 1. Что должно получиться после базы и форм?\n\nСоздайте таблицы, связи и собственные файлы проекта. Проверьте регистрацию, вход, создание заявки и кабинет владельца. Под Conf2027 / Demo77 откройте все заявки и измените статус. Сохраните SQL со структурой и данными и PDF своей ER-схемы.\n\nЗадание 2. Как проверить оформление?\n\nСверьте цвета, шрифт и изображения с руководством по стилю. Откройте регистрацию, вход, заявку, кабинет и администратора на широком экране и при 390 × 844. Подписи, ошибки и кнопки должны читаться и помещаться по ширине.\n\nЗадание 3. Как проверить взаимодействие страниц?\n\nОтправьте заявку один раз и дважды обновите кабинет: в базе должна остаться одна новая запись. Проверьте, что отзыв доступен владельцу после завершения мероприятия и сохраняется один раз. Локальные стили, шрифты, изображения и скрипты должны открываться без интернета.\n\nЧто проверить перед сдачей?\n\nПовторите запуск по своему README в чистой папке и восстановите SQL в отдельной пустой базе. Сохраните файлы проекта, SQL, PDF схемы и остальные материалы в папке сдачи по инструктажу."
+  },
+  "timers": {
+    "result": "PASS",
+    "training": {
+      "paused": "03:29:59",
+      "reloaded": "03:29:59",
+      "progressPersisted": true,
+      "finishedChecklistDisabled": true
+    },
+    "exam": {
+      "before": "03:29:59",
+      "after": "03:29:56",
+      "continuesAcrossNavigationAndReload": true,
+      "noPause": true,
+      "finished": true
+    }
+  },
+  "date": "2026-11-20",
+  "code_contrast": {
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "foreground": "rgb(245, 248, 255)",
+    "background": "rgb(32, 42, 58)",
+    "ratio": 13.588411966337945,
+    "viewport": 1440,
+    "documentWidth": 1440
+  }
+}

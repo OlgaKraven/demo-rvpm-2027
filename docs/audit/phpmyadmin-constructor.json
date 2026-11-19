@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "database": "rvmp27_student_php",
+  "server": "10.4.32-MariaDB",
+  "scope": "Tables and keys created through phpMyAdmin constructor; CHECK and seed through its SQL tab.",
+  "metadata_matches_source": {
+    "columns": true,
+    "indexes": true,
+    "tables": true,
+    "relations": true,
+    "checks": true
+  },
+  "column_count": 38,
+  "foreign_keys": 4,
+  "check_constraints": 11,
+  "catalogue_rows_match_original": true,
+  "counts": {
+    "users": 1,
+    "rooms": 6,
+    "applications": 0,
+    "reviews": 0,
+    "rate_limits": 0
+  },
+  "designer_pdf": "GUI export, A3 landscape, one page, five tables and four links visually checked",
+  "sql_export_reimport": {
+    "result": "PASS after adding missing CHECK to own export",
+    "quick_export_lost_all_11_checks": true,
+    "queries": 40,
+    "metadata_equal": true,
+    "all_rows_equal": true
+  },
+  "pending": [],
+  "subsequent_evidence": [
+    "student-php.json",
+    "student-flask.json",
+    "ready-archives.json",
+    "native-clipboard.json"
+  ]
+}

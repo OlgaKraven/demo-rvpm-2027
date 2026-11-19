@@ -1,0 +1,5677 @@
+{
+  "date": "2026-11-19",
+  "result": "PASS — all 89 learning cards, three tabs and three widths",
+  "scope": "Rendered Steps, Conditions/files and Help in PHP and Flask; every code block has one copy button, no empty code, no direct code/ready-project downloads and no instruction to open a ready project; page width fits viewport",
+  "states": 801,
+  "code_block_occurrences": 387,
+  "runs": [
+    {
+      "stack": "php",
+      "width": 390,
+      "cards": 43,
+      "states": 129,
+      "blocks": 56,
+      "records": [
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 6,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        }
+      ],
+      "errors": []
+    },
+    {
+      "stack": "php",
+      "width": 768,
+      "cards": 43,
+      "states": 129,
+      "blocks": 56,
+      "records": [
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 6,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        }
+      ],
+      "errors": []
+    },
+    {
+      "stack": "php",
+      "width": 1440,
+      "cards": 43,
+      "states": 129,
+      "blocks": 56,
+      "records": [
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 6,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        }
+      ],
+      "errors": []
+    },
+    {
+      "stack": "mysql",
+      "width": 390,
+      "cards": 46,
+      "states": 138,
+      "blocks": 73,
+      "records": [
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 8,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 7,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 390
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 390
+        }
+      ],
+      "errors": []
+    },
+    {
+      "stack": "mysql",
+      "width": 768,
+      "cards": 46,
+      "states": 138,
+      "blocks": 73,
+      "records": [
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 8,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 7,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 768
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 768
+        }
+      ],
+      "errors": []
+    },
+    {
+      "stack": "mysql",
+      "width": 1440,
+      "cards": 46,
+      "states": 138,
+      "blocks": 73,
+      "records": [
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "documents",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "er",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 4,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "database",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 8,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 7,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 7,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 8,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Шаги",
+          "blocks": 3,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "backend",
+          "step": 9,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "design",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Шаги",
+          "blocks": 2,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "interaction",
+          "step": 6,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 1,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 2,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 3,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Шаги",
+          "blocks": 1,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 4,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Шаги",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Условие и файлы",
+          "blocks": 0,
+          "width": 1440
+        },
+        {
+          "stage": "delivery",
+          "step": 5,
+          "view": "Справка",
+          "blocks": 0,
+          "width": 1440
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "clipboard_scope": "System clipboard mechanism independently checked in four representative contexts, native-clipboard.json"
+}

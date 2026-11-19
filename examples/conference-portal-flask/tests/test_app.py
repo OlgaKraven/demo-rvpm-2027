@@ -115,14 +115,18 @@ def test_regular_user_cannot_open_admin(client):
     assert client.get("/admin").status_code == 403
 
 
-def test_complete_booking_journey(app, client):
+@pytest.mark.parametrize(('conference_name', 'comment'), [
+    pytest.param('Технологии будущего', 'Отличное пространство и организация.', id='regular'),
+    pytest.param('Я' * 120, 'Я' * 500, id='unicode-limits'),
+])
+def test_complete_booking_journey(app, client, conference_name, comment):
     register(client)
     assert "Мои заявки" in login(client).get_data(as_text=True)
     future = (date.today() + timedelta(days=14)).isoformat()
     created = client.post("/applications/new", data={
         "_csrf_token": csrf(client, "/applications/new"),
         "room_id": "1",
-        "conference_name": "Технологии будущего",
+        "conference_name": conference_name,
         "event_date": future,
         "start_time": "10:30",
         "attendees": "50",
@@ -141,7 +145,7 @@ def test_complete_booking_journey(app, client):
 
     logout(client)
     assert "Панель администратора" in login(client, "Conf2027", "Demo77").get_data(as_text=True)
-    assert "Технологии будущего" in client.get("/admin?status=new").get_data(as_text=True)
+    assert conference_name in client.get("/admin?status=new").get_data(as_text=True)
     changed = client.post("/admin/applications/1/status", data={
         "_csrf_token": csrf(client, "/admin"),
         "status": "completed",
@@ -153,11 +157,13 @@ def test_complete_booking_journey(app, client):
     reviewed = client.post("/applications/1/review", data={
         "_csrf_token": csrf(client, "/dashboard"),
         "rating": "5",
-        "comment": "Отличное пространство и организация.",
+        "comment": comment,
     }, follow_redirects=True)
     assert "Отзыв опубликован" in reviewed.get_data(as_text=True)
     with app.app_context():
-        assert get_db().execute("SELECT rating FROM reviews WHERE application_id=1").fetchone()[0] == 5
+        saved = get_db().execute("SELECT rating, comment FROM reviews WHERE application_id=1").fetchone()
+        assert saved[0] == 5
+        assert saved[1] == comment
 
 
 def test_application_rejects_over_capacity(client):

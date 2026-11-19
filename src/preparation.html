@@ -9,15 +9,12 @@
   pre { white-space: pre-wrap; }
   code { overflow-wrap: anywhere; }
   summary { cursor: pointer; font-weight: 600; }
+  img { max-width: 100%; height: auto; }
+  [data-check-code] { margin-block: 1rem; }
 </style>
 <main>
   <h1>0. Установка и настройка программ</h1>
-  <ol>
-    <li>Скачайте <a href="https://update.code.visualstudio.com/latest/win32-x64-user/stable">VS Code для Windows x64</a> и <a href="https://git-scm.com/install/windows">Git for Windows</a>. В установщике Git разрешите использование Git из командной строки. Проверьте <code>git --version</code> в новом окне PowerShell.</li>
-    <li>Скачайте <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download">XAMPP для Windows</a>. Выберите Apache, PHP, MySQL (MariaDB) и phpMyAdmin. В XAMPP Control Panel запустите Apache и MySQL. Откройте <code>http://localhost/phpmyadmin</code> и проверьте подключение к базе. Если порт Apache изменён, укажите его в адресе браузера.</li>
-    <li>Для Flask скачайте <a href="https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe">Python 3.12 для Windows x64</a>. Включите Python Launcher и pip. Проверьте <code>py -3.12 --version</code>. Папка <code>wheels</code> из ZIP рассчитана на эту версию и архитектуру.</li>
-    <li>Для диаграмм скачайте <a href="https://github.com/jgraph/drawio-desktop/releases/latest">diagrams.net Desktop</a> (Windows installer) или используйте Designer в phpMyAdmin. Проверьте экспорт диаграммы в PDF. Распакуйте ZIP через «Извлечь всё».</li>
-  </ol>
+  <!-- PROGRAMS -->
   <section id="flask">
     <h2>Flask и MySQL без интернета</h2>
     <ol>
@@ -25,7 +22,7 @@
       <li>Откройте PowerShell в распакованной папке и выполните команды. Подставьте порт и реквизиты своего MySQL. Пустой пароль показан для стандартного локального XAMPP.</li>
     </ol>
     <pre><code>py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --no-index --find-links .\wheels -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install --no-index --disable-pip-version-check --no-cache-dir --find-links .\wheels -r requirements.txt
 $env:DB_BACKEND='mysql'
 $env:MYSQL_HOST='127.0.0.1'
 $env:MYSQL_PORT='3306'
@@ -58,4 +55,5 @@ $env:MYSQL_PASSWORD=''
     <details><summary>Что проверить перед сдачей?</summary><p>Откройте сайт локально, проверьте регистрацию, заявку, смену статуса, допустимость отзыва и мобильный экран. Сохраните SQL, файлы проекта и остальные материалы в папке сдачи по инструктажу.</p></details>
   </section>
 </main>
+<script src="copy-code.js"></script>
 </html>

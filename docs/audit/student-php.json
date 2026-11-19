@@ -1,0 +1,52 @@
+{
+  "result": "PASS — student construction, clean delivery and final course/presentation checks",
+  "date": "2026-11-19",
+  "construction": "Empty folder; initial files and subsequent replacements read from rendered learning cards. Only raw media/fonts ZIP extracted.",
+  "php_files_match_reference_after_eol_normalization": true,
+  "database": "Private copy restored from the learner's corrected SQL export; other courses untouched",
+  "passed": [
+    "Six-room catalogue",
+    "Short username rejected without a record",
+    "Registration, wrong and correct password, logout, guest dashboard redirect",
+    "Past date and 121 attendees rejected without a record",
+    "Two accounts see only their own applications",
+    "Administrator sets scheduled and completed; owners each save one review",
+    "Status filter, empty search, clearing filters",
+    "Local PT Sans, guide colours, H1 36px, two selects 44px, keyboard focus 3px",
+    "POST 302, dashboard GET 200, two reloads GET 200; one application added",
+    "Sending label and disabled observed in actual DOM mutations; button restored after error",
+    "Reduced motion gives 0s transition",
+    "Review absent before completion, saved once after completion",
+    "EXPLAIN and four intended application indexes",
+    "Catalogue images, fonts, login and booking while external browser requests are blocked",
+    "PHP HTTP smoke: validation, duplicates, roles, CSRF, ownership, booking, statuses and review",
+    "Actual MariaDB roundtrip: title 120 Cyrillic characters, comment 500",
+    "Paint: open original 2000 x 1333, retain proportions, resize to 960 x 639, Save As JPEG to working static/img/auditorium-loft.jpg",
+    "Visible Edge: real browser menu and toolbar 200%; login as student27, submit yesterday date, date error and send button readable together; innerWidth 620, document width 613, devicePixelRatio 2",
+    "Invalid zoom test added zero rows; native menu and error screenshots saved in own student docs",
+    "Actual Windows clipboard verified in four representative course/preparation/presentation contexts; see native-clipboard.json",
+    "Design Git d5dd470; interaction start 1c69ed3 and completion 99c1b17; six interaction steps repeated after design checkpoint, see student-php-interaction.json",
+    "Own clean delivery and README: all metadata and catalogue fields match, both roles and negative scenarios pass, see student-php-delivery.json"
+  ],
+  "long_title_layout": {
+    "viewport": 390,
+    "before": 1703,
+    "after": 390
+  },
+  "offline_scope": "Only the isolated browser permits loopback requests and aborts external requests. Computer internet stayed on.",
+  "pending": [],
+  "photo": {
+    "original_bytes": 711643,
+    "working_bytes": 221843,
+    "original_unchanged_vs_raw_zip": true,
+    "width": 960,
+    "height": 639
+  },
+  "final_evidence": [
+    "course-final.json",
+    "course-global-final.json",
+    "presentations-final.json",
+    "native-clipboard.json",
+    "student-php-delivery.json"
+  ]
+}

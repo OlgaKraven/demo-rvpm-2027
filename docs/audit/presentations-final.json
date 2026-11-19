@@ -1,0 +1,5247 @@
+{
+  "date": "2026-11-19",
+  "result": "PASS — 853 slides in presenter and audience, final PDFs and controls",
+  "presentations": [
+    {
+      "stack": "php",
+      "pages": 363,
+      "all_slides_shown_in_both_windows": true,
+      "presenter_viewport": [
+        1440,
+        1000
+      ],
+      "audience_viewport": [
+        1280,
+        720
+      ],
+      "code_slides": 82,
+      "table_slides": 35,
+      "image_occurrences": 393,
+      "scope": "Actual UI Next across every slide; exact visible code/table cells, image decode, copy-control presence, geometry and broadcast synchronization",
+      "controls": {
+        "initial": 363,
+        "back": 362,
+        "tableSlide": 104,
+        "columns": 5,
+        "lateReloadRestoresTable": true,
+        "audienceCannotNavigate": true,
+        "notesPrivate": true,
+        "pointerShowsAndHides": true,
+        "fullscreenEntersAndExits": true,
+        "stopClosesAudience": true
+      },
+      "pdf": {
+        "pages": 363,
+        "sha256": "ae136fc9563cf592f070f0aaa1ee3815d4f8eb94e8c289c76f73b0ece499f15b",
+        "export_layout_errors": 0,
+        "broken_images": 0,
+        "wrong_links": 0,
+        "table_cell_errors": 0
+      },
+      "checked": [
+        {
+          "slide": 1,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 2,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 3,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 4,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 5,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 6,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 7,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 8,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 9,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 10,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 11,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 12,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 13,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 14,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 15,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 16,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 17,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 18,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 19,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 20,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 21,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 22,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 23,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 24,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 25,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 26,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 27,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 28,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 29,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 30,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 31,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 32,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 33,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 34,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 35,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 36,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 37,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 38,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 39,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 40,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 41,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 42,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 43,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 44,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 45,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 46,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 47,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 48,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 49,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 50,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 51,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 52,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 53,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 54,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 55,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 56,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 57,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 58,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 59,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 60,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 61,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 62,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 63,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 64,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 65,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 66,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 67,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 68,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 69,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 70,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 71,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 72,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 73,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 74,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 75,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 76,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 77,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 78,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 79,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 80,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 81,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 82,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 83,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 84,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 85,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 86,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 87,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 88,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 89,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 90,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 91,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 92,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 93,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 94,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 95,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 96,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 97,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 98,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 99,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 100,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 101,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 102,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 103,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 104,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 105,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 106,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 107,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 108,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 109,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 110,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 111,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 112,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 113,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 114,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 115,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 116,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 117,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 118,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 119,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 120,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 121,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 122,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 123,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 124,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 125,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 126,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 127,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 128,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 129,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 130,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 131,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 132,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 133,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 134,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 135,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 136,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 137,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 138,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 139,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 140,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 141,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 142,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 143,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 144,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 145,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 146,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 147,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 148,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 149,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 150,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 151,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 152,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 153,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 154,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 155,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 156,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 157,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 158,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 159,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 160,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 161,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 162,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 163,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 164,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 165,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 166,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 167,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 168,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 169,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 170,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 171,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 172,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 173,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 174,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 175,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 176,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 177,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 178,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 179,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 180,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 181,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 182,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 183,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 184,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 185,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 186,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 187,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 188,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 189,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 190,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 191,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 192,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 193,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 194,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 195,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 196,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 197,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 198,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 199,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 200,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 201,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 202,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 203,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 204,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 205,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 206,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 207,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 208,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 209,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 210,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 211,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 212,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 213,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 214,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 215,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 216,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 217,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 218,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 219,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 220,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 221,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 222,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 223,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 224,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 225,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 226,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 227,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 228,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 229,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 230,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 231,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 232,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 233,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 234,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 235,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 236,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 237,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 238,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 239,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 240,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 241,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 242,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 243,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 244,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 245,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 246,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 247,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 248,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 249,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 250,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 251,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 252,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 253,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 254,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 255,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 256,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 257,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 258,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 259,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 260,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 261,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 262,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 263,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 264,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 265,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 266,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 267,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 268,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 269,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 270,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 271,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 272,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 273,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 274,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 275,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 276,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 277,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 278,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 279,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 280,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 281,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 282,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 283,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 284,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 285,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 286,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 287,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 288,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 289,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 290,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 291,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 292,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 293,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 294,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 295,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 296,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 297,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 298,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 299,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 300,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 301,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 302,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 303,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 304,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 305,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 306,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 307,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 308,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 309,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 310,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 311,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 312,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 313,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 314,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 315,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 316,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 317,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 318,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 319,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 320,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 321,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 322,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 323,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 324,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 325,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 326,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 327,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 328,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 329,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 330,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 331,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 332,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 333,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 334,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 335,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 336,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 337,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 338,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 339,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 340,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 341,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 342,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 343,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 344,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 345,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 346,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 347,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 348,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 349,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 350,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 351,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 352,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 353,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 354,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 355,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 356,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 357,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 358,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 359,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 360,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 361,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 362,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 363,
+          "code": false,
+          "table": true,
+          "images": 1
+        }
+      ]
+    },
+    {
+      "stack": "mysql",
+      "pages": 490,
+      "all_slides_shown_in_both_windows": true,
+      "presenter_viewport": [
+        1440,
+        1000
+      ],
+      "audience_viewport": [
+        1280,
+        720
+      ],
+      "code_slides": 184,
+      "table_slides": 35,
+      "image_occurrences": 522,
+      "scope": "Actual UI Next across every slide; exact visible code/table cells, image decode, copy-control presence, geometry and broadcast synchronization",
+      "controls": {
+        "initial": 490,
+        "back": 489,
+        "tableSlide": 104,
+        "columns": 5,
+        "lateReloadRestoresTable": true,
+        "audienceCannotNavigate": true,
+        "notesPrivate": true,
+        "pointerShowsAndHides": true,
+        "fullscreenEntersAndExits": true,
+        "stopClosesAudience": true
+      },
+      "pdf": {
+        "pages": 490,
+        "sha256": "7ca0a48d2892c50169959e492e06cc8bc7deaf63d995da2d3418988805cbed0f",
+        "export_layout_errors": 0,
+        "broken_images": 0,
+        "wrong_links": 0,
+        "table_cell_errors": 0
+      },
+      "checked": [
+        {
+          "slide": 1,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 2,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 3,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 4,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 5,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 6,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 7,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 8,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 9,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 10,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 11,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 12,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 13,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 14,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 15,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 16,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 17,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 18,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 19,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 20,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 21,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 22,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 23,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 24,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 25,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 26,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 27,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 28,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 29,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 30,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 31,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 32,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 33,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 34,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 35,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 36,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 37,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 38,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 39,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 40,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 41,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 42,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 43,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 44,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 45,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 46,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 47,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 48,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 49,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 50,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 51,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 52,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 53,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 54,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 55,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 56,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 57,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 58,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 59,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 60,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 61,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 62,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 63,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 64,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 65,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 66,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 67,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 68,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 69,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 70,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 71,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 72,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 73,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 74,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 75,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 76,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 77,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 78,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 79,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 80,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 81,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 82,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 83,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 84,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 85,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 86,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 87,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 88,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 89,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 90,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 91,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 92,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 93,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 94,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 95,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 96,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 97,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 98,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 99,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 100,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 101,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 102,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 103,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 104,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 105,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 106,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 107,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 108,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 109,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 110,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 111,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 112,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 113,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 114,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 115,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 116,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 117,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 118,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 119,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 120,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 121,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 122,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 123,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 124,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 125,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 126,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 127,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 128,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 129,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 130,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 131,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 132,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 133,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 134,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 135,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 136,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 137,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 138,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 139,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 140,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 141,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 142,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 143,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 144,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 145,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 146,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 147,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 148,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 149,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 150,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 151,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 152,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 153,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 154,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 155,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 156,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 157,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 158,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 159,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 160,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 161,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 162,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 163,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 164,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 165,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 166,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 167,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 168,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 169,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 170,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 171,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 172,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 173,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 174,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 175,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 176,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 177,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 178,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 179,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 180,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 181,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 182,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 183,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 184,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 185,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 186,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 187,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 188,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 189,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 190,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 191,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 192,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 193,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 194,
+          "code": false,
+          "table": true,
+          "images": 1
+        },
+        {
+          "slide": 195,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 196,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 197,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 198,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 199,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 200,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 201,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 202,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 203,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 204,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 205,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 206,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 207,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 208,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 209,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 210,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 211,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 212,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 213,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 214,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 215,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 216,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 217,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 218,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 219,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 220,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 221,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 222,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 223,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 224,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 225,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 226,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 227,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 228,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 229,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 230,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 231,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 232,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 233,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 234,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 235,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 236,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 237,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 238,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 239,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 240,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 241,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 242,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 243,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 244,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 245,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 246,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 247,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 248,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 249,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 250,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 251,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 252,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 253,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 254,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 255,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 256,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 257,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 258,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 259,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 260,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 261,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 262,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 263,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 264,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 265,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 266,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 267,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 268,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 269,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 270,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 271,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 272,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 273,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 274,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 275,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 276,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 277,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 278,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 279,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 280,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 281,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 282,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 283,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 284,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 285,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 286,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 287,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 288,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 289,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 290,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 291,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 292,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 293,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 294,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 295,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 296,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 297,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 298,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 299,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 300,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 301,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 302,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 303,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 304,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 305,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 306,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 307,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 308,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 309,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 310,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 311,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 312,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 313,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 314,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 315,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 316,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 317,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 318,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 319,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 320,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 321,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 322,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 323,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 324,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 325,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 326,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 327,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 328,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 329,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 330,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 331,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 332,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 333,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 334,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 335,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 336,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 337,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 338,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 339,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 340,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 341,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 342,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 343,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 344,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 345,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 346,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 347,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 348,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 349,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 350,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 351,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 352,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 353,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 354,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 355,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 356,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 357,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 358,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 359,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 360,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 361,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 362,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 363,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 364,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 365,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 366,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 367,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 368,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 369,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 370,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 371,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 372,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 373,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 374,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 375,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 376,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 377,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 378,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 379,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 380,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 381,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 382,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 383,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 384,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 385,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 386,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 387,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 388,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 389,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 390,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 391,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 392,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 393,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 394,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 395,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 396,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 397,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 398,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 399,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 400,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 401,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 402,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 403,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 404,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 405,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 406,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 407,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 408,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 409,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 410,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 411,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 412,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 413,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 414,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 415,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 416,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 417,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 418,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 419,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 420,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 421,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 422,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 423,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 424,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 425,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 426,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 427,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 428,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 429,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 430,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 431,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 432,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 433,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 434,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 435,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 436,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 437,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 438,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 439,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 440,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 441,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 442,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 443,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 444,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 445,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 446,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 447,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 448,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 449,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 450,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 451,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 452,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 453,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 454,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 455,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 456,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 457,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 458,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 459,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 460,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 461,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 462,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 463,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 464,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 465,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 466,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 467,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 468,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 469,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 470,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 471,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 472,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 473,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 474,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 475,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 476,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 477,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 478,
+          "code": true,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 479,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 480,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 481,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 482,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 483,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 484,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 485,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 486,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 487,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 488,
+          "code": false,
+          "table": false,
+          "images": 2
+        },
+        {
+          "slide": 489,
+          "code": false,
+          "table": false,
+          "images": 1
+        },
+        {
+          "slide": 490,
+          "code": false,
+          "table": true,
+          "images": 1
+        }
+      ]
+    }
+  ],
+  "pdf_visual_scope": "Poppler rendered selected installer, five-column constructor, initial/final README, launch commands and revised role instructions; images reviewed at 1280px, no clipping, lost glyphs or overlaps",
+  "pdf_pages_visually_reviewed": {
+    "php": {
+      "pages": 363,
+      "render": [
+        22,
+        104,
+        334,
+        339,
+        341,
+        342,
+        336
+      ],
+      "readme": [
+        334,
+        335,
+        336,
+        337,
+        338,
+        339
+      ]
+    },
+    "mysql": {
+      "pages": 490,
+      "render": [
+        22,
+        104,
+        458,
+        464,
+        466,
+        467,
+        460,
+        461
+      ],
+      "readme": [
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464
+      ]
+    }
+  }
+}

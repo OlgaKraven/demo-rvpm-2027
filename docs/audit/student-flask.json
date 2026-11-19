@@ -1,0 +1,140 @@
+{
+  "result": "PASS — student construction, clean delivery and final course/presentation checks",
+  "date": "2026-11-19",
+  "construction": "Empty folder; six initial files and all nine backend lessons read from rendered course DOM; only raw assets and wheels extracted. Student-owned common SQL export restored through phpMyAdmin GUI, with the Flask seed read from the rendered lesson.",
+  "database": "rvmp27_student_flask on private MariaDB 10.4.32 port 43327",
+  "common_constructor_scope": "The identical 38-column constructor was completed earlier for PHP. For Flask its learner-owned structure was reused; all columns, indexes, four FK and eleven CHECK equal that baseline.",
+  "backend_ast_equals_reference": true,
+  "templates_and_connector_equal_reference": true,
+  "steps": [
+    {
+      "step": 1,
+      "created_or_replaced": [],
+      "time": "2026-11-19T18:49:38.545Z"
+    },
+    {
+      "step": 2,
+      "created_or_replaced": [
+        "templates/_room_card.html",
+        "templates/index.html",
+        "templates/rooms.html",
+        "templates/room_detail.html",
+        "app.py",
+        "app.py"
+      ],
+      "time": "2026-11-19T18:51:21.055Z"
+    },
+    {
+      "step": 3,
+      "created_or_replaced": [
+        "templates/register.html",
+        "app.py"
+      ],
+      "time": "2026-11-19T18:51:51.522Z"
+    },
+    {
+      "step": 4,
+      "created_or_replaced": [
+        "templates/login.html",
+        "app.py"
+      ],
+      "time": "2026-11-19T18:52:51.814Z"
+    },
+    {
+      "step": 5,
+      "created_or_replaced": [
+        "templates/dashboard.html",
+        "app.py"
+      ],
+      "time": "2026-11-19T18:53:54.253Z"
+    },
+    {
+      "step": 6,
+      "created_or_replaced": [
+        "templates/application_form.html",
+        "app.py"
+      ],
+      "time": "2026-11-19T18:54:22.238Z"
+    },
+    {
+      "step": 7,
+      "created_or_replaced": [
+        "templates/admin.html",
+        "app.py"
+      ],
+      "time": "2026-11-19T18:55:20.979Z"
+    },
+    {
+      "step": 8,
+      "created_or_replaced": [
+        "app.py"
+      ],
+      "time": "2026-11-19T18:56:24.988Z"
+    },
+    {
+      "step": 9,
+      "created_or_replaced": [
+        "tests/test_portal.py"
+      ],
+      "time": "2026-11-19T18:57:32.676Z"
+    }
+  ],
+  "passed": [
+    "Initial stub",
+    "Catalogue: six rooms; Baltika detail capacity 120",
+    "Short login rejected, no inserted user; correct registration -> login stub",
+    "Wrong and correct passwords; dashboard stub; logout and guest redirect",
+    "Empty real dashboard",
+    "Past date and capacity 121 separately rejected without a record",
+    "Correct application 12 participants, onsite, future date",
+    "Separate administrator session: new -> scheduled -> completed visible to owner",
+    "Review after completion, two reloads, one record",
+    "Student-created tests/test_portal.py: 4 passed in 0.23s",
+    "Palette H1 rgb(13,71,161), background rgb(248,249,250); H1 36px; local PT Sans loaded",
+    "Paint-verified common image reused: 960 x 639, 221843 bytes; raw original separately preserved",
+    "390px forms, dashboard and admin; actual guest registration/login tested",
+    "Room/payment selects 44px; list test persisted sbp/new",
+    "Admin filters: new -> one record; absent search -> zero and empty message; reset -> two",
+    "Keyboard Tab and Shift+Tab: blue 3px focus outline",
+    "Actual visible Chrome native zoom 200%: menu/toolbar confirms 200%, login -> booking, past date submitted, error and send button fully readable together without horizontal scrollbar. Screenshot saved in learner docs.",
+    "Private student Git: design checkpoint 8c0fdc6, interaction start 961d032; correct author and committer",
+    "Interaction 1: POST 302 -> GET 200, two reloads GET 200; application count 3 -> 4, one matching title",
+    "Interaction 2: observed DOM mutations label Sending and disabled; server rejects past date; restored button sends corrected date; hint 36 -> 120; reduced-motion transition 0s",
+    "Interaction 3: new application 6 has no review form; admin completed; separate student28 dashboard empty; owner saves one rating-5 review; reload has no second form",
+    "Interaction 4: three lesson SQL statements executed in phpMyAdmin GUI. user id 2; four indexes present; EXPLAIN possible_keys applications_user_idx, key NULL, ALL, 6 rows",
+    "Interaction 5/6: isolated browser aborts non-loopback requests; six catalogue photos, CSS, JS and local PT Sans return 200; logout, login and saving work; two reloads keep one booking. No physical network disconnect.",
+    "Console error check: zero JavaScript errors",
+    "Clean own delivery copy: see student-flask-delivery.json; full roles and negative scenarios, 4 read-only tests pass",
+    "Actual Windows clipboard: course files, preparation commands and full presentation snippet match; see native-clipboard.json"
+  ],
+  "long_title_layout": {
+    "characters": 120,
+    "viewport": 390,
+    "before": 1269,
+    "after": 390,
+    "fix": "Include admin-application-card in the same overflow-wrap rule"
+  },
+  "counts_after_design_checks": {
+    "users": 2,
+    "rooms": 6,
+    "applications": 3,
+    "reviews": 1,
+    "rate_limits": 1
+  },
+  "pending": [],
+  "native_zoom_invalid_booking_rows": 0,
+  "counts_after_interaction_checks": {
+    "users": 3,
+    "rooms": 6,
+    "applications": 8,
+    "reviews": 2,
+    "rate_limits": 1
+  },
+  "final_evidence": [
+    "course-final.json",
+    "course-global-final.json",
+    "presentations-final.json",
+    "native-clipboard.json",
+    "student-flask-delivery.json"
+  ]
+}

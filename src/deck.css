@@ -194,6 +194,11 @@ body.printing #print-pages{display:block}
 
 .slide .field-table { table-layout: fixed; }
 .slide .field-table th:first-child { width: 34%; }
+.slide .field-table.columns-5 th:nth-child(1) { width: 24%; }
+.slide .field-table.columns-5 th:nth-child(2) { width: 14%; }
+.slide .field-table.columns-5 th:nth-child(3) { width: 10%; }
+.slide .field-table.columns-5 th:nth-child(4) { width: 30%; }
+.slide .field-table.columns-5 th:nth-child(5) { width: 22%; }
 .slide .field-table th, .slide .field-table td {
   text-align: left;
   white-space: normal;

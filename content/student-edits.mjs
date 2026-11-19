@@ -1,4 +1,5 @@
 import {databaseCheckpoints,backendCheckpoints} from './data-checkpoints.mjs';
+import {studentReadme} from './student-readme.mjs';
 
 export const starterCss = `* { box-sizing: border-box; }
 body { margin: 0; font: 1rem/1.5 system-ui, sans-serif; }
@@ -32,6 +33,11 @@ h3 { font-size: 18px; }
   border-radius: .75rem;
 }
 button, .button, .btn, .nav-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  text-decoration: none;
   background: var(--primary);
   color: #061729;
   border: 1px solid transparent;
@@ -70,6 +76,7 @@ const adaptive = `.container, main { width: min(100%, 72rem); margin-inline: aut
   gap: 1rem;
 }
 .grid > *, .room-grid > *, .applications-grid > *, .form-card { min-width: 0; }
+.card, .room-card, .application-card, .admin-application-card { overflow-wrap: anywhere; }
 form :is(input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]), select, textarea) {
   display: block;
   width: 100%;
@@ -215,6 +222,14 @@ export function studentChecks(stack) {
 git add static docs
 git diff --cached --stat
 git commit -m "Задание 2: стиль и адаптация проверены"`)]
+    },
+    delivery:{
+      0:[{
+        target:'README.md · дополните перед проверкой копии',
+        instruction:'Откройте свой README.md в VS Code. Дополните его по образцу ниже до копирования проекта. Подставьте своё название, имя новой базы, реквизиты и порт. Сохраните файл. В отдельную папку перенесите исходники, static, шаблоны Flask, SQL, docs, README, .gitignore и для Flask requirements.txt с wheels; .venv и кэши не копируйте.',
+        code:studentReadme(stack)
+      }],
+      ...(!php?{1:[terminal('Оставьте свой сервер включённым. Во втором терминале из папки проекта укажите его адрес; если изменяли порт, замените 5017. Четыре проверки читают страницы, сценарий ролей выполняйте отдельно.',"$env:PORTAL_TEST_URL='http://127.0.0.1:5017'\n.\\.venv\\Scripts\\python.exe -m pytest -q tests/test_portal.py")]}:{})
     },
     interaction:{
       0:[

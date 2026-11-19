@@ -1,0 +1,60 @@
+{
+  "result": "PASS — six interaction steps repeated after the completed design checkpoint",
+  "design_commit": "d5dd470",
+  "interaction_start": "1c69ed3",
+  "total_before": 8,
+  "redirect_before": 1,
+  "step1": {
+    "total_after": 9,
+    "redirect_after": 2,
+    "network": "POST 302; GET 200; two reloads GET 200"
+  },
+  "step2": {
+    "sending_label": true,
+    "disabled": true,
+    "error_recovered": true,
+    "corrected_saved_once": true,
+    "reduced_motion": "0s"
+  },
+  "step3": {
+    "application": 11,
+    "before_reviews": 0,
+    "after_reviews": 1,
+    "status": "completed",
+    "rating": 5,
+    "other_owner_has_no_application": true
+  },
+  "step4": {
+    "method": "phpMyAdmin SQL tab",
+    "user_id": 3,
+    "possible_keys": "applications_user_idx",
+    "key": null,
+    "access": "ALL",
+    "rows": 11,
+    "indexes": [
+      "applications_user_idx",
+      "applications_room_idx",
+      "applications_event_date_idx",
+      "applications_status_idx"
+    ]
+  },
+  "step5": {
+    "isolated_browser_aborts_external_requests": true,
+    "physical_network_unchanged": true,
+    "images": 6,
+    "local_font": "PT Sans",
+    "resource_statuses": 200,
+    "external_urls": [],
+    "logout_login_and_booking": true
+  },
+  "step6": {
+    "actual_report": "docs/QA.md",
+    "counts": {
+      "users": 5,
+      "rooms": 6,
+      "applications": 12,
+      "reviews": 5,
+      "rate_limits": 2
+    }
+  }
+}

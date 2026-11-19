@@ -9,7 +9,7 @@ const lessonTabs=[['brief','Условие и файлы'],['steps','Шаги'],
 const helpTabs=[['summary','Объяснение'],['example','Пример'],['terms','Термины'],['errors','Ошибки']];
 let helpTopic='summary';
 let tourActive=false, tourErStep=false, tourCleanup=null, destroyER=null;
-const modes=[['overview','Обзор'],['learn','Обучение'],['training','Тренировка'],['mock','Пробный экзамен'],['examples','Примеры'],['teacher','Преподавателю']];
+const modes=[['overview','Обзор'],['learn','Обучение'],['training','Тренировка'],['mock','Пробный экзамен'],['faq','ЧаВО'],['examples','Примеры'],['teacher','Преподавателю']];
 db=db==='php'?'php':'mysql';
 function lessonProgressKey(kind, id) {
   return ['database','backend'].includes(id) ? `${kind}:${db}:${id}` : `${kind}:${id}`;
@@ -68,6 +68,7 @@ function S(stack=db){return stack==='php'?D.phpStages:D.stages;}function codes()
 const btn=(text,attrs='',primary=false)=>`<button class="btn${primary?' primary':''}" ${attrs}>${text}</button>`;
 const link=(text,path)=>`<a class="btn" href="${path}" target="_blank" rel="noopener">${text}</a>`;
 const modeIcons = {
+  faq: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm0 2a3.5 3.5 0 0 0-3.5 3.5h2a1.5 1.5 0 1 1 2.6 1c-1 .9-2.1 1.7-2.1 3.5h2c0-1 1-1.6 2.2-2.7.6-.5 1.3-1.5 1.3-2.8A3.5 3.5 0 0 0 12 6zm-1 10v2h2v-2z',
   overview: 'M12 2.5 2 11h3v9a1 1 0 0 0 1 1h3.5v-6h5v6H18a1 1 0 0 0 1-1v-9h3z',
   learn: 'M6 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm3.5 2h6a4 4 0 0 1 0 8H9a2 2 0 1 0 0 4h7.2l-2-2 1.4-1.4L20 19l-4.4 4.4-1.4-1.4 2-2H9a4 4 0 1 1 0-8h6.5a2 2 0 0 0 0-4h-6z',
   training: 'M9 1h6v3H9zM11 4h2v1h-2zM19 7l1.8-1.8 1.4 1.4-1.8 1.8zM21 14a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-10-5h2v4.5l2.2 2.2-1.4 1.4-2.8-2.8z',
@@ -183,6 +184,10 @@ function practiceNavigation(tasks) {
 function header(title,description) {
   return `<header class="workspace-intro"><div><h1>${E(title)}</h1>${description?`<p>${E(description)}</p>`:''}</div></header>`;
 }
+function faq() {
+  return header('ЧаВО об экзамене')+D.examFaq.map(([question,answer])=>
+    `<article class="route-panel"><h2>${E(question)}</h2><p>${E(answer)}</p></article>`).join('');
+}
 function codePanel(text,label='Копировать код') {
   return `<div data-check-code>
     ${btn(label,'type="button" data-copy-block')}
@@ -190,43 +195,20 @@ function codePanel(text,label='Копировать код') {
   </div>`;
 }
 function starterIntro() {
-  const php=db==='php';
-  const command=php?`$env:MYSQL_DATABASE='conference_php_2027'
-& C:\\xampp\\php\\php.exe -S 127.0.0.1:8087`:`py -3.12 -m venv .venv
-.\\.venv\\Scripts\\python.exe -m pip install --no-index --find-links .\\wheels -r requirements.txt
-$env:DB_BACKEND='mysql'
-$env:MYSQL_DATABASE='conference_rvpm_2027'
-.\\.venv\\Scripts\\python.exe -m flask --app app run --port 5017`;
-  const purposes={
-    'lib.php':'Открывает соединение PDO и собирает общие части страницы. Переменные MYSQL_* задают параметры вашей базы.',
-    'index.php':'Принимает запрос, выбирает страницу и запускает сессию. Комментарии BEGIN и END отмечают участки для обработчиков следующих шагов.',
-    'requirements.txt':'Указывает pip, какие библиотеки понадобятся Flask, тестам и MySQL.',
-    'mysql_backend.py':'Передаёт запросы MySQL через PyMySQL и возвращает записи, которые обработчик читает по имени поля.',
-    'app.py':'Создаёт приложение и маршруты. У каждого маршрута пока короткий ответ. По одному замените эти ответы в следующих карточках.',
-    'templates/base.html':'Задаёт общую разметку и блок, куда Jinja подставляет содержимое страницы.',
-    'templates/error.html':'Показывает сообщение через общий шаблон при ошибке.',
-    'static/style.css':'Задаёт исходные стили. Цвета и адаптацию добавите после форм.',
-    'static/css/style.css':'Задаёт исходные стили. Цвета и адаптацию добавите после форм.'
-  };
-  return `<ol>
-    <li>Откройте папку, где вы создали README.md и database.sql. Создайте в ней <code>static</code>${php?'':' с подпапками <code>css</code> и <code>js</code>, а рядом со static — <code>templates</code>'}.</li>
-    <li>Создайте пустой <code>${php?'static/app.js':'static/js/app.js'}</code>. Позже вы добавите в него обработчики для форм.</li>
-    <li>Скачайте <a href="downloads/portal-assets.zip" download>изображения и шрифты</a>. Положите папки из ZIP в свой проект, сохранив пути <code>static/img</code> и <code>static/fonts</code>.</li>
-    ${php?'':`<li>Распакуйте <a href="downloads/flask-wheels.zip" download>библиотеки Python</a> так, чтобы папка <code>wheels</code> лежала в корне вашего проекта.</li>`}
-    <li>Создайте каждый файл из списка ниже, вставьте в него показанный код и сохраните в UTF-8.</li>
-  </ol>
+  const php=db==='php',plan=D.projectSetup[db];
+  return `<ol>${plan.actions.map(action=>`<li>${E(action)}</li>`).join('')}</ol>
+  <p><a href="downloads/portal-assets.zip" download>Изображения и шрифты</a>${php?'':' · <a href="downloads/flask-wheels.zip" download>Библиотеки Python 3.12 x64</a>'}</p>
   ${Object.entries(D.setupFiles[db]).map(([file,code])=>`<details class="build-block">
-    <summary>${E(file)}</summary><p>${E(purposes[file])}</p>${codePanel(code)}
+    <summary>${E(file)}</summary><p>${E(plan.purposes[file])}</p>${codePanel(code)}
   </details>`).join('')}
-  <p>Оставьте MySQL включённым. Из папки проекта выполните команды PowerShell. В <code>MYSQL_DATABASE</code> укажите базу, где создали таблицы и загрузили каталог. Для нестандартных реквизитов задайте переменные <code>MYSQL_HOST</code>, <code>MYSQL_PORT</code>, <code>MYSQL_USER</code> и <code>MYSQL_PASSWORD</code>.</p>
-  ${codePanel(command,'Копировать команды запуска')}
-  <p>Откройте <code>http://127.0.0.1:${php?8087:5017}/</code>. На главной пока видна заглушка. Рабочую главную и каталог добавите на шаге 2.</p>
-  ${php?'':'<p>Первые две команды выполняются один раз. После правки app.py остановите сервер через Ctrl+C в том же терминале и повторите последнюю команду.</p>'}`;
+  <p>${E(plan.launchExplanation)}</p>
+  ${codePanel(plan.command,'Копировать команды запуска')}
+  <p>${E(plan.check)}</p><p>${E(plan.restart)}</p>`;
 }
 function phpBuildLesson(i) {
   const lesson = D.phpAssembly[i];
   const setup = i===0 ? starterIntro() : '';
-  return `<section class="build-lesson"><h3>Соберите этот шаг в каркасе</h3>${setup}
+  return `<section class="build-lesson"><h3>Что сделать в своём проекте</h3>${setup}
     ${lesson.blocks.map((block,order)=>`<section class="php-lesson-block" data-edit-file="${E(block.file)}" data-edit-first="${E(block.first)}" data-edit-last="${E(block.last)}">
       <h4>${order+1}. ${E(block.file)} · ${E(block.first.match(/BEGIN ([\w-]+)/)[1])}</h4>
       <p>${E(block.purpose)}</p>
@@ -323,22 +305,32 @@ function seedData() {
 function databaseLesson(i) {
   const [file,caption]=D.databaseIllustrations[i];
   const guide=D.guidance.database[i];
-  const extras={2:[['03-fields.png','Поля, типы и ограничения'],['04-users-structure.png','Структура таблицы users']],3:[['06-all-tables.png','Пять таблиц после импорта']]};
+  const constructor=D.databaseConstructor;
+  const figure=(f,title)=>`<figure><a href="materials/database/${E(f)}" target="_blank" rel="noopener"><img src="materials/database/${E(f)}" alt="${E(title)}" loading="lazy"></a><figcaption>${E(title)} · нажмите для увеличения</figcaption></figure>`;
+  const table=(columns,rows)=>`<div class="material-table constructor-table" tabindex="0" aria-label="Таблица настроек; на узком экране прокручивается вправо"><table><thead><tr>${columns.map(text=>`<th scope="col">${E(text)}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map((text,j)=>j===0?`<th scope="row">${E(text)}</th>`:`<td>${E(text)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const forms=i===2?constructor.tableForms.slice(0,1):i===3?constructor.tableForms.slice(1):[];
   return `<section class="lesson-explanation database-lesson">
     <h3>${i===5?'Откуда берутся данные':'Почему этот шаг нужен'}</h3><p>${E(guide.why)}</p>
     ${i===5?seedData():''}
     <h3>Что сделать</h3>${lessonActions(guide.actions)}
     ${lessonLinks('database',i)}
-    ${i===2?`<section class="build-block" data-check-code>
-      <h4>Создание users · phpMyAdmin → SQL</h4>
-      <p>Выполните этот блок один раз в выбранной пустой базе. Если уже импортировали users.sql, переходите к проверке ниже.</p>
-      ${btn('Копировать SQL создания таблицы','data-copy-block')}
-      <pre class="lesson-code" tabindex="0" aria-label="Запрос создания таблицы users"><code>${E(D.usersSql)}</code></pre>
-    </section>`:''}
+    ${forms.length?`<h3>Порядок работы в конструкторе</h3>${lessonActions(constructor.constructorActions)}
+      ${forms.map(form=>`<section class="table-constructor"><h3>${E(form.name)} · ${form.fields.length} столбцов</h3><p>${E(form.purpose)}</p>
+        ${table(['Имя','Тип','Длина/Значения','Индекс · имя','По умолчанию'],form.fields)}
+        ${lessonActions(form.notes)}${(form.extraImages??[]).map(([file,title])=>figure(file,title)).join('')}${figure(form.image,'После сохранения '+form.name+': поля и индексы')}
+      </section>`).join('')}`:''}
+    ${i===4?`<h3>Создайте четыре внешних ключа</h3>${lessonActions(constructor.relationActions)}
+      ${constructor.relationForms.map(form=>`<h4>${E(form.table)} → Структура → Связи</h4>
+        ${table(['Имя ограничения','Локальный столбец','Таблица','Столбец','ON DELETE','ON UPDATE'],form.rows)}
+        ${figure(form.image,'Два отдельных внешних ключа '+form.table)}`).join('')}
+      <h3>Добавьте проверки допустимых значений</h3>
+      <p>В проверенном phpMyAdmin 5.2.1 конструктор полей и экран «Связи» не содержат редактора CHECK. Поэтому эти одиннадцать ограничений добавьте через SQL: нажмите имя своей базы → «SQL», скопируйте блок ниже в большое поле запроса → «Вперёд». Выполните его один раз после создания таблиц. При повторе сначала посмотрите запрос проверки: уже существующие ограничения добавлять снова не нужно.</p>
+      ${table(['Таблица','Имя проверки','Условие','Зачем'],constructor.valueChecks)}
+      ${codePanel(constructor.valueChecksSql,'Копировать CHECK')}
+      <p>ALTER TABLE изменяет уже созданную таблицу. ADD CONSTRAINT даёт проверке имя, CHECK проверяет условие для сохраняемой строки. CHAR_LENGTH считает символы, включая кириллицу; LENGTH в MySQL считает байты и для этих двух ограничений не подходит.</p>`:''}
     ${studentChecks('database',i)}
-    ${[[file,caption],...(extras[i]??[])].map(([f,title])=>
-    `<figure><a href="materials/database/${E(f)}" target="_blank" rel="noopener"><img src="materials/database/${E(f)}" alt="${E(title)}" loading="lazy"></a><figcaption>${E(title)} · нажмите для увеличения</figcaption></figure>`
-  ).join('')}</section>`;
+    ${i===8?`<h3>Если экспорт пропустил CHECK</h3><p>Этот блок вставляют в конец своего database.sql, если в выгрузке нет CHECK. В рабочей базе ограничения уже созданы на шаге 5; повторно выполнять их там не нужно. После сохранения импортируйте исправленный файл в новую пустую базу и проверьте её ограничения запросом из шага 5.</p>${codePanel(constructor.valueChecksSql,'Копировать недостающие CHECK')}`:''}
+    ${![2,3,4].includes(i)?figure(file,caption):''}</section>`;
 }
 function stepCheck(id,index) {
   const check=D.stepChecks[id]?.[index];
@@ -431,7 +423,7 @@ function lessonBrief(lesson) {
   if(assignment&&!files.some(([,href])=>href.startsWith(kimPdfPath)))files.unshift(['КИМ · стр. '+assignment.pages,kimPdfPath+'#page='+assignment.pages.match(/\d+/)[0]]);
   return `<section class="lesson-brief">
     <p>${E(lesson.goal)}</p>
-    ${lesson.id==='documents'?'<p><a href="learning-preparation.html">0. Установка и настройка программ</a> · <a href="learning-preparation.html#faq">ЧаВО об экзамене</a></p>':''}
+    ${lesson.id==='documents'?'<p><a href="learning-preparation.html">0. Установка и настройка программ</a> · <a href="?mode=faq">ЧаВО об экзамене</a></p>':''}
     ${lesson.id==='backend'?`<p><a href="learning-preparation.html#${db==='php'?'php':'flask'}">Библиотеки и запуск без интернета</a></p>`:''}
     ${assignment?`<h3>Условие задания</h3><p>${E(assignment.text)}</p>`:''}
     <h3>Что понадобится</h3><p>${E(D.stageChecks[lesson.id][0])}</p>
@@ -474,6 +466,7 @@ function learn() {
           </div>
           ${result?`<div class="lesson-result">${lessonArtifacts(lesson.id)}${stepResultCheck(lesson.id)}</div>`:`
             <p>${E(step[1])}</p><p class="source-note">Источник · ${E(step[2])}</p>
+            ${stage==='documents'&&index===0?`<section class="installation-guide">${D.learningPreparationHtml}</section>`:''}
             ${stage==='database'?databaseLesson(index):guidanceHTML(stage,index)+lessonLinks(stage,index)}
             ${stage==='backend'?buildLesson(index):beginnerHTML(stage,index)}
             ${stage==='er'?'':stepCheck(stage,index)}
@@ -804,7 +797,7 @@ function render({pushHistory=false}={}){
     ${siteNavigation()}
     <main id="main" tabindex="-1">
       ${!storageOK?'<p class="notice">Браузер не сможет сохранить прогресс после закрытия страницы.</p>':''}
-      ${mode==='overview'?overviewBanner()+criteria():mode==='learn'?learn():['training','mock'].includes(mode)?practice():mode==='examples'?examples():teacher()}
+      ${mode==='overview'?overviewBanner()+criteria():mode==='learn'?learn():['training','mock'].includes(mode)?practice():mode==='faq'?faq():mode==='examples'?examples():teacher()}
     </main>
   </div>`;
   bind();
@@ -842,15 +835,7 @@ function bind(){
   on('lesson-images',()=>materialsModal('images'));
   document.querySelectorAll('[data-reference]').forEach(b=>b.onclick=()=>{const [target,index]=b.dataset.reference.split(':');stage=target;set(lessonProgressKey('step',stage),Number(index));mode='learn';render({pushHistory:true});document.querySelector('.study-step').scrollIntoView({block:'start'});});
   on('mock-variant',e=>{mockBrief=false;mockId=e.target.value;set('mock-id',mockId);render();document.getElementById('mock-variant')?.focus();},'onchange');
-  root.querySelectorAll('[data-copy-block]').forEach(button=>button.onclick=async()=>{
-    const code=button.closest('[data-edit-file], [data-check-code]').querySelector('pre').textContent;
-    try {
-      await navigator.clipboard.writeText(code);
-      button.textContent='Скопировано';
-    } catch {
-      button.textContent='Выделите код и нажмите Ctrl+C';
-    }
-  });
+  CopyBlocks.bind(root);
   root.querySelectorAll('[data-mode]').forEach(button=>button.onclick=()=>{
     mode=button.dataset.mode;
     returnTask=false;

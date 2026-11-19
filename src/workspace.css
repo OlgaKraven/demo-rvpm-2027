@@ -69,6 +69,10 @@
 .result-files code { overflow-wrap: anywhere; }
 .project-progress strong { display: block; margin-bottom: 4px; }
 .seed-data .material-table { margin-block: 12px; }
+.database-lesson .constructor-table { max-inline-size: 100%; overflow-x: auto; }
+.database-lesson .constructor-table table { min-inline-size: 760px; table-layout: auto; }
+.database-lesson .constructor-table :is(th, td) { overflow-wrap: normal; word-break: normal; font-size: .875rem; }
+.database-lesson .constructor-table tbody th { white-space: nowrap; }
 .seed-data .material-table table { margin: 0; table-layout: auto; }
 .seed-data .material-table :is(th, td) { font-size: .875rem; overflow-wrap: normal; word-break: normal; }
 .seed-data .material-table tbody th {
@@ -498,3 +502,7 @@
   .learning-map,.route-layout.lesson-layout,.training-compact .training-workspace { grid-template-columns:minmax(0,1fr); }
   .mock-variant-bar { grid-template-columns:minmax(0,1fr); }
 }
+.installation-guide { min-inline-size: 0; }
+.installation-guide img { display: block; max-inline-size: 100%; block-size: auto; }
+.installation-guide [data-check-code] { min-inline-size: 0; }
+.installation-guide pre { max-inline-size: 100%; box-sizing: border-box; overflow: auto; }

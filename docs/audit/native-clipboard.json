@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-19",
+  "result": "PASS — four representative contexts; actual Windows clipboard and exact saved text",
+  "method": "Click visible copy button (Chrome for initial learning files; connected IAB for preparation/presentation) -> activate blank Windows Notepad -> genuine Ctrl+V -> Save As UTF-8 -> compare saved text with rendered source; no clipboard read API or text injection between copy and paste.",
+  "checks": [
+    {
+      "context": "Learning, PHP backend step 1, initial static/style.css",
+      "chars": 540,
+      "sha256": "b9016dfd61a12958f49fa8334f84fba49be6a7bd421c79b85675bf0744d1ac9b",
+      "exact_equal_after_notepad_newline_normalization": true
+    },
+    {
+      "context": "Learning, PHP backend step 1, initial lib.php",
+      "chars": 1721,
+      "sha256": "5b759f7dd044b741e93023b690f6feffaf5548ecbb37eab1f8654ca44f62116d",
+      "exact_equal_after_notepad_newline_normalization": true
+    },
+    {
+      "context": "Standalone preparation, Flask local launch commands",
+      "browser": "Connected IAB; genuine Windows Notepad Ctrl+V",
+      "chars": 386,
+      "sha256": "9531bc12cb92fc51a9d1d68eb5f8ee8911b37b86d94df308d74dfc9bd115af01",
+      "exact_equal_after_notepad_newline_normalization": true
+    },
+    {
+      "context": "PHP presentation, slide 201 of 362, initial lib.php, Copy whole snippet",
+      "browser": "Connected IAB; genuine Windows Notepad Ctrl+V",
+      "chars": 1721,
+      "sha256": "5b759f7dd044b741e93023b690f6feffaf5548ecbb37eab1f8654ca44f62116d",
+      "exact_equal_after_notepad_newline_normalization": true,
+      "full_file_instead_of_visible_page": true
+    }
+  ],
+  "pending": []
+}

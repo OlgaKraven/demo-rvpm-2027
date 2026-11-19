@@ -9,7 +9,7 @@ const databaseNotes=[
   'Покажите зелёный индикатор MySQL и верхнюю строку phpMyAdmin. Спросите, какую роль здесь играет Apache.',
   'Введите имя учебной базы. Затем попросите назвать её: такое же значение должно попасть в MYSQL_DATABASE.',
   'Создайте id, нажмите A_I и сохраните. Покажите, где в «Структуре» виден значок первичного ключа.',
-  'Перед выбором SQL покажите имя базы в верхней строке. После импорта откройте «Структура» и пересчитайте таблицы.',
+  'Создайте rooms, applications, reviews и rate_limits через конструктор. Перед каждой таблицей сверяйте имя базы; после сохранения покажите поля и отдельные индексы.',
   'В «Связях» выберите applications.user_id и покажите, куда ведёт эта стрелка на ER. Повторите для room_id.',
   'Покажите источник помещений и почему каталог нужен до регистрации. Сопоставьте первую запись JSON со строкой rooms, затем покажите роль администратора.',
   'Откройте Designer и разнесите таблицы. Попросите проследить путь от reviews к rooms через applications.',
@@ -27,7 +27,6 @@ const labels = {
 };
 
 const exampleArchive = stack => 'downloads/conference-portal-'+(stack==='php'?'php':'flask')+'.zip';
-const starterArchive = stack => exampleArchive(stack).replace('.zip','-starter.zip');
 const lessonUrl = (stack, stage, step) => '?mode=learn&stage='+stage+'&stack='+stack+'&step='+step;
 const image = (folder,file,caption) => ({file:material+folder+'/'+file,caption});
 
@@ -102,8 +101,8 @@ export function teacherDeck(data, stack) {
   add('text','Что открыть перед занятием',{
     actions:['Откройте КИМ на страницах 33–37 и скачайте приложения. Проверьте руководство по стилю, шрифты и исходные изображения.',
       php?'Запустите Apache и MySQL в XAMPP. Откройте phpMyAdmin и отдельную папку проекта в VS Code.':'Запустите MySQL в XAMPP. Откройте phpMyAdmin и VS Code. Flask запускается через Python из виртуального окружения.',
-      'Распакуйте готовый пример отдельно от рабочей папки. Для поэтапной сборки скачайте учебный каркас.'],
-    links:[['КИМ · PDF',material+'kim-2027.pdf#page=33'],['Исходные файлы · ZIP',material+'basic-inputs.zip'],['Готовый пример · ZIP',exampleArchive(stack)],['Учебный каркас · ZIP',starterArchive(stack)]],
+      'Создайте свою рабочую папку. Файлы и код добавляйте по шагам обучения; изображения, шрифты и библиотеки подготовьте заранее.'],
+    links:[['КИМ · PDF',material+'kim-2027.pdf#page=33'],['Исходные файлы · ZIP',material+'basic-inputs.zip']],
     check:'Видны исходные материалы, открыта рабочая папка, запущена СУБД.'
   });
   const shownTasks=new Set();
@@ -134,10 +133,18 @@ export function teacherDeck(data, stack) {
       const props={stepKey,eyebrow};
       const g=guide(stage,i);
       const card=lessonUrl(stack,stage.id,i+1);
-      const resources=filesFor(data.lessonFiles,stage.id,i,stack).map(([label,path])=>[label,path]);
+      const materials=filesFor(data.lessonFiles,stage.id,i,stack).map(([label,path])=>[label,path]);
+      const resources=materials.filter(([,path])=>!data.sqlBlocks[path]);
       const lesson=stage.id==='backend'?(php?data.phpAssembly:data.assembly)[i]:null;
-      if(lesson&&i===0)resources.push(['Скачать учебный каркас',starterArchive(stack)]);
       add('text',title,{...props,body,source,links:[['Открыть карточку',card],...resources],note:stage.id==='database'?databaseNotes[i]:g?.why});
+      if(stage.id==='documents'&&i===0){
+        for(const program of data.installationSteps){
+          const paragraphs=program.paragraphs.flatMap(sourceParagraphs);
+          textPages(paragraphs,410,3).forEach(actions=>add('step',program.title,{...props,actions,links:program.links}));
+          if(program.image)add('step',program.title+' · где скачать',{...props,image:{file:program.image,caption:'Ссылка скачивания программы находится на этой странице.'},links:program.links});
+          for(const code of program.commands)add('code',program.title+' · проверьте установку',{...props,code});
+        }
+      }
       const expected=data.stepChecks[stage.id]?.[i];
       if(expected&&stage.id==='er')add('step',title,{...props,check:expected});
       if(g) {
@@ -147,14 +154,23 @@ export function teacherDeck(data, stack) {
         }));
         if(g.code)add('code',title,{...props,code:g.code,heading:'Команды и код для проверки'});
       }
+      for(const [label,path] of materials){
+        const code=data.sqlBlocks[path];
+        if(!code)continue;
+        add('text',label,{...props,heading:'В своей базе → SQL',body:'Структура уже создана и проверена. Следующий блок добавляет шесть помещений из учебного каталога и администратора своего стека. Скопируйте полный блок, вставьте в большое поле SQL своей базы и выполните один раз. PHP и Flask используют разные хеши учебного пароля.'});
+        const pages=codePages(code),snippet=pages.length>1?snippets.push(code)-1:undefined;
+        pages.forEach(part=>add('code',label,{...props,code:part,snippet,heading:'Начальные записи · копируйте полный блок',links:[['Источник данных и объяснение в карточке',card]]}));
+      }
       for(const {file,code} of data.studentEdits[stack][stage.id]?.[i]??[]){
-        for(const part of codePages(code))add('code',title,{
-          ...props,heading:'В конец файла '+file,code:part,links:[['Фрагмент целиком в карточке',card]]
+        const pages=codePages(code),snippet=pages.length>1?snippets.push(code)-1:undefined;
+        for(const part of pages)add('code',title,{
+          ...props,heading:'В конец файла '+file,code:part,snippet,links:[['Фрагмент целиком в карточке',card]]
         });
       }
       for(const {target,instruction,code} of data.studentChecks[stack][stage.id]?.[i]??[]){
-        for(const part of codePages(code))add('code',title,{
-          ...props,heading:target,code:part,note:instruction,links:[['Порядок проверки в карточке',card]]
+        const pages=codePages(code),snippet=pages.length>1?snippets.push(code)-1:undefined;
+        for(const part of pages)add('code',title,{
+          ...props,heading:target,code:part,snippet,note:instruction,links:[['Порядок проверки в карточке',card]]
         });
       }
       const worked=beginnerStep(data.beginner,stage.id,i,stack);
@@ -167,7 +183,7 @@ export function teacherDeck(data, stack) {
       }
       if(stage.id==='er'&&i===0) add('step','Общая ER-диаграмма',{
         ...props,body:'Проследите четыре связи. У заявки есть владелец и помещение. Отзыв ссылается на заявку и пользователя.',
-        image:image('database','07-designer.png','ER-схема в phpMyAdmin'),links:[['ER-схема · PDF',material+'database/er-example.pdf']]
+        image:image('database','constructor-designer.png','ER-схема в phpMyAdmin'),links:[['ER-схема · PDF',material+'database/er-example.pdf']]
       });
       if(stage.id==='er'&&[1,2,3].includes(i)) {
         const names = i===1?['users']:i===2?['rooms','applications']:['reviews','rate_limits'];
@@ -184,6 +200,50 @@ export function teacherDeck(data, stack) {
         }
       }
       if(stage.id==='database') {
+        const constructor=data.databaseConstructor;
+        const forms=i===2?constructor.tableForms.slice(0,1):i===3?constructor.tableForms.slice(1):[];
+        if(forms.length){
+          textPages(constructor.constructorActions,410).forEach(actions=>add('step',title,{...props,heading:'Порядок работы в конструкторе',actions}));
+          for(const form of forms){
+            add('text',form.name+' · '+form.fields.length+' столбцов',{...props,body:form.purpose});
+            for(let j=0;j<form.fields.length;j+=4)add('table',form.name+' · заполните строки конструктора',{
+              ...props,columns:['Имя','Тип','Длина','Индекс · имя','По умолчанию'],rows:form.fields.slice(j,j+4),wrapTable:true
+            });
+            textPages(form.notes,410,2).forEach(actions=>add('step',form.name+' · ключи и сохранение',{...props,actions}));
+            for(const [file,caption] of form.extraImages??[])add('step',form.name+' · настройка индекса',{...props,image:image('database',file,caption)});
+            add('step',form.name+' · после сохранения',{...props,image:image('database',form.image,'Сверьте поля и блок «Индексы».')});
+          }
+        }
+        if(i===4){
+          textPages(constructor.relationActions,410).forEach(actions=>add('step',title,{...props,heading:'Создайте связи в конструкторе',actions}));
+          for(const form of constructor.relationForms){
+            add('table',form.table+' · внешние ключи',{
+              ...props,columns:['Имя ограничения','Связь','ON DELETE / ON UPDATE'],wrapTable:true,
+              rows:form.rows.map(([name,field,table,column,onDelete,onUpdate])=>[name,field+' → '+table+'.'+column,onDelete+' / '+onUpdate])
+            });
+            add('step',form.table+' → Структура → Связи',{...props,image:image('database',form.image,'Заполните две отдельные строки и сохраните.')});
+          }
+          add('step','Проверки допустимых значений · CHECK',{...props,actions:[
+            'В phpMyAdmin 5.2.1 конструктор полей и экран «Связи» не имеют редактора CHECK. Нажмите имя своей базы → «SQL».',
+            'Скопируйте полный блок CHECK из следующего слайда в большое поле запроса → «Вперёд». Выполните один раз после создания таблиц. При повторе сначала проверьте уже существующие ограничения.',
+            'ALTER TABLE изменяет таблицу, ADD CONSTRAINT задаёт имя, CHECK проверяет условие. CHAR_LENGTH считает символы русского текста; LENGTH в MySQL считает байты.'
+          ]});
+          for(let j=0;j<constructor.valueChecks.length;j+=3)add('table','Какие значения разрешены',{
+            ...props,columns:['Таблица','Условие','Зачем'],wrapTable:true,
+            rows:constructor.valueChecks.slice(j,j+3).map(([table,,expression,reason])=>[table,expression,reason])
+          });
+          const snippet=snippets.push(constructor.valueChecksSql)-1;
+          codePages(constructor.valueChecksSql).forEach(code=>add('code','Добавьте CHECK в своей базе',{...props,code,snippet,heading:'Кнопка копирует весь блок ограничений'}));
+        }
+        if(i===8){
+          add('step','Проверьте CHECK после экспорта',{...props,actions:[
+            'В проверенном phpMyAdmin 5.2.1 быстрый экспорт пропускает CHECK. Откройте свой database.sql в VS Code и найдите CHECK (. Если проверок нет, добавьте следующий блок в конец файла; если часть есть, добавьте только недостающие.',
+            'Сохраните UTF-8. Импортируйте свой файл в новую пустую учебную базу. Запросами шагов 3–6 проверьте поля, индексы, четыре FK, одиннадцать CHECK и начальные записи.',
+            'Блок ниже дополняет файл выгрузки. В исходной рабочей базе CHECK уже есть; повторно выполнять блок в ней не нужно.'
+          ]});
+          const snippet=snippets.push(constructor.valueChecksSql)-1;
+          codePages(constructor.valueChecksSql).forEach(code=>add('code','Дополнение к своей SQL-выгрузке',{...props,code,snippet,heading:'Копируется полный блок CHECK'}));
+        }
         if(i===5) {
           const rooms=JSON.parse((php?data.phpCode:data.code)['rooms.json']);
           add('table','Из каталога в таблицу rooms',{
@@ -194,13 +254,27 @@ export function teacherDeck(data, stack) {
           });
         }
         const [file,caption]=data.databaseIllustrations[i];
-        const extras={2:['03-fields.png','04-users-structure.png'],3:['06-all-tables.png']};
-        for(const [shot,description] of [[file,caption],...(extras[i]||[]).map(name=>[name,'Проверьте поля, ключи и список таблиц в phpMyAdmin.'])]) {
+        for(const [shot,description] of ([2,3,4].includes(i)?[]:[[file,caption]])) {
           add('step',title,{...props,image:image('database',shot,description)});
         }
         add('step',title,{...props,check:expected,links:resources});
       }
       if(lesson) {
+        if(i===0) {
+          const plan=data.projectSetup[stack];
+          textPages(plan.actions,410).forEach(actions=>add('step',title,{
+            ...props,heading:'Создайте свою рабочую папку и файлы',actions,
+            links:[['Изображения и шрифты','downloads/portal-assets.zip'],...(!php?[['Библиотеки Python 3.12 x64','downloads/flask-wheels.zip']]:[])]
+          }));
+          for(const [file,text] of Object.entries(data.setupFiles[stack])) {
+            add('text',title,{...props,heading:'Создайте файл '+file,body:plan.purposes[file]});
+            const pages=codePages(text);
+            const snippet=pages.length>1?snippets.push(text)-1:undefined;
+            pages.forEach(code=>add('code',title,{...props,heading:file,code,snippet,links:[['Полный код файла в карточке',card]]}));
+          }
+          add('text',title,{...props,heading:'Запустите свой проект',body:plan.launchExplanation});
+          add('code',title,{...props,heading:'Команды PowerShell из своей папки',code:plan.command,check:plan.check,note:plan.restart});
+        }
         if(lesson.map)add('text',title,{...props,heading:'От условия к данным',body:lesson.map,check:lesson.check});
         for(const block of lesson.blocks) {
           const marker=block.first?.match(/BEGIN ([\w-]+)/)?.[1];
@@ -254,5 +328,6 @@ export function teacherDeck(data, stack) {
     note:'Итого 75 баллов. Для оценивания используйте формулировки таблицы 7 КИМ.'
   });
   slides[contents].rows=contentsRows(chapters.slice(1));
-  return {stackName,code:data.official.code,site,slides,chapters,snippets};
+  const externalLinks=[...new Set(data.installationSteps.flatMap(program=>program.links.map(([,href])=>href)))];
+  return {stackName,code:data.official.code,site,slides,chapters,snippets,externalLinks};
 }

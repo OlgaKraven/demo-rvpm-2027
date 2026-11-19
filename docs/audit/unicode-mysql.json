@@ -1,0 +1,38 @@
+{
+  "scope": "Regression against source Flask application and real isolated MariaDB; separate from student construction walkthrough",
+  "server": "MariaDB 10.4.32, isolated QA instance on 127.0.0.1:43327",
+  "original_check": "LENGTH(conference_name) BETWEEN 3 AND 120",
+  "observed": {
+    "unicode_characters": 120,
+    "utf8_bytes": 240,
+    "old_check_accepts": false,
+    "character_check_accepts": true
+  },
+  "before_fix": "test_complete_booking_journey[unicode-limits] failed with constraint applications.conference_name",
+  "fix": "CHAR_LENGTH in both MySQL schemas and matching SQL lesson materials",
+  "after_fix": {
+    "flask_mysql_tests_passed": 9,
+    "title_120_cyrillic_and_comment_500_cyrillic_roundtrip": true
+  },
+  "offline_dependencies": {
+    "fresh_venv": true,
+    "no_index": true,
+    "no_cache_dir": true,
+    "wheel_packages_installed": 14
+  },
+  "database_scope": "Unique rvpm_test_ UUID databases only; test fixtures remove their own databases",
+  "remaining_test_databases_after_suite": 0,
+  "result": "PASS for isolated Flask regression",
+  "at_time_of_regression": {
+    "php_http_boundary_test_completed": false,
+    "student_manual_constructor_walkthrough_completed": false
+  },
+  "subsequent_evidence": {
+    "php_boundary_roundtrip": "student-php.json",
+    "manual_constructor": "phpmyadmin-constructor.json",
+    "student_construction": [
+      "student-php.json",
+      "student-flask.json"
+    ]
+  }
+}
